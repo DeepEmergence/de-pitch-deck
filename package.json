@@ -1,0 +1,17 @@
+{
+  "name": "de-pitch-deck",
+  "private": true,
+  "version": "1.0.0",
+  "description": "DeepEmergence markdown pitch deck (Slidev) with editable Mermaid diagrams.",
+  "scripts": {
+    "dev": "slidev slides.md --open",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md --format pptx --output DeepEmergence-Pitch-Deck.pptx",
+    "export:pdf": "slidev export slides.md --format pdf --output DeepEmergence-Pitch-Deck.pdf"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.16.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.47.0"
+  }
+}
