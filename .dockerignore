@@ -1,0 +1,8 @@
+node_modules
+.git
+.firecrawl
+*.pptx
+*.pdf
+terminals
+.cursor
+**/.DS_Store

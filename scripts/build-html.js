@@ -86,7 +86,6 @@ const SLIDE_SLUGS = [
   'cover',
   'problem',
   'solution',
-  'traction',
   'team',
   'advisors',
   'market',
@@ -97,6 +96,8 @@ const SLIDE_SLUGS = [
   'biz-phase-3',
   'gtm',
   'funding-viz',
+  'burn-viz',
+  'path-to-profitability',
   'ask-angel',
   'ask-preseed',
   'ask-seed',
@@ -270,6 +271,34 @@ window.addEventListener('resize', () => {
     slides[index].querySelectorAll('.mermaid[data-processed]').forEach(scaleMermaid);
   }
 });
+
+window.openAskModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+};
+
+window.closeAskModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = 'none';
+  }
+};
+
+// Close modals on clicking background
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('deck-modal')) {
+    e.target.style.display = 'none';
+  }
+});
+
+// Close modals on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.deck-modal').forEach(m => m.style.display = 'none');
+  }
+});
 `;
 
 function wrapSlideBody(html, isCenter) {
@@ -327,6 +356,224 @@ function build() {
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"><\/script>
 </head>
 <body>
+  <div class="mobile-warning" id="mobileWarning">
+    <div class="mobile-warning-content">
+      <span class="mobile-warning-icon">⚠️</span>
+      <div class="mobile-warning-text">
+        <div class="mobile-warning-title">View in desktop, screen too small</div>
+        <div class="mobile-warning-desc">This presentation contains detailed data, charts, and metrics designed for larger screens.</div>
+      </div>
+      <button type="button" class="mobile-warning-close" onclick="document.getElementById('mobileWarning').style.display='none'" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
+
+  <!-- Angel Round Modal -->
+  <div class="deck-modal" id="modalAngelSalaries">
+    <div class="deck-modal-container">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalAngelSalaries')">&times;</button>
+      <div class="deck-modal-title">Salaries Breakdown · Angel Round</div>
+      <div class="deck-modal-content">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Founders Split</span>
+            <b>18% ($90K)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 6-month runway for 2 founders (Ajay & Aman) = <b>$7.5K/month per founder</b> (annualized stipend of $90K/year, reflecting competitive pre-seed VC benchmarks).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Team Split</span>
+            <b>18% ($90K)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 6-month runway for 2 highly skilled, premium systems engineers = <b>$7.5K/month per engineer</b> (annualized premium contract rate of $90K/year to build core Sophon v1.0 layers).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-seed Round Modal -->
+  <div class="deck-modal" id="modalPreseedSalaries">
+    <div class="deck-modal-container">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalPreseedSalaries')">&times;</button>
+      <div class="deck-modal-title">Salaries Breakdown · Pre-seed Round</div>
+      <div class="deck-modal-content">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Founders Split</span>
+            <b>12% ($240K)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 12-month runway for 2 co-founders (Ajay & Aman) = <b>$10K/month per founder</b> (annualized stipend of $120K/year, aligned with standard industry benchmarks for institutional pre-seed rounds).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Team Split</span>
+            <b>43% ($860K)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 12-month runway for 6 premium Full-Time Employees (FTE) = <b>$12K/month average per FTE</b> (annualized premium salary of $144K/year to secure elite AI developers and compiler specialists).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seed Round Modal -->
+  <div class="deck-modal" id="modalSeedSalaries">
+    <div class="deck-modal-container">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalSeedSalaries')">&times;</button>
+      <div class="deck-modal-title">Salaries Breakdown · Seed Round</div>
+      <div class="deck-modal-content">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Founders Split</span>
+            <b>6% ($720K)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 24-month runway for 2 founders = <b>$15K/month per founder</b> (annualized market rate salary of $180K/year, meeting standard VC executive salary expectations for scaling Seed rounds).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Team Split</span>
+            <b>44% ($5.28M)</b>
+          </div>
+          <div class="deck-modal-split-body">
+            Over 24-month runway for 15 scaling Full-Time Employees (FTE) = <b>$14.6K/month average per FTE</b> (annualized premium salary of $175K/year to attract world-class AI, research, and systems engineering talent).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Angel Round Burn Modal -->
+  <div class="deck-modal" id="modalAngelBurn">
+    <div class="deck-modal-container" style="max-width: 36rem;">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalAngelBurn')">&times;</button>
+      <div class="deck-modal-title">Angel Round Detailed Burn Breakdown</div>
+      <div class="deck-modal-content" style="gap: 0.6rem;">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Timeline, Focus & Headcount</span>
+            <b>6 Months · 4 FTE</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>Runway Period:</b> Q3 2026 – Q4 2026 (6 Months stealth build runway).<br/>
+            • <b>Product Focus:</b> Launching Sophon Platform v1.0 and initial stealth harness frameworks.<br/>
+            • <b>Team Composition:</b> 2 co-founders + 2 world-class ML/systems contract developers.
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>One-off & Monthly Overheads</span>
+            <b>$75K One-off · $77K/mo Average</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>One-off Overheads ($75K):</b> IP setup/filings ($20K), early dev reference boards ($25K), premium dev tooling setup (Cursor, GitHub Enterprise, SOC2 tools, Slack/Jira SaaS) ($30K).<br/>
+            • <b>Monthly Recurring Burn ($68K):</b> Premium payroll ($30K/mo), private GPU instances & LLM API tokens ($25K/mo), SaaS software licensing and dev seats ($5K/mo), workspace admin ($8K/mo).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Ecosystem Leverage & Credits</span>
+            <b>$120K Non-Dilutive</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>AWS Activate credits ($100K):</b> Covers 100% of standard cloud hosting, DB staging, and active pipeline storage nodes.<br/>
+            • <b>OpenAI Startup Program ($20K):</b> Reimburses model token fine-tuning and experiment APIs.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-seed Round Burn Modal -->
+  <div class="deck-modal" id="modalPreseedBurn">
+    <div class="deck-modal-container" style="max-width: 36rem;">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalPreseedBurn')">&times;</button>
+      <div class="deck-modal-title">Pre-seed Round Detailed Burn Breakdown</div>
+      <div class="deck-modal-content" style="gap: 0.6rem;">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Timeline, Focus & Headcount</span>
+            <b>12 Months · 8 FTE</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>Runway Period:</b> Q4 2026 – Q4 2027 (12 Months targeting public GA release).<br/>
+            • <b>Product Focus:</b> Launching Sira & Agnee beta, launching Fleet Beta (Elyra, Vaayoo, Kat), and starting retail GA.<br/>
+            • <b>Team Composition:</b> 2 co-founders + 6 elite Full-Time Employees (FTE) in software & compiler engineering.
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>One-off & Monthly Overheads</span>
+            <b>$300K One-off · $167K/mo Average</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>One-off Overheads ($300K):</b> CNC precision milling, DFM injection molds for hardware beta ($120K), environmental pre-testing & SAR certifications ($60K), custom enterprise staging/deployments for initial pilots ($120K).<br/>
+            • <b>Monthly Recurring Burn ($142K):</b> Premium team salaries ($91.6K/mo), private GPU clusters, DB hosting & memory indexing ($35K/mo), Cursor/Copilot Enterprise & professional SaaS dev licenses ($5.4K/mo), regulatory compliance audits ($10K/mo).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Ecosystem Leverage & Credits</span>
+            <b>$300K Non-Dilutive</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>Microsoft Founders Hub ($150K Azure):</b> Offloads primary cloud host infrastructure, database instances, and active OpenAI endpoints.<br/>
+            • <b>Google Cloud Startup ($150K credits):</b> Fully covers large model training runs, Vertex AI nodes, and parallel fine-tuning tests.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seed Round Burn Modal -->
+  <div class="deck-modal" id="modalSeedBurn">
+    <div class="deck-modal-container" style="max-width: 36rem;">
+      <button type="button" class="deck-modal-close" onclick="closeAskModal('modalSeedBurn')">&times;</button>
+      <div class="deck-modal-title">Seed Round Detailed Burn Breakdown</div>
+      <div class="deck-modal-content" style="gap: 0.6rem;">
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Timeline, Focus & Headcount</span>
+            <b>24 Months · 17 FTE</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>Runway Period:</b> Q2 2027 – Q2 2029 (24 Months commercial scale-out runway).<br/>
+            • <b>Product Focus:</b> Launching Phase 2 Smart Home & Wearables GA, Phase 3 B2B2C licensing, and scaling enterprise pipelines.<br/>
+            • <b>Team Composition:</b> 2 co-founders + 15 scaling Full-Time Employees (FTE) across software, systems, and deep ML research.
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>One-off & Monthly Overheads</span>
+            <b>$1.2M One-off · $500K/mo Average</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>One-off Overheads ($1.2M):</b> CE/FCC/RoHS global regulatory safety certifications ($300K), SOC2 Type II compliance audit ($100K), raw hardware inventory pre-orders for first 5,000 units ($500K), customized customer pilot deployment engineering ($300K).<br/>
+            • <b>Monthly Recurring Burn ($450K):</b> Large premium FTE payroll ($250K/mo), enterprise-grade GPU scale-out clusters and fine-tuning hosts ($120K/mo), marketing & enterprise GTM customer acquisition ($40K/mo), product iteration & pivot buffer for failed features/products ($30K/mo), software enterprise licenses and seats ($10K/mo).
+          </div>
+        </div>
+        <div class="deck-modal-split-row">
+          <div class="deck-modal-split-header">
+            <span>Ecosystem Leverage & Credits</span>
+            <b>$650K Non-Dilutive</b>
+          </div>
+          <div class="deck-modal-split-body">
+            • <b>CoreWeave/Nebius Cloud credits ($400K):</b> Fully offloads active model fine-tuning runs and raw model training workloads.<br/>
+            • <b>Enterprise Cloud rebates ($250K):</b> Special enterprise pricing agreements offloading routine database backups and host operations.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="progress" id="progress"></div>
   <main class="deck" id="deck">
 ${slideHtml}

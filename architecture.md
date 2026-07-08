@@ -62,7 +62,7 @@ flowchart TB
         end
 
         subgraph PACKS["Domain Packs — Digital Employees"]
-            RETAIL["Retail: Auvi · Sira · Rina · Elyra · Catalyst · Kat"]
+            RETAIL["Retail: Auvi · Sira · Agnee · Elyra · Vaayoo · Kat"]
             ENT["Enterprise & Gov: Legal · Finance · Defense · Regulatory"]
         end
 
@@ -206,7 +206,7 @@ flowchart TB
         B_WF["Review → flag → escalation workflow"]
     end
 
-    subgraph PACK_C["Rina — Chief of Staff"]
+    subgraph PACK_C["Agnee — Chief of Staff"]
         C_ONT["Org state & calendar graph"]
         C_WF["Briefing → routing → approval workflow"]
     end

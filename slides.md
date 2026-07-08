@@ -20,7 +20,7 @@ fonts:
 **One harness. Any domain. Governed autonomy.**
 
 <div class="deck-meta">
-Launching July 2026 · Ajay Pratap Singh · Aman Pratap Singh
+Launching July 2026 · Ajay Pratap Singh · Aman Pratap Singh<br><a href="https://deepemergence.com" target="_blank" rel="noopener noreferrer">deepemergence.com</a> · <a href="https://www.linkedin.com/company/deepemergence" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 </div>
 
 ---
@@ -31,54 +31,58 @@ class: slide-dense
 # The problem
 
 <div class="deck-lead">
-AI capability is advancing yearly — but production labor still lacks governance.
+AI capabilities are shifting from text-retrieval tools to an ambient, deeply integrated cognitive labor economy—but the foundational infrastructure to govern, capture, and monetize this deep context does not exist.
 </div>
 
 <div class="deck-snake deck-snake--inline">
 
 <div class="deck-snake-row deck-snake-row--cols-3 deck-snake-row--ltr">
-<div class="deck-snake-milestone">
-<span class="deck-snake-q">2024</span>
-<span class="deck-snake-product">Retrieval</span>
-<span class="deck-snake-ver">Summarize documents</span>
-</div>
-<div class="deck-snake-milestone">
-<span class="deck-snake-q">2025</span>
-<span class="deck-snake-product">Reasoning</span>
-<span class="deck-snake-ver">Workflow analysis</span>
-</div>
+
 <div class="deck-snake-milestone deck-snake-milestone--active">
-<span class="deck-snake-q">2026</span>
-<span class="deck-snake-product">Governed labor</span>
-<span class="deck-snake-ver">Identity · audit · coordination</span>
+<span class="deck-snake-q">Horizon 1 (2026–27)</span>
+<span class="deck-snake-product">Governed Labor</span>
+<span class="deck-snake-ver">Sovereign digital employees · policy-as-code · multi-agent teams</span>
 </div>
+
+<div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Horizon 2 (2027–28)</span>
+<span class="deck-snake-product">Ambient Context</span>
+<span class="deck-snake-ver">Continuous 24/7 passive mesh · wearables · smart home MCP fusion</span>
+</div>
+
+<div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Horizon 3 (2028+)</span>
+<span class="deck-snake-product">Cognitive Platform</span>
+<span class="deck-snake-ver">Consent-gated B2B2C matching, targeting & personalization APIs</span>
+</div>
+
 </div>
 </div>
 
 <div class="grid grid-cols-2 gap-3 mt-2">
 
 <div class="deck-card deck-card--warn">
-<b>Wrapper agents today</b>
+<b>Stateless Wrappers Today</b>
 <ul class="deck-list">
-<li>LLM + prompt + tool list</li>
-<li>No persistent identity or audit trail</li>
-<li>Governance lives in the prompt</li>
+<li>No persistent identity, audit trails, or safety sandboxes</li>
+<li>Siloed data reliant on manual user input and text chat</li>
+<li>No proprietary multi-channel context or continuous moats</li>
 </ul>
 </div>
 
 <div class="deck-card deck-card--active">
-<b>What labor actually requires</b>
+<b>What the Future Economy Requires</b>
 <ul class="deck-list">
-<li>Scoped credentials and policy-as-code</li>
-<li>Replayable traces across sessions</li>
-<li>Multi-agent handoffs under enforceable policy</li>
+<li><b>Governed autonomy:</b> Replayable session traces & policy hooks</li>
+<li><b>Continuous enrichment:</b> Zero-friction passive biometric fusion</li>
+<li><b>Platform licensing:</b> Monetizing consent-gated deep context APIs</li>
 </ul>
 </div>
 
 </div>
 
 <div class="deck-footnote">
-The prompt was never the moat. The <b>harness around the model</b> is — and the market is ready in July 2026.
+We are not building a point-solution chat wrapper. We are building **Sophon**—the multi-phase cognitive OS designed to capture the future of digital labor and deep-context personal platforms.
 </div>
 
 ---
@@ -88,33 +92,33 @@ layout: default
 # Solution
 
 <div class="deck-lead">
-<b>Sophon</b> — the engineering stack that turns model intelligence into dependable, general-purpose labor.
+<b>Sophon</b> — the cognitive operating system that converts swappable model intelligence into dependable, governed digital labor.
 </div>
 
 <div class="grid grid-cols-5 gap-2 deck-pill-row">
 
-<div class="deck-pill"><b>Identity</b><span>Scoped credentials</span></div>
-<div class="deck-pill"><b>Guardrails</b><span>Deny-by-default policy</span></div>
-<div class="deck-pill"><b>Hooks</b><span>Intercept risky writes</span></div>
-<div class="deck-pill"><b>Evals</b><span>Grade trajectories</span></div>
-<div class="deck-pill"><b>Traces</b><span>Audit lineage</span></div>
+<div class="deck-pill"><b>Sovereign Identity</b><span>Enforceable credentials</span></div>
+<div class="deck-pill"><b>Dynamic Policy</b><span>Deny-by-default guardrails</span></div>
+<div class="deck-pill"><b>Predictive Hooks</b><span>Simulated safety sandbox</span></div>
+<div class="deck-pill"><b>Continuous Evals</b><span>Autonomic feedback loop</span></div>
+<div class="deck-pill"><b>Cryptographic Traces</b><span>Verifiable audit lineage</span></div>
 
 </div>
 
 ```mermaid {scale: 0.42}
 flowchart LR
-    LLM["Foundation models<br/>(swappable)"]
-    subgraph cognitive["Beyond-LLM layer"]
+    LLM["Swappable Models<br/>(Llama 4 · Claude · GPT-5)"]
+    subgraph cognitive["Cognitive Substrate"]
         direction TB
-        WM["World model"] --> CI["Causal inference"] --> MEM["Memory"] --> PLAN["Planner"]
+        WM["World Model"] --> CI["Causal Inference"] --> MEM["Deep Memory"] --> PLAN["Autonomous Planner"]
     end
-    subgraph harness["Sophon harness"]
+    subgraph harness["Sophon Governance Substrate"]
         direction TB
-        ID["Identity"] --> GR["Guardrails"] --> HK["Hooks"] --> EV["Evals"] --> TR["Traces"]
+        ID["Sovereign Identity"] --> GR["Policy Guardrails"] --> HK["Simulation Hooks"] --> EV["Autonomous Evals"] --> TR["Trace Lineage"]
     end
-    subgraph packs["Domain packs"]
-        R["Retail fleet"]
-        E["Enterprise"]
+    subgraph packs["Digital Labor Fleet"]
+        R["Retail Employees (Sira · Agnee · Kat)"]
+        E["Enterprise Teams (CoS Ghost Orgs)"]
     end
     LLM --> WM
     PLAN --> ID
@@ -125,84 +129,7 @@ flowchart LR
 ```
 
 <div class="deck-footnote">
-Simulate before every write · Domain packs plug into one substrate · Model upgrades are eval-gated
-</div>
-
----
-layout: default
-class: slide-dense
----
-
-# Traction
-
-<div class="deck-lead">
-Pre-revenue today · <b>Platform launches July 2026</b> · Retail sales Q2 2027 · Enterprise Q3 2027
-</div>
-
-<div class="deck-snake">
-
-<div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr">
-
-<div class="deck-snake-milestone deck-snake-milestone--active">
-<span class="deck-snake-q">Now</span>
-<span class="deck-snake-product">Sophon Harness</span>
-<span class="deck-snake-ver"><b>v0.9</b> · stealth · design partners</span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--active">
-<span class="deck-snake-q">Jul 2026</span>
-<span class="deck-snake-product">Sophon Platform</span>
-<span class="deck-snake-ver"><b>v1.0</b> · public launch</span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--active">
-<span class="deck-snake-q">Q4 2026</span>
-<span class="deck-snake-product">Sira · Rina</span>
-<span class="deck-snake-ver"><b>β</b> · markets · chief of staff</span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--active">
-<span class="deck-snake-q">Q1 2027</span>
-<span class="deck-snake-product">Fleet expansion</span>
-<span class="deck-snake-ver">Elyra · Catalyst · Kat <b>α</b> · Auvi <b>α</b></span>
-</div>
-
-</div>
-
-<div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div>
-
-<div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--rtl">
-
-<div class="deck-snake-milestone deck-snake-milestone--future">
-<span class="deck-snake-q">Q1 2028</span>
-<span class="deck-snake-product">Phase 3 pilots</span>
-<span class="deck-snake-ver"><b>Career API</b> · parallel to Phase 2</span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--future">
-<span class="deck-snake-q">Q4 2027</span>
-<span class="deck-snake-product">Phase 2 · Wearable <b>β</b></span>
-<span class="deck-snake-ver">Apps <b>β</b> · passive sensors</span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--future">
-<span class="deck-snake-q">Q3 2027</span>
-<span class="deck-snake-product">Enterprise sales · Phase 2</span>
-<span class="deck-snake-ver">Ent. CoS <b>β</b> · Wearable · Apps <b>α</b></span>
-</div>
-
-<div class="deck-snake-milestone deck-snake-milestone--future">
-<span class="deck-snake-q">Q2 2027</span>
-<span class="deck-snake-product">Retail sales begin</span>
-<span class="deck-snake-ver">Sira · Rina <b>GA</b> · first revenue · <b>Seed</b></span>
-</div>
-
-</div>
-
-</div>
-
-<div class="deck-footnote">
-Retail fleet: Sira · Rina · Elyra · Catalyst · Kat · Auvi · Enterprise CoS — one Sophon substrate
+Autonomic sandboxing (simulating actions before writing) · Swappable model substrate protects against API depreciation · Upgrades are automated and eval-gated
 </div>
 
 ---
@@ -254,6 +181,8 @@ class: slide-dense
 <div class="deck-lead">
 Academic, policy, and industry advisors — <b>IIT Madras</b> depth · responsible AI · institutional finance.
 </div>
+
+<div class="deck-advisors">
 
 <div class="deck-id-grid deck-id-grid--lead">
 
@@ -355,13 +284,15 @@ Academic, policy, and industry advisors — <b>IIT Madras</b> depth · responsib
 
 </div>
 
+</div>
+
 ---
 layout: default
 ---
 
 # Market size
 
-<div class="grid grid-cols-5 gap-4 items-start">
+<div class="grid grid-cols-5 gap-4">
 
 <div class="col-span-2 deck-tam">
 
@@ -380,7 +311,7 @@ layout: default
 
 </div>
 
-<div class="col-span-3">
+<div class="col-span-3 deck-market-table">
 
 | Region | TAM | SAM | SOM Yr-5 |
 | --- | ---: | ---: | ---: |
@@ -465,7 +396,7 @@ class: slide-dense
 # Products
 
 <div class="deck-lead">
-One <b>Sophon</b> substrate · seven digital employees · wearables · platform APIs — three phases of product depth.
+Single unified <b>Sophon</b> cognitive kernel powering domain-specialized digital labor, ambient devices, and platform licensing.
 </div>
 
 <div class="grid grid-cols-3 gap-3 items-stretch">
@@ -485,7 +416,7 @@ One <b>Sophon</b> substrate · seven digital employees · wearables · platform 
 </div>
 
 <div class="deck-product">
-<b>Rina</b>
+<b>Agnee</b>
 <span>AI Chief of Staff — briefings, calendar routing, executive coordination</span>
 </div>
 
@@ -500,7 +431,7 @@ One <b>Sophon</b> substrate · seven digital employees · wearables · platform 
 </div>
 
 <div class="deck-product">
-<b>Catalyst</b>
+<b>Vaayoo</b>
 <span>Career operator — trajectory modeling, role & mentor matching</span>
 </div>
 
@@ -518,7 +449,7 @@ One <b>Sophon</b> substrate · seven digital employees · wearables · platform 
 </div>
 
 <div class="deck-phase">
-<div class="deck-phase-label"><b>Phase 2</b> · Data mesh · Q3 2027+</div>
+<div class="deck-phase-label"><b>Phase 2</b> · Data mesh & ambient devices · Q3 2027+</div>
 <div class="deck-products">
 
 <div class="deck-product deck-product--active">
@@ -529,6 +460,11 @@ One <b>Sophon</b> substrate · seven digital employees · wearables · platform 
 <div class="deck-product">
 <b>Companion Apps</b>
 <span>iOS & Android — consent-first UX, active capture, real-time Sophon sync</span>
+</div>
+
+<div class="deck-product">
+<b>Smart home & ambient</b>
+<span>Speakers, screens & controls via MCP — digital employees in home, car, TV, watch, phone & beyond</span>
 </div>
 
 <div class="deck-product">
@@ -550,7 +486,7 @@ One <b>Sophon</b> substrate · seven digital employees · wearables · platform 
 
 <div class="deck-product deck-product--active">
 <b>Career API</b>
-<span>Catalyst licensing — job boards, recruiters, talent platforms</span>
+<span>Vaayoo licensing — job boards, recruiters, talent platforms</span>
 </div>
 
 <div class="deck-product">
@@ -608,14 +544,14 @@ Build retail digital employees and enterprise teams — three phases to a wearab
 
 <div class="deck-snake-milestone">
 <span class="deck-snake-q">2026 H2</span>
-<span class="deck-snake-product">Sira · Rina</span>
+<span class="deck-snake-product">Sira · Agnee</span>
 <span class="deck-snake-ver"><b>β</b> · free · design partners</span>
 </div>
 
 <div class="deck-snake-milestone deck-snake-milestone--active">
 <span class="deck-snake-q">Q2 2027</span>
 <span class="deck-snake-product">Retail sales</span>
-<span class="deck-snake-ver"><b>$79–$149/mo</b> · Sira · Rina <b>GA</b></span>
+<span class="deck-snake-ver"><b>$79–$149/mo</b> · Sira · Agnee <b>GA</b></span>
 </div>
 
 </div>
@@ -682,7 +618,7 @@ class: slide-dense
 # Business model · Phase 2
 
 <div class="deck-lead">
-Launch <b>wearable devices</b> and <b>companion apps</b> from <b>Q3 2027</b> — passive data layer runs parallel with Phase 3 from Q1 2028.
+Launch <b>wearable devices</b>, <b>smart home hardware</b>, and <b>companion apps</b> from <b>Q3 2027</b> — passive data layer runs parallel with Phase 3 from Q1 2028.
 </div>
 
 <div class="deck-snake">
@@ -741,13 +677,21 @@ Launch <b>wearable devices</b> and <b>companion apps</b> from <b>Q3 2027</b> —
 
 </div>
 
-<div class="grid grid-cols-3 gap-2 mt-2">
+<div class="grid grid-cols-4 gap-2 mt-2">
 
 <div class="deck-card deck-card--active">
 <b>Wearable device</b>
 <ul class="deck-list deck-list--tight">
 <li>Continuous biometrics & behavioral context</li>
 <li>Passive signals — no manual logging</li>
+</ul>
+</div>
+
+<div class="deck-card deck-card--active">
+<b>Smart home & ambient</b>
+<ul class="deck-list deck-list--tight">
+<li>Speakers, screens & controls via MCP</li>
+<li>Employees present in home, car, TV, watch, phone</li>
 </ul>
 </div>
 
@@ -770,7 +714,7 @@ Launch <b>wearable devices</b> and <b>companion apps</b> from <b>Q3 2027</b> —
 </div>
 
 <div class="deck-footnote">
-Phase 1 employees seed the graph · Phase 2 wearables from Q3 2027 · Phase 3 platform pilots parallel from Q1 2028
+Phase 1 employees seed the graph · Phase 2 wearables & smart home from Q3 2027 · Phase 3 platform pilots parallel from Q1 2028
 </div>
 
 ---
@@ -817,7 +761,7 @@ Merge intelligence into external platforms — <b>Phase 3 launches Q1 2028</b>, 
 <div class="deck-snake-milestone deck-snake-milestone--future">
 <span class="deck-snake-q">Q1 2028</span>
 <span class="deck-snake-product">Career API</span>
-<span class="deck-snake-ver"><b>Catalyst</b> pilots · Phase 3 start</span>
+<span class="deck-snake-ver"><b>Vaayoo</b> pilots · Phase 3 start</span>
 </div>
 
 <div class="deck-snake-milestone deck-snake-milestone--future">
@@ -845,7 +789,7 @@ Merge intelligence into external platforms — <b>Phase 3 launches Q1 2028</b>, 
 <div class="grid grid-cols-3 gap-3">
 
 <div class="deck-card deck-card--active">
-<b>Career matching</b> · Catalyst
+<b>Career matching</b> · Vaayoo
 <ul class="deck-list">
 <li>Trajectory inference for roles & positions</li>
 <li>Job boards, recruiters, talent platforms</li>
@@ -882,15 +826,21 @@ layout: default
 class: slide-dense
 ---
 
-# Go-to-market strategy
+# Go-to-market & traction
 
 <div class="deck-lead">
-Product roadmap — retail <b>Q2 2027</b> · enterprise <b>Q3 2027</b> · Phase 2 & 3 run in parallel from Q3 2027 / Q1 2028
+Pre-revenue today · <b>Sophon Harness v0.9</b> in stealth · retail sales <b>Q2 2027</b> · enterprise <b>Q3 2027</b> · Phase 2 & 3 run in parallel from Q3 2027 / Q1 2028
 </div>
 
 <div class="deck-snake">
 
-<div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr">
+<div class="deck-snake-row deck-snake-row--cols-5 deck-snake-row--ltr">
+
+<div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Now</span>
+<span class="deck-snake-product">Sophon Harness</span>
+<span class="deck-snake-ver"><b>v0.9</b> · stealth · design partners</span>
+</div>
 
 <div class="deck-snake-milestone deck-snake-milestone--active">
 <span class="deck-snake-q">Jul 2026</span>
@@ -900,27 +850,33 @@ Product roadmap — retail <b>Q2 2027</b> · enterprise <b>Q3 2027</b> · Phase 
 
 <div class="deck-snake-milestone deck-snake-milestone--active">
 <span class="deck-snake-q">Q4 2026</span>
-<span class="deck-snake-product">Sira · Rina</span>
+<span class="deck-snake-product">Sira · Agnee</span>
 <span class="deck-snake-ver"><b>β</b> · YC & finance communities</span>
 </div>
 
 <div class="deck-snake-milestone deck-snake-milestone--future">
 <span class="deck-snake-q">Q1 2027</span>
 <span class="deck-snake-product">Fleet <b>β</b></span>
-<span class="deck-snake-ver">Elyra · Catalyst · Kat <b>α</b> · Ent. CoS <b>α</b></span>
+<span class="deck-snake-ver">Elyra · Vaayoo · Kat <b>α</b> · Ent. CoS <b>α</b></span>
 </div>
 
 <div class="deck-snake-milestone deck-snake-milestone--future">
 <span class="deck-snake-q">Q2 2027</span>
 <span class="deck-snake-product">Retail sales</span>
-<span class="deck-snake-ver">Sira · Rina <b>GA</b> · paying customers</span>
+<span class="deck-snake-ver">Sira · Agnee <b>GA</b> · paying customers</span>
 </div>
 
 </div>
 
-<div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div>
+<div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-5"></div>
 
-<div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--rtl">
+<div class="deck-snake-row deck-snake-row--cols-5 deck-snake-row--rtl">
+
+<div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2028</span>
+<span class="deck-snake-product">Agency graph API</span>
+<span class="deck-snake-ver">Sira · targeted ads</span>
+</div>
 
 <div class="deck-snake-milestone deck-snake-milestone--future">
 <span class="deck-snake-q">Q2 2028</span>
@@ -948,6 +904,10 @@ Product roadmap — retail <b>Q2 2027</b> · enterprise <b>Q3 2027</b> · Phase 
 
 </div>
 
+</div>
+
+<div class="deck-footnote">
+Retail fleet: Sira · Agnee · Elyra · Vaayoo · Kat · Auvi · Enterprise CoS — one Sophon substrate
 </div>
 
 ---
@@ -1012,7 +972,7 @@ Use of funds by round · ARR ramp · <b>fund · product · phase</b> milestones 
 </div>
 <div class="deck-funding-tags">
 <span class="deck-funding-tag deck-funding-tag--fund">Fund close</span>
-<span class="deck-funding-tag deck-funding-tag--product">Sira · Rina β</span>
+<span class="deck-funding-tag deck-funding-tag--product">Sira · Agnee β</span>
 <span class="deck-funding-tag deck-funding-tag--product">Fleet α</span>
 <span class="deck-funding-tag deck-funding-tag--phase">Phase 1</span>
 </div>
@@ -1076,13 +1036,13 @@ Use of funds by round · ARR ramp · <b>fund · product · phase</b> milestones 
 <div class="deck-snake-milestone deck-snake-milestone--fund">
 <span class="deck-snake-q">Q4 2026</span>
 <span class="deck-snake-product">Pre-seed · $2M</span>
-<span class="deck-snake-ver">Sira · Rina <b>β</b> · Phase 1</span>
+<span class="deck-snake-ver">Sira · Agnee <b>β</b> · Phase 1</span>
 </div>
 
 <div class="deck-snake-milestone">
 <span class="deck-snake-q">Q1 2027</span>
 <span class="deck-snake-product">Fleet <b>β</b></span>
-<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+<span class="deck-snake-ver">Elyra · Vaayoo · Kat</span>
 </div>
 
 <div class="deck-snake-milestone">
@@ -1135,6 +1095,206 @@ Use of funds by round · ARR ramp · <b>fund · product · phase</b> milestones 
 <span class="deck-funding-tag deck-funding-tag--fund">Fund</span> round close ·
 <span class="deck-funding-tag deck-funding-tag--product">Product</span> ship ·
 <span class="deck-funding-tag deck-funding-tag--phase">Phase</span> expansion · ARR at pre-raise / run-rate
+</div>
+
+---
+layout: default
+class: slide-dense
+---
+
+# Burn & runway
+
+<div class="deck-lead">
+Quarterly burn by round · capital efficiency improves as ARR offsets spend · <b>~$14.5M</b> total burn to pre-Series A
+</div>
+
+<div class="deck-burn">
+
+<div class="grid grid-cols-3 gap-2 deck-burn-rounds">
+
+<div class="deck-burn-round" onclick="openAskModal('modalAngelBurn')">
+<div class="deck-funding-round-head"><b>Angel</b><span>$500K · Q3 2026</span></div>
+<div class="deck-burn-stats">
+<div class="deck-burn-stat"><b>$77K</b><span>Avg burn/mo</span></div>
+<div class="deck-burn-stat deck-burn-stat--active"><b>6 mo</b><span>Runway</span></div>
+</div>
+<div class="deck-burn-chart">
+<div class="deck-burn-row"><span>Q3'26</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:64%"></div></div><b>$180K</b></div>
+<div class="deck-burn-row"><span>Q4'26</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:100%"></div></div><b>$280K</b></div>
+</div>
+<div class="deck-burn-breakdown">
+<div class="deck-burn-bd-title">Phase 1 build & stealth</div>
+<div class="deck-burn-bd-row"><span>One-off cost</span><b>$75K (IP, Tools)</b></div>
+<div class="deck-burn-bd-row"><span>Recurring/mo</span><b>$68K (4 FTE payroll)</b></div>
+<div class="deck-burn-bd-row deck-burn-bd-row--discount"><span>Credits & discounts</span><b>$120K (AWS, OpenAI)</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--product">Sophon v1.0</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase 1 build</span>
+</div>
+</div>
+
+<div class="deck-burn-round deck-burn-round--active" onclick="openAskModal('modalPreseedBurn')">
+<div class="deck-funding-round-head"><b>Pre-seed</b><span>$2.0M · Q4 2026</span></div>
+<div class="deck-burn-stats">
+<div class="deck-burn-stat"><b>$167K</b><span>Avg burn/mo</span></div>
+<div class="deck-burn-stat deck-burn-stat--active"><b>12 mo</b><span>Runway</span></div>
+</div>
+<div class="deck-burn-chart">
+<div class="deck-burn-row"><span>Q4'26</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:46%"></div></div><b>$300K</b></div>
+<div class="deck-burn-row"><span>Q1'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:85%"></div></div><b>$550K</b></div>
+<div class="deck-burn-row"><span>Q2'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:100%"></div></div><b>$650K</b></div>
+<div class="deck-burn-row"><span>Q3'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:77%"></div></div><b>$500K</b></div>
+</div>
+<div class="deck-burn-breakdown">
+<div class="deck-burn-bd-title">Phase 1 GA · Phase 2 R&D</div>
+<div class="deck-burn-bd-row"><span>One-off cost</span><b>$300K (DFM, Pilots)</b></div>
+<div class="deck-burn-bd-row"><span>Recurring/mo</span><b>$142K (8 FTE, compute)</b></div>
+<div class="deck-burn-bd-row deck-burn-bd-row--discount"><span>Credits & discounts</span><b>$300K (MS Hub, GCP)</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--product">Fleet β</span>
+<span class="deck-funding-tag deck-funding-tag--fund">Seed close</span>
+<span class="deck-funding-tag deck-funding-tag--product">Retail GA</span>
+</div>
+</div>
+
+<div class="deck-burn-round" onclick="openAskModal('modalSeedBurn')">
+<div class="deck-funding-round-head"><b>Seed</b><span>$12.0M · Q2 2027</span></div>
+<div class="deck-burn-stats">
+<div class="deck-burn-stat"><b>$500K</b><span>Avg burn/mo</span></div>
+<div class="deck-burn-stat deck-burn-stat--active"><b>24 mo</b><span>Runway</span></div>
+</div>
+<div class="deck-burn-chart">
+<div class="deck-burn-row"><span>Q2'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:45%"></div></div><b>$1.0M</b></div>
+<div class="deck-burn-row"><span>Q3'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:73%"></div></div><b>$1.6M</b></div>
+<div class="deck-burn-row"><span>Q4'27</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:91%"></div></div><b>$2.0M</b></div>
+<div class="deck-burn-row"><span>Q1'28</span><div class="deck-burn-bar"><div class="deck-burn-bar-fill" style="width:100%"></div></div><b>$2.2M</b></div>
+</div>
+<div class="deck-burn-breakdown">
+<div class="deck-burn-bd-title">Phase 2 GA · Phase 3 launch</div>
+<div class="deck-burn-bd-row"><span>One-off cost</span><b>$1.2M (CE, SOC2, Inv)</b></div>
+<div class="deck-burn-bd-row"><span>Recurring/mo</span><b>$450K (17 FTE, GPU)</b></div>
+<div class="deck-burn-bd-row deck-burn-bd-row--discount"><span>Credits & discounts</span><b>$650K (CoreWeave)</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--phase">Enterprise · Phase 2</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase 3 pilots</span>
+<span class="deck-funding-tag deck-funding-tag--fund">Pre-Series A</span>
+</div>
+</div>
+
+</div>
+
+<div class="deck-burn-summary">
+
+<div class="deck-snake deck-snake--compact">
+
+<div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr">
+
+<div class="deck-snake-milestone deck-snake-milestone--fund deck-snake-milestone--active">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Pre-seed extends runway</span>
+<span class="deck-snake-ver">Angel bridge absorbed · 4 FTE</span>
+</div>
+
+<div class="deck-snake-milestone deck-snake-milestone--fund">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Seed closes · Retail GA</span>
+<span class="deck-snake-ver">First revenue offsets burn</span>
+</div>
+
+<div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-type">Phase</span>
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Phase 2 kickoff</span>
+<span class="deck-snake-ver">Wearable · Enterprise sales</span>
+</div>
+
+<div class="deck-snake-milestone deck-snake-milestone--fund">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q2 2029</span>
+<span class="deck-snake-product">Pre-Series A</span>
+<span class="deck-snake-ver">Runway ends · ~$35M ARR</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="deck-footnote">
+Gross burn shown · net burn falls as ARR ramps from Q2 2027 · Seed runway overlaps pre-Series A raise for buffer
+</div>
+
+---
+layout: default
+class: slide-dense
+---
+
+# Path to profitability
+
+<div class="deck-lead">
+When revenue lands · by customer type, product, and count · path from first dollar to operating leverage
+</div>
+
+<div class="deck-ptp">
+
+<div class="deck-ptp-table-wrap">
+
+| Milestone | ARR | Customers · products | Unit economics |
+| --- | ---: | --- | --- |
+| **Q2 2027** · Retail GA | **~$0.4M** | **~350–500** retail seats · Sira · Agnee · first paid fleet | ARPU **$79–$149/mo** · GM **~72%** |
+| **EOY 2027** | **$12M** | **~6–8K** retail seats · **~25–40** enterprise logos · full Phase 1 fleet | 70% retail / 30% ent · Ent ACV **$80–250K** |
+| **EOY 2028** | **$28M** | **~12–15K** retail · **~70–90** ent · Wearable GA · Phase 3 pilots | 50/50 P1 · P2 devices begin · P3 API pilots |
+| **Q2 2029** · Pre-A | **~$35M** | **~18–22K** seats · **~110–140** logos · B2B2C licensing live | Mix shifts to multi-phase · NRR **125%+** |
+| **2030** | **$85M** | **~40K+** seats · **~250+** logos · platform partners | **50% P1 · 30% P2 · 20% P3** · GM **~78%** |
+
+</div>
+
+<div class="deck-ptp-lower">
+
+<div class="deck-ptp-col">
+<div class="deck-ask-section-label">Customer mix · how we get there</div>
+<div class="deck-stack deck-stack--tight">
+<div class="deck-row"><span>Retail SaaS (Sira · Agnee · fleet)</span><b>Per-employee · land & expand</b></div>
+<div class="deck-row"><span>Enterprise (CoS · ghost orgs)</span><b>Packs · $250K–$2M ACV</b></div>
+<div class="deck-row"><span>Phase 2 (wearable · apps · home)</span><b>Device + subscription attach</b></div>
+<div class="deck-row"><span>Phase 3 (API · rev-share)</span><b>Platform · usage & licensing</b></div>
+</div>
+</div>
+
+<div class="deck-ptp-col">
+<div class="deck-ask-section-label">Path to profitability</div>
+<div class="deck-stack deck-stack--tight">
+<div class="deck-row"><span>Retail contribution+</span><b>Q3 2027</b></div>
+<div class="deck-row"><span>Gross margin target</span><b>~78% at scale</b></div>
+<div class="deck-row"><span>Op. cash-flow breakeven</span><b>~EOY 2028 / early 2029</b></div>
+<div class="deck-row"><span>Rule of 40 (growth + margin)</span><b>Targeted from 2029</b></div>
+</div>
+</div>
+
+<div class="deck-ptp-col deck-ptp-col--kpis">
+<div class="deck-ask-section-label">VC checkpoints</div>
+<div class="grid grid-cols-2 gap-2 deck-metrics">
+<div class="deck-metric deck-metric--active"><b>Q2'27</b><span>First revenue</span></div>
+<div class="deck-metric"><b>$12M</b><span>EOY'27 ARR</span></div>
+<div class="deck-metric"><b>$28M</b><span>EOY'28 ARR</span></div>
+<div class="deck-metric deck-metric--active"><b>$35M</b><span>Pre-A ARR</span></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="deck-footnote">
+Assumes Seed close Q2 2027 · net burn falls as ARR offsets spend · profitability = op. cash-flow positive, not just gross margin
 </div>
 
 ---
@@ -1197,10 +1357,10 @@ class: slide-dense slide-ask
 <div class="deck-ask-section-label">Use of funds</div>
 
 <div class="deck-stack deck-stack--tight">
-<div class="deck-row"><span>Platform & Sophon harness</span><b>40%</b></div>
-<div class="deck-row"><span>Founder salaries (lean)</span><b>30%</b></div>
-<div class="deck-row"><span>ML compute & research</span><b>15%</b></div>
-<div class="deck-row"><span>Legal · design partners</span><b>15%</b></div>
+<div class="deck-row deck-salaries-row" onclick="openAskModal('modalAngelSalaries')"><span>Salaries (Premium team)</span><b>36% ($180K)</b></div>
+<div class="deck-row"><span>ML Compute, GPUs & AI Tools</span><b>30% ($150K)</b></div>
+<div class="deck-row"><span>Deployments & Cloud Chrome</span><b>20% ($100K)</b></div>
+<div class="deck-row"><span>Legal & Design Partners</span><b>14% ($70K)</b></div>
 </div>
 
 </div>
@@ -1227,7 +1387,7 @@ class: slide-dense slide-ask
 
 <div class="deck-snake-milestone">
 <span class="deck-snake-q">Q4 2026</span>
-<span class="deck-snake-product">Sira · Rina <b>β</b></span>
+<span class="deck-snake-product">Sira · Agnee <b>β</b></span>
 <span class="deck-snake-ver">Bridge to pre-seed</span>
 </div>
 
@@ -1265,7 +1425,7 @@ Raising <b>$500K – $3M</b> · Post-money SAFE or priced note · <b>$15–20M</
 <div class="deck-ask-context-item deck-ask-context-item--active">
 <span class="deck-ask-context-label">Pre-raise ARR</span>
 <b>~$0</b>
-<span>Sira · Rina <b>β</b> · free pilots · no GA yet</span>
+<span>Sira · Agnee <b>β</b> · free pilots · no GA yet</span>
 </div>
 
 </div>
@@ -1303,11 +1463,11 @@ Raising <b>$500K – $3M</b> · Post-money SAFE or priced note · <b>$15–20M</
 <div class="deck-ask-section-label">Use of funds · $2M target</div>
 
 <div class="deck-stack deck-stack--tight">
-<div class="deck-row"><span>Core team · 8 FTE</span><b>$900K · 45%</b></div>
-<div class="deck-row"><span>Research & ML compute</span><b>$450K · 23%</b></div>
-<div class="deck-row"><span>GTM · design partners</span><b>$300K · 15%</b></div>
-<div class="deck-row"><span>Legal & compliance</span><b>$200K · 10%</b></div>
-<div class="deck-row"><span>Reserve</span><b>$150K · 7%</b></div>
+<div class="deck-row deck-salaries-row" onclick="openAskModal('modalPreseedSalaries')"><span>Salaries (Premium team)</span><b>$1.1M · 55%</b></div>
+<div class="deck-row"><span>GPU Compute, LLMs & AI Tools</span><b>$450K · 22.5%</b></div>
+<div class="deck-row"><span>Deployments & Cloud Infra</span><b>$250K · 12.5%</b></div>
+<div class="deck-row"><span>Legal, IP & Security (SOC2)</span><b>$120K · 6%</b></div>
+<div class="deck-row"><span>GTM & Reserve</span><b>$80K · 4%</b></div>
 </div>
 
 </div>
@@ -1323,13 +1483,13 @@ Raising <b>$500K – $3M</b> · Post-money SAFE or priced note · <b>$15–20M</
 <div class="deck-snake-milestone deck-snake-milestone--active">
 <span class="deck-snake-q">Q4 2026</span>
 <span class="deck-snake-product">Pre-seed close</span>
-<span class="deck-snake-ver">Sira · Rina <b>β</b> · ~$0 ARR</span>
+<span class="deck-snake-ver">Sira · Agnee <b>β</b> · ~$0 ARR</span>
 </div>
 
 <div class="deck-snake-milestone">
 <span class="deck-snake-q">Q1 2027</span>
 <span class="deck-snake-product">Fleet <b>β</b></span>
-<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+<span class="deck-snake-ver">Elyra · Vaayoo · Kat</span>
 </div>
 
 <div class="deck-snake-milestone">
@@ -1378,7 +1538,7 @@ Raising <b>$10M – $15M</b> priced equity · <b>$48–55M</b> pre-money · ~18%
 <div class="deck-ask-context-item deck-ask-context-item--active">
 <span class="deck-ask-context-label">Pre-raise ARR</span>
 <b>~$300K – $500K</b>
-<span>Early retail GA · Sira · Rina paying customers</span>
+<span>Early retail GA · Sira · Agnee paying customers</span>
 </div>
 
 </div>
@@ -1417,11 +1577,11 @@ Raising <b>$10M – $15M</b> priced equity · <b>$48–55M</b> pre-money · ~18%
 <div class="deck-ask-section-label">Use of funds · $12M target</div>
 
 <div class="deck-stack deck-stack--tight">
-<div class="deck-row"><span>Engineering · product · 16 FTE</span><b>$4.8M · 40%</b></div>
-<div class="deck-row"><span>GTM · enterprise pilots</span><b>$3.0M · 25%</b></div>
-<div class="deck-row"><span>ML compute · Sophon infra</span><b>$1.8M · 15%</b></div>
-<div class="deck-row"><span>Legal · compliance</span><b>$1.2M · 10%</b></div>
-<div class="deck-row"><span>Reserve</span><b>$1.2M · 10%</b></div>
+<div class="deck-row deck-salaries-row" onclick="openAskModal('modalSeedSalaries')"><span>Salaries (Premium scale)</span><b>$6.0M · 50%</b></div>
+<div class="deck-row"><span>GPU Scale, Cloud & Licenses</span><b>$2.4M · 20%</b></div>
+<div class="deck-row"><span>Deployments, GTM & Marketing</span><b>$1.8M · 15%</b></div>
+<div class="deck-row"><span>R&D Buffer (Pivots/Failures)</span><b>$1.0M · 8.3%</b></div>
+<div class="deck-row"><span>Legal, Compliance & IP</span><b>$800K · 6.7%</b></div>
 </div>
 
 </div>
@@ -1467,7 +1627,7 @@ Raising <b>$10M – $15M</b> priced equity · <b>$48–55M</b> pre-money · ~18%
 </div>
 
 <div class="deck-footnote">
-Ambitious vs. median AI seed (<b>~$4.5M / $20M post</b>, Carta 2025) — justified by 7-pack platform, enterprise pipeline, and wearable Phase 2 optionality
+Ambitious vs. median AI seed (<b>~$4.5M / $20M post</b>, Carta 2025) — justified by 7-pack platform, enterprise pipeline, and wearable & smart home Phase 2 optionality
 </div>
 
 ---
@@ -1518,7 +1678,7 @@ Every labeled milestone from <b>today</b> through <b>pre-Series A</b> — fundin
 <div class="deck-snake-milestone">
 <span class="deck-snake-type">Product</span>
 <span class="deck-snake-q">Q4 2026</span>
-<span class="deck-snake-product">Sira · Rina <b>β</b></span>
+<span class="deck-snake-product">Sira · Agnee <b>β</b></span>
 <span class="deck-snake-ver">Phase 1 · free pilots</span>
 </div>
 
@@ -1526,7 +1686,7 @@ Every labeled milestone from <b>today</b> through <b>pre-Series A</b> — fundin
 <span class="deck-snake-type">Product</span>
 <span class="deck-snake-q">Q1 2027</span>
 <span class="deck-snake-product">Fleet <b>β</b></span>
-<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+<span class="deck-snake-ver">Elyra · Vaayoo · Kat</span>
 </div>
 
 </div>
@@ -1622,7 +1782,7 @@ Every labeled milestone from <b>today</b> through <b>pre-Series A</b> — fundin
 </div>
 
 <div class="deck-footnote">
-Today = Q3 2026 · ~$12.5M total raised through seed · pre-Series A opens the path to Series A and $85M ARR by 2030
+Today = Q3 2026 · ~$14.5M total raised through seed · pre-Series A opens the path to Series A and $85M ARR by 2030
 </div>
 
 ---
@@ -1634,7 +1794,7 @@ class: text-center
 
 ### The engineering discipline that makes autonomous work safe to run in production.
 
-**contact@deepemergence.com** · deepemergence.com
+**contact@deepemergence.com** · <a href="https://deepemergence.com" target="_blank" rel="noopener noreferrer">deepemergence.com</a> · <a href="https://www.linkedin.com/company/deepemergence" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 
 <div class="deck-meta">
 July 2026
