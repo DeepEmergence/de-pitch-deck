@@ -62,7 +62,7 @@ flowchart TB
         end
 
         subgraph PACKS["Domain Packs — Digital Employees"]
-            RETAIL["Retail: Auvi · Sira · Rina · Elyra · Catalyst · Kay"]
+            RETAIL["Retail: Auvi · Sira · Rina · Elyra · Catalyst · Kat"]
             ENT["Enterprise & Gov: Legal · Finance · Defense · Regulatory"]
         end
 

@@ -1,0 +1,2962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>DeepEmergence — Investor Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>/* DeepEmergence investor deck — premium VC design system */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@500;600;700&display=swap');
+
+:root {
+  /* Surfaces — warm institutional paper */
+  --de-bg: #f5f3ef;
+  --de-bg-elevated: #fdfcfa;
+  --de-surface: #ebe8e2;
+  --de-surface-active: rgba(26, 24, 22, 0.04);
+  --de-surface-warn: rgba(139, 58, 44, 0.06);
+
+  /* Borders */
+  --de-border: #d9d4cb;
+  --de-border-subtle: #e8e4dc;
+  --de-border-active: #8a847a;
+  --de-border-warn: rgba(139, 58, 44, 0.28);
+
+  /* Typography */
+  --de-text: #1c1a17;
+  --de-text-strong: #0a0908;
+  --de-muted: #5c5852;
+
+  /* Accent — institutional navy */
+  --de-accent: #1e3a5f;
+  --de-accent-soft: rgba(30, 58, 95, 0.07);
+  --de-accent-muted: rgba(30, 58, 95, 0.55);
+
+  /* Financial highlights */
+  --de-gold: #8f6f1f;
+  --de-gold-soft: rgba(143, 111, 31, 0.09);
+
+  /* Chart segments */
+  --de-seg-eng: #1e3a5f;
+  --de-seg-team: #3d6b52;
+  --de-seg-ml: #5c5488;
+  --de-seg-gtm: #9a7040;
+  --de-seg-legal: #6e6660;
+  --de-seg-reserve: #4f6578;
+  --de-seg-arr: #3d6b52;
+
+  /* Fonts */
+  --de-font: "Inter", system-ui, -apple-system, sans-serif;
+  --de-display: "Instrument Sans", "Inter", system-ui, sans-serif;
+
+  /* Proportional scale — modular, presentation-safe minimums */
+  --de-pad-x: clamp(1.75rem, 3.2vw, 2.75rem);
+  --de-pad-y: clamp(1.25rem, 2.4vw, 2rem);
+  --de-title: clamp(1.45rem, 2.6vw, 1.95rem);
+  --de-body: clamp(0.8125rem, 1.12vw, 0.9375rem);
+  --de-small: clamp(0.75rem, 1vw, 0.875rem);
+  --de-xs: clamp(0.6875rem, 0.92vw, 0.8125rem);
+  --de-radius: 8px;
+  --de-radius-sm: 5px;
+  --de-line: var(--de-accent);
+
+  /* Elevation */
+  --de-shadow: 0 1px 2px rgba(12, 11, 10, 0.04), 0 6px 24px rgba(12, 11, 10, 0.06);
+  --de-shadow-lg: 0 2px 4px rgba(12, 11, 10, 0.05), 0 12px 40px rgba(12, 11, 10, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --de-bg: #0b0b0d;
+    --de-bg-elevated: #121214;
+    --de-surface: #1a1a1e;
+    --de-surface-active: rgba(255, 255, 255, 0.045);
+    --de-surface-warn: rgba(220, 140, 110, 0.07);
+    --de-border: #2a2a2f;
+    --de-border-subtle: #1e1e22;
+    --de-border-active: #6e7888;
+    --de-border-warn: rgba(220, 140, 110, 0.32);
+    --de-text: #e8e6e2;
+    --de-text-strong: #f8f7f5;
+    --de-muted: #9c9890;
+    --de-accent: #7eb3e8;
+    --de-accent-soft: rgba(126, 179, 232, 0.1);
+    --de-accent-muted: rgba(126, 179, 232, 0.5);
+    --de-gold: #c9a84c;
+    --de-gold-soft: rgba(201, 168, 76, 0.1);
+    --de-seg-eng: #7eb3e8;
+    --de-seg-team: #6aab7e;
+    --de-seg-ml: #9a8fc4;
+    --de-seg-gtm: #c49a6c;
+    --de-seg-legal: #9a928a;
+    --de-seg-reserve: #7a92a8;
+    --de-seg-arr: #6aab7e;
+    --de-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 36px rgba(0, 0, 0, 0.4);
+    --de-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4), 0 20px 56px rgba(0, 0, 0, 0.5);
+    --de-line: #7eb3e8;
+  }
+}
+
+.dark,
+html.dark,
+.slidev-page.dark {
+  --de-bg: #0b0b0d;
+  --de-bg-elevated: #121214;
+  --de-surface: #1a1a1e;
+  --de-surface-active: rgba(255, 255, 255, 0.045);
+  --de-surface-warn: rgba(220, 140, 110, 0.07);
+  --de-border: #2a2a2f;
+  --de-border-subtle: #1e1e22;
+  --de-border-active: #6e7888;
+  --de-border-warn: rgba(220, 140, 110, 0.32);
+  --de-text: #e8e6e2;
+  --de-text-strong: #f8f7f5;
+  --de-muted: #9c9890;
+  --de-accent: #7eb3e8;
+  --de-accent-soft: rgba(126, 179, 232, 0.1);
+  --de-accent-muted: rgba(126, 179, 232, 0.5);
+  --de-gold: #c9a84c;
+  --de-gold-soft: rgba(201, 168, 76, 0.1);
+  --de-seg-eng: #7eb3e8;
+  --de-seg-team: #6aab7e;
+  --de-seg-ml: #9a8fc4;
+  --de-seg-gtm: #c49a6c;
+  --de-seg-legal: #9a928a;
+  --de-seg-reserve: #7a92a8;
+  --de-seg-arr: #6aab7e;
+  --de-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 12px 36px rgba(0, 0, 0, 0.4);
+  --de-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4), 0 20px 56px rgba(0, 0, 0, 0.5);
+  --de-line: #7eb3e8;
+}
+
+/* ── Slidev layout ─────────────────────────────────────── */
+.slidev-page {
+  background: var(--de-bg) !important;
+  color: var(--de-text) !important;
+  font-family: var(--de-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.slidev-layout {
+  overflow: hidden !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+  padding: var(--de-pad-y) var(--de-pad-x) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, var(--de-accent-soft) 0%, transparent 55%),
+    linear-gradient(168deg, var(--de-bg-elevated) 0%, var(--de-bg) 100%) !important;
+}
+
+.slidev-layout.default,
+.slidev-layout.center {
+  font-size: var(--de-body);
+  line-height: 1.5;
+}
+
+.slidev-layout h1 {
+  flex-shrink: 0;
+  font-family: var(--de-display) !important;
+  font-size: var(--de-title) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.12 !important;
+  color: var(--de-text-strong) !important;
+  margin: 0 0 0.45rem !important;
+  padding-bottom: 0.4rem !important;
+  border-bottom: 1px solid var(--de-border-subtle);
+  position: relative;
+}
+
+.slidev-layout h1::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--de-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+.slidev-layout.center h1::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slidev-layout h3 {
+  font-family: var(--de-display) !important;
+  font-weight: 500 !important;
+  color: var(--de-muted) !important;
+  letter-spacing: -0.01em;
+}
+
+.slidev-page.slide-dense .slidev-layout {
+  padding: calc(var(--de-pad-y) * 0.88) calc(var(--de-pad-x) * 0.92) !important;
+}
+
+.slidev-page.slide-dense .slidev-layout h1 {
+  font-size: clamp(1.25rem, 2.1vw, 1.65rem) !important;
+  margin-bottom: 0.35rem !important;
+  padding-bottom: 0.3rem !important;
+}
+
+.slidev-page.slide-ask .slidev-layout {
+  --de-body: clamp(0.75rem, 1vw, 0.875rem);
+  --de-small: clamp(0.6875rem, 0.92vw, 0.8125rem);
+  --de-xs: clamp(0.625rem, 0.85vw, 0.75rem);
+}
+
+.slidev-layout > *:not(h1):not(h2):not(h3) {
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.slidev-layout .grid {
+  flex: 1;
+  min-height: 0;
+  align-content: center;
+}
+
+/* ── Cover slide ───────────────────────────────────────── */
+.deck-cover-tagline {
+  font-family: var(--de-display);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  font-weight: 500;
+  color: var(--de-muted);
+  letter-spacing: -0.01em;
+  margin: 0.35rem 0 0.5rem;
+}
+
+.deck-cover-hook {
+  font-size: clamp(0.875rem, 1.25vw, 1rem);
+  color: var(--de-text);
+  letter-spacing: 0.01em;
+}
+
+.deck-meta {
+  font-size: var(--de-small);
+  color: var(--de-muted);
+  margin-top: 0.65rem;
+  letter-spacing: 0.02em;
+}
+
+.slidev-layout.center h1 {
+  font-size: clamp(2rem, 4.5vw, 2.75rem) !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.slidev-layout.center h1::after {
+  display: none;
+}
+
+/* ── Semantic components ───────────────────────────────── */
+.deck-lead {
+  font-size: var(--de-small);
+  color: var(--de-muted);
+  text-align: center;
+  margin: 0 0 0.55rem;
+  line-height: 1.45;
+  flex-shrink: 0;
+  max-width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.deck-footnote {
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  text-align: center;
+  margin-top: 0.45rem;
+  line-height: 1.4;
+  flex-shrink: 0;
+  opacity: 0.92;
+}
+
+.deck-muted {
+  color: var(--de-muted);
+  font-size: var(--de-small);
+}
+
+.deck-card {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius);
+  padding: 0.55rem 0.65rem;
+  background: var(--de-bg-elevated);
+  font-size: var(--de-small);
+  line-height: 1.42;
+  box-shadow: var(--de-shadow);
+}
+
+.deck-card--active {
+  border-color: var(--de-border-active);
+  background: var(--de-accent-soft);
+  box-shadow: 0 0 0 1px var(--de-accent-soft), var(--de-shadow);
+}
+
+.deck-card--warn {
+  border-color: var(--de-border-warn);
+  background: var(--de-surface-warn);
+}
+
+.deck-phase {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 0;
+  min-width: 0;
+}
+
+.deck-phase-label {
+  font-size: var(--de-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--de-muted);
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--de-border);
+  flex-shrink: 0;
+}
+
+.deck-phase-label b {
+  color: var(--de-text-strong);
+  font-size: var(--de-small);
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.deck-product {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  padding: 0.35rem 0.45rem;
+  background: var(--de-bg-elevated);
+  font-size: var(--de-xs);
+  line-height: 1.35;
+}
+
+.deck-product b {
+  display: block;
+  font-size: var(--de-small);
+  font-weight: 600;
+  color: var(--de-text-strong);
+  margin-bottom: 0.06rem;
+}
+
+.deck-product span {
+  color: var(--de-muted);
+}
+
+.deck-product--active {
+  border-color: var(--de-border-active);
+  background: var(--de-accent-soft);
+}
+
+.deck-products {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ── Advisor ID cards ──────────────────────────────────── */
+.deck-id-grid {
+  display: grid;
+  gap: 0.4rem;
+  min-height: 0;
+}
+
+.deck-id-grid--lead {
+  grid-template-columns: 1fr;
+  margin-bottom: 0.2rem;
+}
+
+.deck-id-grid--quad {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.deck-id-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius);
+  overflow: hidden;
+  background: var(--de-bg-elevated);
+  box-shadow: var(--de-shadow);
+  font-size: var(--de-xs);
+  min-height: 0;
+  min-width: 0;
+}
+
+.deck-id-card--lead {
+  flex-direction: row;
+  border-color: var(--de-border-active);
+  background: linear-gradient(125deg, var(--de-accent-soft) 0%, var(--de-bg-elevated) 50%);
+  box-shadow: var(--de-shadow-lg);
+}
+
+.deck-id-card--lead .deck-id-header {
+  flex-direction: column;
+  align-items: center;
+  width: 5.75rem;
+  padding: 0.5rem 0.4rem;
+  border-bottom: none;
+  border-right: 1px solid var(--de-border);
+}
+
+.deck-id-card--lead .deck-id-photo {
+  width: 3.75rem;
+  height: 4.35rem;
+  font-size: 1rem;
+}
+
+.deck-id-card--lead .deck-id-body {
+  flex: 1;
+  padding: 0.45rem 0.55rem;
+}
+
+.deck-id-header {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.38rem 0.4rem 0.32rem;
+  background: var(--de-surface-active);
+  border-bottom: 1px solid var(--de-border-subtle);
+  align-items: flex-start;
+}
+
+.deck-id-photo {
+  width: 2.5rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: var(--de-radius-sm);
+  border: 1px solid var(--de-border);
+  background: linear-gradient(165deg, var(--de-surface), var(--de-bg-elevated));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--de-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--de-accent);
+}
+
+.deck-id-name {
+  font-family: var(--de-display);
+  font-weight: 600;
+  font-size: var(--de-small);
+  color: var(--de-text-strong);
+  line-height: 1.22;
+}
+
+.deck-id-role {
+  color: var(--de-muted);
+  font-size: var(--de-xs);
+  line-height: 1.32;
+  margin-top: 0.14rem;
+}
+
+.deck-id-body {
+  padding: 0.32rem 0.4rem 0.38rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.deck-id-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.16rem;
+  margin-top: 0.2rem;
+}
+
+.deck-id-tag {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  padding: 0.1rem 0.28rem;
+  font-size: var(--de-xs);
+  line-height: 1.25;
+  color: var(--de-muted);
+  background: var(--de-bg-elevated);
+}
+
+.deck-id-tag--accent {
+  border-color: var(--de-border-active);
+  color: var(--de-text-strong);
+  background: var(--de-accent-soft);
+}
+
+.deck-id-org {
+  display: inline-block;
+  margin-top: 0.22rem;
+  font-size: var(--de-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--de-accent);
+}
+
+.deck-pill {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius);
+  padding: 0.38rem 0.3rem;
+  text-align: center;
+  font-size: var(--de-xs);
+  line-height: 1.3;
+  background: var(--de-bg-elevated);
+  box-shadow: var(--de-shadow);
+}
+
+.deck-pill b {
+  display: block;
+  font-size: var(--de-small);
+  font-weight: 600;
+  color: var(--de-text-strong);
+  margin-bottom: 0.06rem;
+}
+
+.deck-pill span {
+  color: var(--de-muted);
+  font-size: var(--de-xs);
+}
+
+.deck-pill-row {
+  flex-shrink: 0;
+  margin-bottom: 0.3rem;
+}
+
+.deck-metric {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  padding: 0.35rem 0.4rem;
+  text-align: center;
+  font-size: var(--de-xs);
+  line-height: 1.3;
+  background: var(--de-bg-elevated);
+}
+
+.deck-metric b {
+  font-weight: 600;
+  color: var(--de-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-metric span {
+  display: block;
+  color: var(--de-muted);
+  margin-top: 0.06rem;
+}
+
+.deck-metric--active {
+  border-color: var(--de-border-active);
+  background: var(--de-accent-soft);
+}
+
+.deck-metrics {
+  flex-shrink: 0;
+}
+
+.deck-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  padding: 0.35rem 0.5rem;
+  font-size: var(--de-small);
+  background: var(--de-bg-elevated);
+}
+
+.deck-row b {
+  font-variant-numeric: tabular-nums;
+  color: var(--de-text-strong);
+}
+
+.deck-list {
+  margin: 0.3rem 0 0 1rem;
+  padding: 0;
+  list-style: disc;
+}
+
+.deck-list li {
+  font-size: var(--de-small);
+  line-height: 1.38;
+  margin-bottom: 0.12rem;
+  color: var(--de-text);
+}
+
+.deck-list--tight li {
+  margin-bottom: 0.06rem;
+}
+
+.deck-timeline,
+.deck-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-ask-amount {
+  font-family: var(--de-display);
+  font-size: clamp(1rem, 1.9vw, 1.2rem);
+  font-weight: 700;
+  color: var(--de-gold);
+  margin: 0.1rem 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Tables ────────────────────────────────────────────── */
+.deck-cap-table .deck-table td:first-child,
+.deck-cap-table table td:first-child {
+  font-weight: 600;
+  color: var(--de-text-strong);
+}
+
+.deck-cap-table .deck-table td:nth-child(2),
+.deck-cap-table table td:nth-child(2) {
+  font-family: var(--de-display);
+  font-weight: 600;
+  color: var(--de-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-cap-table .deck-table tr:first-child td,
+.deck-cap-table table tr:first-child td {
+  background: var(--de-surface);
+}
+
+.deck-table-wrap,
+.slidev-layout table {
+  overflow: hidden;
+  border-radius: var(--de-radius);
+  border: 1px solid var(--de-border);
+  flex-shrink: 1;
+  min-height: 0;
+  box-shadow: var(--de-shadow);
+}
+
+.deck-table,
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--de-small);
+  margin: 0 !important;
+}
+
+.deck-table th,
+.deck-table td,
+.slidev-layout table th,
+.slidev-layout table td {
+  border-bottom: 1px solid var(--de-border-subtle);
+  padding: 0.35rem 0.48rem;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.35;
+}
+
+.deck-table th,
+.slidev-layout table th {
+  background: var(--de-surface);
+  font-weight: 600;
+  color: var(--de-text-strong);
+  font-size: var(--de-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.deck-table tr:last-child td,
+.slidev-layout table tr:last-child td {
+  border-bottom: none;
+}
+
+.deck-table tbody tr:hover {
+  background: var(--de-surface-active);
+}
+
+.slide-dense .deck-table th,
+.slide-dense .deck-table td,
+.slide-dense .slidev-layout table th,
+.slide-dense .slidev-layout table td {
+  padding: 0.28rem 0.4rem;
+  font-size: var(--de-xs);
+}
+
+/* ── TAM rings ─────────────────────────────────────────── */
+.deck-tam {
+  position: relative;
+  width: clamp(7rem, 17vw, 10rem);
+  height: clamp(7rem, 17vw, 10rem);
+  margin: 0.3rem auto 0;
+  flex-shrink: 0;
+}
+
+.deck-tam-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--de-border-active);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.4rem;
+}
+
+.deck-tam-ring--outer { inset: 0; opacity: 0.45; }
+.deck-tam-ring--mid { inset: 1.55rem; opacity: 0.7; }
+.deck-tam-ring--inner {
+  inset: 3.1rem;
+  background: var(--de-accent-soft);
+  justify-content: center;
+  padding-top: 0;
+  border-color: var(--de-accent);
+  opacity: 1;
+}
+
+.deck-tam-label {
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.deck-tam-value {
+  font-family: var(--de-display);
+  font-size: var(--de-small);
+  font-weight: 700;
+  color: var(--de-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Grid utilities ────────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.grid > div {
+  min-width: 0;
+  min-height: 0;
+}
+
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-5 { grid-template-columns: repeat(5, 1fr); }
+.col-span-2 { grid-column: span 2; }
+.col-span-3 { grid-column: span 3; }
+.gap-2 { gap: 0.35rem; }
+.gap-3 { gap: 0.45rem; }
+.gap-4 { gap: 0.55rem; }
+.gap-5 { gap: 0.7rem; }
+.mt-2 { margin-top: 0.3rem; }
+.mt-3 { margin-top: 0.4rem; }
+.mt-4 { margin-top: 0.5rem; }
+.mb-3 { margin-bottom: 0.4rem; }
+.items-start { align-items: start; }
+.items-stretch { align-items: stretch; }
+
+/* ── Charts / Mermaid ──────────────────────────────────── */
+.deck-chart {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slidev-layout .mermaid,
+.deck-chart .mermaid,
+.slidev-layout pre.mermaid {
+  flex: 1 1 auto;
+  min-height: 0 !important;
+  max-height: min(28vh, 210px) !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+.slide-dense .slidev-layout .mermaid,
+.slide-dense .deck-chart .mermaid {
+  max-height: min(22vh, 165px) !important;
+}
+
+.slidev-layout .mermaid svg,
+.deck-chart .mermaid svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.slidev-page:nth-child(3) .mermaid,
+.slide-frame[data-slide="solution"] .mermaid {
+  max-height: min(24vh, 185px) !important;
+}
+
+.slidev-page:nth-child(13) .mermaid,
+.slide-frame[data-slide="gtm"] .mermaid {
+  max-height: min(26vh, 200px) !important;
+}
+
+/* ── Snake timeline ────────────────────────────────────── */
+.deck-snake {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  --de-line: var(--de-accent-muted);
+}
+
+.deck-snake-row {
+  display: grid;
+  gap: 0;
+  align-items: stretch;
+  position: relative;
+}
+
+.deck-snake-row--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.deck-snake-row--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.deck-snake-row--cols-4 { grid-template-columns: repeat(4, 1fr); }
+.deck-snake-row--cols-5 { grid-template-columns: repeat(5, 1fr); }
+
+.deck-snake--inline {
+  flex: 0 0 auto;
+  margin-bottom: 0.4rem;
+}
+
+.deck-snake--compact {
+  flex: 0 0 auto;
+}
+
+.deck-stack .deck-snake {
+  flex: 0 0 auto;
+}
+
+.deck-snake--compact .deck-snake-milestone {
+  padding: 0.28rem 0.36rem 0.32rem;
+  margin: 0.1rem 0.12rem;
+}
+
+.deck-snake--compact .deck-snake-turn {
+  height: 0.65rem;
+}
+
+.deck-snake-row--ltr .deck-snake-milestone:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: calc(0.3rem + 2px);
+  height: 2px;
+  background: var(--de-line);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.deck-snake-row--rtl {
+  direction: rtl;
+}
+
+.deck-snake-row--rtl > .deck-snake-milestone {
+  direction: ltr;
+}
+
+.deck-snake-row--rtl .deck-snake-milestone:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  right: auto;
+  width: calc(0.3rem + 2px);
+  height: 2px;
+  background: var(--de-line);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.deck-snake-turn {
+  height: 0.9rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.deck-snake-turn--right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(12.5% - 1px);
+  width: 2px;
+  height: 100%;
+  background: var(--de-line);
+}
+
+.deck-snake-turn--right.deck-snake-turn--cols-3::before {
+  right: calc(16.67% - 1px);
+}
+
+.deck-snake-turn--right.deck-snake-turn--cols-5::before {
+  right: calc(10% - 1px);
+}
+
+.deck-snake-turn--left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(12.5% - 1px);
+  width: 2px;
+  height: 100%;
+  background: var(--de-line);
+}
+
+.deck-snake-turn--left.deck-snake-turn--cols-3::before {
+  left: calc(16.67% - 1px);
+}
+
+.deck-snake-turn--left.deck-snake-turn--cols-5::before {
+  left: calc(10% - 1px);
+}
+
+.deck-snake-turn--cols-2::before {
+  right: calc(25% - 1px);
+}
+
+.deck-snake-turn--left.deck-snake-turn--cols-2::before {
+  left: calc(25% - 1px);
+}
+
+.deck-snake-milestone {
+  position: relative;
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius-sm);
+  padding: 0.36rem 0.46rem 0.4rem;
+  background: var(--de-bg-elevated);
+  margin: 0.14rem 0.2rem;
+  min-height: 0;
+  box-shadow: var(--de-shadow);
+}
+
+.deck-snake-milestone--active {
+  border-color: var(--de-accent);
+  background: var(--de-accent-soft);
+  box-shadow: 0 0 0 1px var(--de-accent-soft), var(--de-shadow);
+}
+
+.deck-snake-milestone--future {
+  opacity: 0.9;
+}
+
+.deck-snake-milestone--fund {
+  border-color: color-mix(in srgb, var(--de-gold) 50%, var(--de-border));
+  background: var(--de-gold-soft);
+}
+
+.deck-snake-milestone--phase {
+  border-color: var(--de-accent);
+  background: var(--de-accent-soft);
+}
+
+.deck-snake-milestone--arr {
+  border-color: color-mix(in srgb, var(--de-seg-arr) 50%, var(--de-border));
+  background: color-mix(in srgb, var(--de-seg-arr) 8%, var(--de-bg-elevated));
+}
+
+.deck-snake-type {
+  display: inline-block;
+  font-size: var(--de-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.06rem 0.24rem;
+  border-radius: var(--de-radius-sm);
+  margin-bottom: 0.12rem;
+  line-height: 1.2;
+  border: 1px solid var(--de-border);
+  color: var(--de-muted);
+}
+
+.deck-snake-milestone--fund .deck-snake-type {
+  border-color: var(--de-gold);
+  color: var(--de-gold);
+  background: var(--de-gold-soft);
+}
+
+.deck-snake-milestone--phase .deck-snake-type {
+  border-color: var(--de-accent);
+  color: var(--de-accent);
+  background: var(--de-accent-soft);
+}
+
+.deck-snake-milestone--arr .deck-snake-type {
+  border-color: var(--de-seg-arr);
+  color: var(--de-seg-arr);
+}
+
+.deck-snake-q {
+  display: block;
+  font-family: var(--de-display);
+  font-weight: 700;
+  font-size: var(--de-small);
+  color: var(--de-accent);
+  letter-spacing: 0.02em;
+  line-height: 1.22;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-snake-product {
+  display: block;
+  font-weight: 600;
+  font-size: var(--de-small);
+  color: var(--de-text-strong);
+  margin-top: 0.14rem;
+  line-height: 1.28;
+}
+
+.deck-snake-ver {
+  display: block;
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  margin-top: 0.12rem;
+  line-height: 1.32;
+}
+
+.deck-snake-ver b,
+.deck-snake-product b {
+  color: var(--de-text-strong);
+  font-weight: 600;
+}
+
+.slide-dense .deck-snake-milestone {
+  padding: 0.3rem 0.38rem 0.34rem;
+  margin: 0.1rem 0.14rem;
+}
+
+.slide-dense .deck-snake-turn {
+  height: 0.75rem;
+}
+
+.slide-dense .deck-snake-q { font-size: var(--de-xs); }
+.slide-dense .deck-snake-product { font-size: var(--de-xs); }
+.slide-dense .deck-snake-ver { font-size: var(--de-xs); }
+
+/* ── Ask slides ────────────────────────────────────────── */
+.slide-ask .slidev-layout,
+.slide-frame.ask .slide-content {
+  justify-content: flex-start;
+}
+
+.deck-ask {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-ask-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  align-items: start;
+}
+
+.deck-ask-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-ask-section-label {
+  font-size: var(--de-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--de-muted);
+  flex-shrink: 0;
+}
+
+.deck-ask-timeline {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--de-border-subtle);
+  padding-top: 0.3rem;
+}
+
+.deck-ask-timeline .deck-snake {
+  flex: 0 0 auto;
+}
+
+.deck-ask-context {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.deck-ask-context-item {
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius);
+  padding: 0.35rem 0.45rem;
+  background: var(--de-bg-elevated);
+  text-align: center;
+  line-height: 1.3;
+  box-shadow: var(--de-shadow);
+}
+
+.deck-ask-context-item--active {
+  border-color: var(--de-border-active);
+  background: var(--de-accent-soft);
+}
+
+.deck-ask-context-label {
+  display: block;
+  font-size: var(--de-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--de-muted);
+  margin-bottom: 0.08rem;
+}
+
+.deck-ask-context-item b {
+  display: block;
+  font-family: var(--de-display);
+  font-size: var(--de-small);
+  font-weight: 700;
+  color: var(--de-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-ask-context-item > span:last-child {
+  display: block;
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  margin-top: 0.08rem;
+}
+
+/* ── Funding visualization ─────────────────────────────── */
+.deck-funding {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-funding-rounds {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.deck-funding-round {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  border: 1px solid var(--de-border);
+  border-radius: var(--de-radius);
+  padding: 0.38rem 0.45rem;
+  background: var(--de-bg-elevated);
+  min-height: 0;
+  min-width: 0;
+  box-shadow: var(--de-shadow);
+}
+
+.deck-funding-round--active {
+  border-color: var(--de-border-active);
+  background: var(--de-accent-soft);
+}
+
+.deck-funding-round-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.deck-funding-round-head b {
+  font-family: var(--de-display);
+  font-size: var(--de-small);
+  color: var(--de-text-strong);
+}
+
+.deck-funding-round-head span {
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-funding-round-amt {
+  font-family: var(--de-display);
+  font-size: var(--de-small);
+  font-weight: 700;
+  color: var(--de-gold);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-fund-stack {
+  display: flex;
+  height: 0.65rem;
+  border-radius: var(--de-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--de-border-subtle);
+  flex-shrink: 0;
+}
+
+.deck-fund-seg {
+  height: 100%;
+  min-width: 2px;
+}
+
+.deck-fund-seg--eng { background: var(--de-seg-eng); }
+.deck-fund-seg--team { background: var(--de-seg-team); }
+.deck-fund-seg--ml { background: var(--de-seg-ml); }
+.deck-fund-seg--gtm { background: var(--de-seg-gtm); }
+.deck-fund-seg--legal { background: var(--de-seg-legal); }
+.deck-fund-seg--reserve { background: var(--de-seg-reserve); }
+
+.deck-fund-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-fund-legend-row {
+  display: grid;
+  grid-template-columns: 0.5rem 1fr auto;
+  gap: 0.22rem;
+  align-items: center;
+  font-size: var(--de-xs);
+  line-height: 1.25;
+  color: var(--de-muted);
+}
+
+.deck-fund-legend-row b {
+  font-size: var(--de-xs);
+  color: var(--de-text-strong);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-fund-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.deck-funding-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.14rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  padding-top: 0.18rem;
+  border-top: 1px solid var(--de-border-subtle);
+}
+
+.deck-funding-tag {
+  font-size: var(--de-xs);
+  padding: 0.08rem 0.26rem;
+  border-radius: var(--de-radius-sm);
+  border: 1px solid var(--de-border);
+  color: var(--de-muted);
+  background: var(--de-bg-elevated);
+  line-height: 1.25;
+}
+
+.deck-funding-tag--fund {
+  border-color: var(--de-gold);
+  color: var(--de-gold);
+  background: var(--de-gold-soft);
+}
+
+.deck-funding-tag--product {
+  border-color: var(--de-border-active);
+  color: var(--de-text-strong);
+}
+
+.deck-funding-tag--phase {
+  border-color: var(--de-accent);
+  color: var(--de-accent);
+  background: var(--de-accent-soft);
+}
+
+.deck-funding-tag--arr {
+  border-color: var(--de-seg-arr);
+  color: var(--de-seg-arr);
+  background: color-mix(in srgb, var(--de-seg-arr) 8%, var(--de-bg-elevated));
+}
+
+.deck-funding-lower {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  border-top: 1px solid var(--de-border-subtle);
+  padding-top: 0.32rem;
+  min-height: 0;
+}
+
+.deck-arr-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.14rem;
+  justify-content: center;
+}
+
+.deck-arr-label {
+  font-size: var(--de-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--de-muted);
+  margin-bottom: 0.06rem;
+}
+
+.deck-arr-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 2.2rem;
+  gap: 0.22rem;
+  align-items: center;
+  font-size: var(--de-xs);
+}
+
+.deck-arr-row span:first-child {
+  color: var(--de-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-arr-row b {
+  font-size: var(--de-xs);
+  color: var(--de-text-strong);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-arr-bar {
+  height: 0.45rem;
+  background: var(--de-surface);
+  border-radius: var(--de-radius-sm);
+  border: 1px solid var(--de-border-subtle);
+  overflow: hidden;
+}
+
+.deck-arr-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--de-accent-soft), var(--de-accent));
+  border-radius: 1px;
+}
+
+.deck-funding-timeline-wrap {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-funding-timeline-wrap .deck-snake {
+  flex: 0 0 auto;
+}
+
+/* ── Unified timeline ──────────────────────────────────── */
+.deck-unified {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.deck-unified-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.deck-unified .deck-snake {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.deck-unified .deck-snake--compact .deck-snake-milestone {
+  padding: 0.24rem 0.32rem 0.28rem;
+  margin: 0.08rem 0.1rem;
+}
+
+.deck-unified-end {
+  text-align: center;
+  flex-shrink: 0;
+  padding: 0.28rem 0.45rem;
+  border: 1px solid var(--de-gold);
+  border-radius: var(--de-radius);
+  background: var(--de-gold-soft);
+  font-size: var(--de-xs);
+  color: var(--de-muted);
+  line-height: 1.35;
+}
+
+.deck-unified-end b {
+  color: var(--de-gold);
+  font-family: var(--de-display);
+}
+
+.deck-stack--tight {
+  gap: 0.22rem;
+}
+
+.deck-stack--tight .deck-row {
+  padding: 0.28rem 0.42rem;
+  font-size: var(--de-xs);
+}
+
+.slide-ask .deck-cap-table,
+.slide-frame.ask .deck-cap-table {
+  flex-shrink: 1;
+}
+
+.slide-ask .deck-metrics,
+.slide-frame.ask .deck-metrics {
+  flex-shrink: 0;
+}
+
+.slide-ask .deck-footnote,
+.slide-frame.ask .deck-footnote {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+/* Static HTML deck shell — premium presentation chrome */
+
+:root {
+  color-scheme: light dark;
+  --bg-outer: #d8d4cc;
+  --bg-slide: var(--de-bg-elevated);
+  --slide-pad: var(--de-pad-x);
+  --title-size: var(--de-title);
+  --body-size: var(--de-body);
+  --small-size: var(--de-small);
+  --xs-size: var(--de-xs);
+  --text: var(--de-text);
+  --text-strong: var(--de-text-strong);
+  --muted: var(--de-muted);
+  --border: var(--de-border);
+  --border-subtle: var(--de-border-subtle);
+  --border-active: var(--de-border-active);
+  --surface: var(--de-surface);
+  --surface-active: var(--de-surface-active);
+  --shadow: var(--de-shadow);
+  --font: var(--de-font);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-outer: #040405;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg-outer);
+  color: var(--text);
+  font-family: var(--font);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.deck {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 0.85rem 3.5rem;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, var(--de-accent-soft) 0%, transparent 60%),
+    var(--bg-outer);
+}
+
+.slide-frame {
+  display: none;
+  width: min(95vw, calc(95vh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  max-height: 95vh;
+  background:
+    radial-gradient(ellipse 80% 55% at 100% 0%, var(--de-accent-soft) 0%, transparent 50%),
+    linear-gradient(168deg, var(--de-bg-elevated) 0%, var(--de-bg) 100%);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--de-shadow-lg);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.25s ease;
+}
+
+.slide-frame.active { display: flex; flex-direction: column; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.992); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.slide-inner {
+  flex: 1;
+  min-height: 0;
+  padding: var(--slide-pad);
+  padding-top: calc(var(--slide-pad) * 0.75);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-inner > h1 {
+  flex-shrink: 0;
+  font-family: var(--de-display);
+  font-size: var(--title-size);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-strong);
+  position: relative;
+}
+
+.slide-inner > h1::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--de-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+.slide-inner h3 {
+  font-size: clamp(0.875rem, 1.45vw, 1.05rem);
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0.12rem 0 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.slide-inner p, .slide-inner li {
+  font-size: var(--body-size);
+  line-height: 1.48;
+  color: var(--text);
+}
+
+.slide-inner strong, .slide-inner b {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.slide-content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.3rem, 0.65vh, 0.5rem);
+  overflow: hidden;
+}
+
+.slide-frame.dense:not(.ask) .slide-content {
+  justify-content: flex-start;
+  gap: clamp(0.2rem, 0.45vh, 0.35rem);
+}
+
+.slide-frame.dense.ask .slide-content {
+  justify-content: flex-start;
+  gap: 0.25rem;
+}
+
+.slide-frame.ask .deck-ask {
+  flex: 1;
+  min-height: 0;
+}
+
+.slide-frame.ask .deck-ask-main {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.slide-frame.ask .deck-ask-timeline {
+  flex-shrink: 0;
+}
+
+.slide-frame.ask .deck-footnote {
+  margin-top: 0;
+}
+
+.slide-frame.dense.ask {
+  --body-size: clamp(0.75rem, 1vw, 0.875rem);
+  --small-size: clamp(0.6875rem, 0.92vw, 0.8125rem);
+  --xs-size: clamp(0.625rem, 0.85vw, 0.75rem);
+}
+
+.slide-frame.dense {
+  --body-size: clamp(0.75rem, 1.05vw, 0.875rem);
+  --small-size: clamp(0.6875rem, 0.95vw, 0.8125rem);
+  --xs-size: clamp(0.625rem, 0.88vw, 0.75rem);
+}
+
+.slide-frame.dense .slide-inner > h1 {
+  font-size: clamp(1.25rem, 2.1vw, 1.65rem);
+  margin-bottom: 0.3rem;
+}
+
+.slide-footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem var(--slide-pad);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--xs-size);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--de-surface-active);
+}
+
+.slide-frame.center .slide-inner {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.slide-frame.center .slide-inner > h1 {
+  font-size: clamp(1.85rem, 4.2vw, 2.65rem);
+  border-bottom: none;
+  padding-bottom: 0;
+  letter-spacing: -0.035em;
+}
+
+.slide-frame.center .slide-inner > h1::after {
+  display: none;
+}
+
+.slide-frame.center .slide-inner h3 {
+  font-size: clamp(1rem, 1.85vw, 1.2rem);
+}
+
+.slide-content > .grid {
+  flex: 1;
+  min-height: 0;
+  align-content: center;
+  align-items: stretch;
+}
+
+.slide-content > .grid.items-start { align-content: start; }
+
+.slide-content > .mermaid,
+.slide-content > .deck-chart {
+  min-height: 0;
+  max-height: min(28vh, 200px);
+}
+
+.grid .deck-chart,
+.grid .mermaid {
+  min-height: 0;
+  max-height: min(30vh, 215px);
+}
+
+.slide-frame.dense .grid .deck-chart,
+.slide-frame.dense .grid .mermaid {
+  max-height: min(22vh, 160px);
+}
+
+.slide-frame[data-slide="solution"] .mermaid { max-height: min(24vh, 175px); }
+.slide-frame[data-slide="gtm"] .mermaid { max-height: min(26vh, 190px); }
+.slide-frame[data-slide="funding-viz"] .deck-funding { flex: 1; min-height: 0; }
+.slide-frame[data-slide="funding-viz"] .deck-funding-lower { flex-shrink: 0; }
+.slide-frame[data-slide="unified-timeline"] .deck-unified { flex: 1; min-height: 0; }
+.slide-frame[data-slide="unified-timeline"] .deck-unified-end { flex-shrink: 0; }
+
+.nav {
+  position: fixed;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--de-bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.32rem 0.8rem;
+  z-index: 100;
+  font-size: var(--small-size);
+  color: var(--muted);
+  box-shadow: var(--de-shadow-lg);
+  backdrop-filter: blur(12px);
+}
+
+.nav button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--de-radius-sm);
+  padding: 0.22rem 0.55rem;
+  cursor: pointer;
+  font-size: var(--small-size);
+  font-family: inherit;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.nav button:hover {
+  border-color: var(--border-active);
+  color: var(--text-strong);
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--de-accent);
+  opacity: 0.75;
+  transition: width 0.2s ease;
+  z-index: 100;
+}
+
+@page { size: 10in 5.625in; margin: 0; }
+
+@media print {
+  html, body { overflow: visible; background: #fff; print-color-adjust: exact; }
+  .deck { display: block; padding: 0; height: auto; width: 100%; background: #fff; }
+  .slide-frame {
+    display: flex !important;
+    width: 10in;
+    height: 5.625in;
+    max-height: none;
+    aspect-ratio: auto;
+    page-break-after: always;
+    break-inside: avoid;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    overflow: hidden;
+  }
+  .slide-frame:last-child { page-break-after: auto; }
+  .slide-inner { padding: 0.5in 0.6in 0.4in; }
+  .slide-footer { padding: 0.1in 0.6in; font-size: 7pt; }
+  .nav, .progress { display: none !important; }
+  .mermaid svg { max-height: 2in; }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-3, .grid-cols-5 { grid-template-columns: 1fr 1fr; }
+  .col-span-2, .col-span-3 { grid-column: span 2; }
+  .deck-id-grid--quad { grid-template-columns: 1fr 1fr; }
+}
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <main class="deck" id="deck">
+  <section class="slide-frame center" data-index="0" data-slide="cover">
+    <div class="slide-inner"><h1>DeepEmergence</h1>
+<h3>The engineering stack behind digital employees</h3>
+<p><strong>One harness. Any domain. Governed autonomy.</strong></p>
+<div class="deck-meta">
+Launching July 2026 · Ajay Pratap Singh · Aman Pratap Singh
+</div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>1 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="1" data-slide="problem">
+    <div class="slide-inner"><h1>The problem</h1><div class="slide-content"><div class="deck-lead">
+AI capability is advancing yearly — but production labor still lacks governance.
+</div><div class="deck-snake deck-snake--inline"><div class="deck-snake-row deck-snake-row--cols-3 deck-snake-row--ltr">
+<div class="deck-snake-milestone">
+<span class="deck-snake-q">2024</span>
+<span class="deck-snake-product">Retrieval</span>
+<span class="deck-snake-ver">Summarize documents</span>
+</div>
+<div class="deck-snake-milestone">
+<span class="deck-snake-q">2025</span>
+<span class="deck-snake-product">Reasoning</span>
+<span class="deck-snake-ver">Workflow analysis</span>
+</div>
+<div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">2026</span>
+<span class="deck-snake-product">Governed labor</span>
+<span class="deck-snake-ver">Identity · audit · coordination</span>
+</div>
+</div>
+</div><div class="grid grid-cols-2 gap-3 mt-2"><div class="deck-card deck-card--warn">
+<b>Wrapper agents today</b>
+<ul class="deck-list">
+<li>LLM + prompt + tool list</li>
+<li>No persistent identity or audit trail</li>
+<li>Governance lives in the prompt</li>
+</ul>
+</div><div class="deck-card deck-card--active">
+<b>What labor actually requires</b>
+<ul class="deck-list">
+<li>Scoped credentials and policy-as-code</li>
+<li>Replayable traces across sessions</li>
+<li>Multi-agent handoffs under enforceable policy</li>
+</ul>
+</div></div><div class="deck-footnote">
+The prompt was never the moat. The <b>harness around the model</b> is — and the market is ready in July 2026.
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>2 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame" data-index="2" data-slide="solution">
+    <div class="slide-inner"><h1>Solution</h1><div class="slide-content"><div class="deck-lead">
+<b>Sophon</b> — the engineering stack that turns model intelligence into dependable, general-purpose labor.
+</div><div class="grid grid-cols-5 gap-2 deck-pill-row"><div class="deck-pill"><b>Identity</b><span>Scoped credentials</span></div>
+<div class="deck-pill"><b>Guardrails</b><span>Deny-by-default policy</span></div>
+<div class="deck-pill"><b>Hooks</b><span>Intercept risky writes</span></div>
+<div class="deck-pill"><b>Evals</b><span>Grade trajectories</span></div>
+<div class="deck-pill"><b>Traces</b><span>Audit lineage</span></div></div><div class="mermaid" data-src="flowchart LR
+    LLM[&quot;Foundation models<br/>(swappable)&quot;]
+    subgraph cognitive[&quot;Beyond-LLM layer&quot;]
+        direction TB
+        WM[&quot;World model&quot;] --> CI[&quot;Causal inference&quot;] --> MEM[&quot;Memory&quot;] --> PLAN[&quot;Planner&quot;]
+    end
+    subgraph harness[&quot;Sophon harness&quot;]
+        direction TB
+        ID[&quot;Identity&quot;] --> GR[&quot;Guardrails&quot;] --> HK[&quot;Hooks&quot;] --> EV[&quot;Evals&quot;] --> TR[&quot;Traces&quot;]
+    end
+    subgraph packs[&quot;Domain packs&quot;]
+        R[&quot;Retail fleet&quot;]
+        E[&quot;Enterprise&quot;]
+    end
+    LLM --> WM
+    PLAN --> ID
+    TR --> R
+    TR --> E
+    style cognitive fill:#1e293b,stroke:#818cf8,color:#e2e8f0
+    style harness fill:#0f172a,stroke:#38bdf8,color:#f8fafc">flowchart LR
+    LLM["Foundation models<br/>(swappable)"]
+    subgraph cognitive["Beyond-LLM layer"]
+        direction TB
+        WM["World model"] --> CI["Causal inference"] --> MEM["Memory"] --> PLAN["Planner"]
+    end
+    subgraph harness["Sophon harness"]
+        direction TB
+        ID["Identity"] --> GR["Guardrails"] --> HK["Hooks"] --> EV["Evals"] --> TR["Traces"]
+    end
+    subgraph packs["Domain packs"]
+        R["Retail fleet"]
+        E["Enterprise"]
+    end
+    LLM --> WM
+    PLAN --> ID
+    TR --> R
+    TR --> E
+    style cognitive fill:#1e293b,stroke:#818cf8,color:#e2e8f0
+    style harness fill:#0f172a,stroke:#38bdf8,color:#f8fafc</div><div class="deck-footnote">
+Simulate before every write · Domain packs plug into one substrate · Model upgrades are eval-gated
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>3 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="3" data-slide="traction">
+    <div class="slide-inner"><h1>Traction</h1><div class="slide-content"><div class="deck-lead">
+Pre-revenue today · <b>Platform launches July 2026</b> · Retail sales Q2 2027 · Enterprise Q3 2027
+</div><div class="deck-snake"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Now</span>
+<span class="deck-snake-product">Sophon Harness</span>
+<span class="deck-snake-ver"><b>v0.9</b> · stealth · design partners</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Jul 2026</span>
+<span class="deck-snake-product">Sophon Platform</span>
+<span class="deck-snake-ver"><b>v1.0</b> · public launch</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Sira · Rina</span>
+<span class="deck-snake-ver"><b>β</b> · markets · chief of staff</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q1 2027</span>
+<span class="deck-snake-product">Fleet expansion</span>
+<span class="deck-snake-ver">Elyra · Catalyst · Kat <b>α</b> · Auvi <b>α</b></span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Phase 3 pilots</span>
+<span class="deck-snake-ver"><b>Career API</b> · parallel to Phase 2</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q4 2027</span>
+<span class="deck-snake-product">Phase 2 · Wearable <b>β</b></span>
+<span class="deck-snake-ver">Apps <b>β</b> · passive sensors</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise sales · Phase 2</span>
+<span class="deck-snake-ver">Ent. CoS <b>β</b> · Wearable · Apps <b>α</b></span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Retail sales begin</span>
+<span class="deck-snake-ver">Sira · Rina <b>GA</b> · first revenue · <b>Seed</b></span>
+</div></div></div><div class="deck-footnote">
+Retail fleet: Sira · Rina · Elyra · Catalyst · Kat · Auvi · Enterprise CoS — one Sophon substrate
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>4 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame" data-index="4" data-slide="team">
+    <div class="slide-inner"><h1>Team</h1><div class="slide-content"><div class="grid grid-cols-2 gap-5 mt-2"><div class="deck-card"><h3>Ajay Pratap Singh · Co-founder</h3>
+<ul>
+<li>B.Tech, <strong>IIT Madras</strong> · Ex-Head of AI, <strong>Premji Invest</strong></li>
+<li><strong>Y Combinator</strong> · <strong>Goldman Sachs</strong></li>
+</ul>
+<p class="deck-muted mt-2">
+Institutional finance and applied AI at family-office scale — domain depth for investment and regulated verticals.
+</p></div><div class="deck-card"><h3>Aman Pratap Singh · Co-founder</h3>
+<ul>
+<li>M.S. AI Research, <strong>University of Maryland</strong></li>
+</ul>
+<p class="deck-muted mt-2">
+Agent systems and applied ML — harness engineering: guardrails, evals, and trace infrastructure.
+</p></div></div><div class="deck-footnote">
+Pre-revenue · Lean team through pre-seed · Scale to 16 FTE at $10–15M seed
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>5 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="5" data-slide="advisors">
+    <div class="slide-inner"><h1>Advisors</h1><div class="slide-content"><div class="deck-lead">
+Academic, policy, and industry advisors — <b>IIT Madras</b> depth · responsible AI · institutional finance.
+</div><div class="deck-id-grid deck-id-grid--lead"><div class="deck-id-card deck-id-card--lead"><div class="deck-id-header">
+<div class="deck-id-photo"><span>BR</span></div>
+<span class="deck-id-org">IIT Madras</span>
+</div><div class="deck-id-body">
+<div class="deck-id-name">Prof. Balaraman Ravindran</div>
+<div class="deck-id-role">HOD, Dept. of Data Science & AI · Founding Head, WSAI · RBCDSAI · CeRAI</div>
+<div class="deck-id-tags">
+<span class="deck-id-tag deck-id-tag--accent">AAAI Fellow</span>
+<span class="deck-id-tag deck-id-tag--accent">INAE Fellow</span>
+<span class="deck-id-tag deck-id-tag--accent">ACM Distinguished</span>
+<span class="deck-id-tag">Deep RL · Responsible AI</span>
+<span class="deck-id-tag">India AI Governance Guidelines</span>
+<span class="deck-id-tag">RBI FREE-AI Framework</span>
+<span class="deck-id-tag">UN AI Scientific Panel · 2026</span>
+<span class="deck-id-tag">AIGEG · TPEC</span>
+</div>
+</div></div></div><div class="deck-id-grid deck-id-grid--quad"><div class="deck-id-card">
+<div class="deck-id-header">
+<div class="deck-id-photo"><span>MK</span></div>
+<div class="deck-id-meta">
+<div class="deck-id-name">Prof. Mitesh Khapra</div>
+<div class="deck-id-role">Professor · IIT Madras</div>
+</div>
+</div>
+<div class="deck-id-body">
+<div class="deck-id-tags">
+<span class="deck-id-tag deck-id-tag--accent">Bharat4AI</span>
+<span class="deck-id-tag">NLP · AI research</span>
+<span class="deck-id-tag">IIT Madras</span>
+</div>
+</div>
+</div><div class="deck-id-card">
+<div class="deck-id-header">
+<div class="deck-id-photo"><span>VK</span></div>
+<div class="deck-id-meta">
+<div class="deck-id-name">Prof. V. Kamakoti</div>
+<div class="deck-id-role">Director · IIT Madras</div>
+</div>
+</div>
+<div class="deck-id-body">
+<div class="deck-id-tags">
+<span class="deck-id-tag deck-id-tag--accent">IIT Madras</span>
+<span class="deck-id-tag">Institutional leadership</span>
+<span class="deck-id-tag">National AI policy</span>
+</div>
+</div>
+</div><div class="deck-id-card">
+<div class="deck-id-header">
+<div class="deck-id-photo"><span>AR</span></div>
+<div class="deck-id-meta">
+<div class="deck-id-name">Aravindan Raghuveer</div>
+<div class="deck-id-role">Ex-Google DeepMind · IIT Madras</div>
+</div>
+</div>
+<div class="deck-id-body">
+<div class="deck-id-tags">
+<span class="deck-id-tag deck-id-tag--accent">Google DeepMind</span>
+<span class="deck-id-tag">Applied ML</span>
+<span class="deck-id-tag">IIT Madras</span>
+</div>
+</div>
+</div><div class="deck-id-card">
+<div class="deck-id-header">
+<div class="deck-id-photo"><span>AM</span></div>
+<div class="deck-id-meta">
+<div class="deck-id-name">Aditya Murgai</div>
+<div class="deck-id-role">VP · Goldman Sachs · Paytm</div>
+</div>
+</div>
+<div class="deck-id-body">
+<div class="deck-id-tags">
+<span class="deck-id-tag deck-id-tag--accent">Goldman Sachs</span>
+<span class="deck-id-tag">Paytm</span>
+<span class="deck-id-tag">Fintech · scale</span>
+</div>
+</div>
+</div></div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>6 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame" data-index="6" data-slide="market">
+    <div class="slide-inner"><h1>Market size</h1><div class="slide-content"><div class="grid grid-cols-5 gap-4 items-start"><div class="col-span-2 deck-tam"><div class="deck-tam-ring deck-tam-ring--outer">
+<span class="deck-tam-label">TAM</span>
+<span class="deck-tam-value">$8.4T</span>
+</div>
+<div class="deck-tam-ring deck-tam-ring--mid">
+<span class="deck-tam-label">SAM</span>
+<span class="deck-tam-value">$156B</span>
+</div>
+<div class="deck-tam-ring deck-tam-ring--inner">
+<span class="deck-tam-label">SOM</span>
+<span class="deck-tam-value">$85M</span>
+</div></div><div class="col-span-3"><div class="deck-table-wrap"><table class="deck-table"><thead><tr><th>Region</th><th style="text-align:right">TAM</th><th style="text-align:right">SAM</th><th style="text-align:right">SOM Yr-5</th></tr></thead><tbody><tr><td>North America</td><td style="text-align:right">$3.1T</td><td style="text-align:right">$62B</td><td style="text-align:right">$40M</td></tr><tr><td>Europe</td><td style="text-align:right">$2.2T</td><td style="text-align:right">$41B</td><td style="text-align:right">$17M</td></tr><tr><td>Japan</td><td style="text-align:right">$0.9T</td><td style="text-align:right">$16B</td><td style="text-align:right">$6M</td></tr><tr><td>India</td><td style="text-align:right">$0.7T</td><td style="text-align:right">$14B</td><td style="text-align:right">$8M</td></tr><tr><td>Singapore · UAE</td><td style="text-align:right">$0.2T</td><td style="text-align:right">$13B</td><td style="text-align:right">$9M</td></tr><tr><td><strong>Global</strong></td><td style="text-align:right"><strong>$8.4T</strong></td><td style="text-align:right"><strong>$156B</strong></td><td style="text-align:right"><strong>$85M</strong></td></tr></tbody></table></div></div></div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>7 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="7" data-slide="competition">
+    <div class="slide-inner"><h1>Competition</h1><div class="slide-content"><div class="deck-lead">
+Competitors sell <b>agents</b>. Buyers need <b>governed digital employees</b> they can trust with real work.
+</div><div class="grid grid-cols-2 gap-3 items-stretch"><div class="deck-chart"><div class="mermaid" data-src="quadrantChart
+    title Where value compounds
+    x-axis Low governance --> High governance
+    y-axis Shallow --> Deep domain ownership
+    quadrant-1 Systems of record
+    quadrant-2 Domain copilots
+    quadrant-3 Chat wrappers
+    quadrant-4 Framework toolkits
+    &quot;Chat wrappers&quot;: [0.18, 0.18]
+    &quot;Agent frameworks&quot;: [0.32, 0.42]
+    &quot;Vertical copilots&quot;: [0.55, 0.5]
+    &quot;DeepEmergence&quot;: [0.88, 0.88]">quadrantChart
+    title Where value compounds
+    x-axis Low governance --> High governance
+    y-axis Shallow --> Deep domain ownership
+    quadrant-1 Systems of record
+    quadrant-2 Domain copilots
+    quadrant-3 Chat wrappers
+    quadrant-4 Framework toolkits
+    "Chat wrappers": [0.18, 0.18]
+    "Agent frameworks": [0.32, 0.42]
+    "Vertical copilots": [0.55, 0.5]
+    "DeepEmergence": [0.88, 0.88]</div></div><div class="grid grid-cols-2 gap-2 deck-stack"><div class="deck-card">
+<b>vs. Chat wrappers</b><br>
+<span class="deck-muted">Identity, audit, policy — not stateless chat.</span>
+</div><div class="deck-card">
+<b>vs. Agent frameworks</b><br>
+<span class="deck-muted">Sophon productized — no 12-month platform build.</span>
+</div><div class="deck-card">
+<b>vs. Vertical copilots</b><br>
+<span class="deck-muted">One substrate — shared governance across packs.</span>
+</div><div class="deck-card deck-card--active">
+<b>vs. Workspace AI</b><br>
+<span class="deck-muted">Model-agnostic · investment-grade audit · no lock-in.</span>
+</div></div></div><div class="deck-footnote">
+Similar headlines on a landing page · <b>Different architecture under the hood</b>
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>8 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="8" data-slide="products">
+    <div class="slide-inner"><h1>Products</h1><div class="slide-content"><div class="deck-lead">
+One <b>Sophon</b> substrate · seven digital employees · wearables · platform APIs — three phases of product depth.
+</div><div class="grid grid-cols-3 gap-3 items-stretch"><div class="deck-phase">
+<div class="deck-phase-label"><b>Phase 1</b> · Digital employees · 2026–28</div>
+<div class="deck-products"><div class="deck-product deck-product--active">
+<b>Sophon Platform</b>
+<span>Governed runtime — identity, policy, evals, traces for every pack</span>
+</div><div class="deck-product">
+<b>Sira</b>
+<span>Markets intelligence — research, narrative, audience & positioning</span>
+</div><div class="deck-product">
+<b>Rina</b>
+<span>AI Chief of Staff — briefings, calendar routing, executive coordination</span>
+</div><div class="deck-product">
+<b>Elyra</b>
+<span>Healthspan COO — longevity habits, biomarkers, daily health ops</span>
+</div><div class="deck-product">
+<b>Auvi</b>
+<span>Investment desk — portfolio research, memos, rebalance workflows</span>
+</div><div class="deck-product">
+<b>Catalyst</b>
+<span>Career operator — trajectory modeling, role & mentor matching</span>
+</div><div class="deck-product">
+<b>Kat</b>
+<span>Relationships — compatibility depth, values, temperament, life path</span>
+</div><div class="deck-product">
+<b>Enterprise CoS</b>
+<span>Institutional chief of staff · ghost orgs for governed teams</span>
+</div></div>
+</div><div class="deck-phase">
+<div class="deck-phase-label"><b>Phase 2</b> · Data mesh · Q3 2027+</div>
+<div class="deck-products"><div class="deck-product deck-product--active">
+<b>Deeplife Wearable</b>
+<span>Passive biometrics & behavioral context — zero-friction 24/7 capture</span>
+</div><div class="deck-product">
+<b>Companion Apps</b>
+<span>iOS & Android — consent-first UX, active capture, real-time Sophon sync</span>
+</div><div class="deck-product">
+<b>Sophon v2 graph</b>
+<span>Sensor fusion — fuses active + passive streams into one people graph</span>
+</div><div class="deck-product">
+<b>Passive data layer</b>
+<span>Continuous enrichment that Phase 3 matching precision depends on</span>
+</div></div>
+</div><div class="deck-phase">
+<div class="deck-phase-label"><b>Phase 3</b> · Platform licensing · Q1 2028+</div>
+<div class="deck-products"><div class="deck-product deck-product--active">
+<b>Career API</b>
+<span>Catalyst licensing — job boards, recruiters, talent platforms</span>
+</div><div class="deck-product">
+<b>Dating layer</b>
+<span>Kat white-label — compatibility depth apps cannot build alone</span>
+</div><div class="deck-product">
+<b>Agency graph API</b>
+<span>Sira licensing — audience psychology & campaign fit by trajectory</span>
+</div><div class="deck-product">
+<b>Targeted advertising</b>
+<span>Consent-gated ads shaped by deep person context — psychology, trajectory, life stage</span>
+</div><div class="deck-product">
+<b>Personalized sales & marketing</b>
+<span>Deep-context outreach — message, channel, and timing tuned to each prospect</span>
+</div><div class="deck-product">
+<b>B2B2C platform</b>
+<span>Rev-share integrations wherever people psychology drives decisions</span>
+</div></div>
+</div></div><div class="deck-footnote">
+Retail fleet GA <b>Q2 2027</b> · Enterprise <b>Q3 2027</b> · Wearables & Phase 3 run in parallel from Q3 2027 / Q1 2028
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>9 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="9" data-slide="biz-phase-1">
+    <div class="slide-inner"><h1>Business model · Phase 1</h1><div class="slide-content"><div class="deck-lead">
+Build retail digital employees and enterprise teams — three phases to a wearable-fed platform moat.
+</div><div class="grid grid-cols-2 gap-4"><div class="deck-col"><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-2 deck-snake-row--ltr"><div class="deck-snake-milestone">
+<span class="deck-snake-q">2026 H2</span>
+<span class="deck-snake-product">Sira · Rina</span>
+<span class="deck-snake-ver"><b>β</b> · free · design partners</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Retail sales</span>
+<span class="deck-snake-ver"><b>$79–$149/mo</b> · Sira · Rina <b>GA</b></span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-2"></div><div class="deck-snake-row deck-snake-row--cols-2 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">2028</span>
+<span class="deck-snake-product">Enterprise scale</span>
+<span class="deck-snake-ver">Regulated · <b>$250K–$2M ACV</b></span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise sales</span>
+<span class="deck-snake-ver">Ent. CoS · ghost orgs <b>β</b> · pilots</span>
+</div></div></div><div class="grid grid-cols-3 gap-2 mt-3 deck-metrics">
+<div class="deck-metric"><b>Retail</b><span>Per-employee SaaS</span></div>
+<div class="deck-metric"><b>Enterprise</b><span>Packs + ghost orgs</span></div>
+<div class="deck-metric deck-metric--active"><b>Fleet</b><span>Multi-employee bundles</span></div>
+</div></div><div class="deck-col"><div class="deck-table-wrap"><table class="deck-table"><thead><tr><th>Year</th><th style="text-align:right">ARR</th><th>Mix</th></tr></thead><tbody><tr><td>2026</td><td style="text-align:right">$0</td><td>Pre-revenue</td></tr><tr><td>2027</td><td style="text-align:right">$12M</td><td>70% retail · 30% enterprise</td></tr><tr><td>2028</td><td style="text-align:right">$28M</td><td>50% / 50%</td></tr><tr><td><strong>2030</strong></td><td style="text-align:right"><strong>$85M</strong></td><td>50% P1 · 30% P2 · 20% P3</td></tr></tbody></table></div><div class="mermaid" data-src="xychart-beta
+    title &quot;ARR ($M)&quot;
+    x-axis [2027, 2028, 2030]
+    y-axis &quot;USD millions&quot; 0 --> 90
+    bar [12, 28, 85]">xychart-beta
+    title "ARR ($M)"
+    x-axis [2027, 2028, 2030]
+    y-axis "USD millions" 0 --> 90
+    bar [12, 28, 85]</div><div class="grid grid-cols-2 gap-2 mt-2 deck-metrics">
+<div class="deck-metric">Gross margin <b>78%</b> at scale</div>
+<div class="deck-metric">NRR target <b>125%+</b></div>
+</div></div></div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>10 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="10" data-slide="biz-phase-2">
+    <div class="slide-inner"><h1>Business model · Phase 2</h1><div class="slide-content"><div class="deck-lead">
+Launch <b>wearable devices</b> and <b>companion apps</b> from <b>Q3 2027</b> — passive data layer runs parallel with Phase 3 from Q1 2028.
+</div><div class="deck-snake"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Deeplife Wearable</span>
+<span class="deck-snake-ver"><b>α v0.1</b> · Phase 2 kickoff</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q4 2027</span>
+<span class="deck-snake-product">Companion Apps</span>
+<span class="deck-snake-ver"><b>α</b> · iOS · Android · consent layer</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Wearable · Apps</span>
+<span class="deck-snake-ver"><b>β v0.5</b> · passive capture · daily sync</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2028</span>
+<span class="deck-snake-product">Real-time graph</span>
+<span class="deck-snake-ver">Sensor fusion · <b>Sophon v2</b> · Phase 3 live</span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div><div class="deck-snake-row deck-snake-row--cols-3 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2028</span>
+<span class="deck-snake-product">Wearable · Apps</span>
+<span class="deck-snake-ver"><b>GA v1.0</b> · passive data mesh</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2028</span>
+<span class="deck-snake-product">Passive data layer</span>
+<span class="deck-snake-ver">24/7 enrichment · zero-friction capture</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q4 2028</span>
+<span class="deck-snake-product">Graph density</span>
+<span class="deck-snake-ver">Phase 2 + 3 running in parallel</span>
+</div></div></div><div class="grid grid-cols-3 gap-2 mt-2"><div class="deck-card deck-card--active">
+<b>Wearable device</b>
+<ul class="deck-list deck-list--tight">
+<li>Continuous biometrics & behavioral context</li>
+<li>Passive signals — no manual logging</li>
+</ul>
+</div><div class="deck-card deck-card--active">
+<b>Smartphone apps</b>
+<ul class="deck-list deck-list--tight">
+<li>iOS & Android companion · consent-first UX</li>
+<li>Active capture + real-time sync to Sophon</li>
+</ul>
+</div><div class="deck-card deck-card--active">
+<b>Richer data moat</b>
+<ul class="deck-list deck-list--tight">
+<li>Fuses active + passive streams into one graph</li>
+<li>Enables Phase 3 with precision others cannot match</li>
+</ul>
+</div></div><div class="deck-footnote">
+Phase 1 employees seed the graph · Phase 2 wearables from Q3 2027 · Phase 3 platform pilots parallel from Q1 2028
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>11 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="11" data-slide="biz-phase-3">
+    <div class="slide-inner"><h1>Business model · Phase 3</h1><div class="slide-content"><div class="deck-lead">
+Merge intelligence into external platforms — <b>Phase 3 launches Q1 2028</b>, two quarters after Phase 2, running in parallel.
+</div><div class="deck-snake deck-snake--compact mb-2"><div class="deck-snake-row deck-snake-row--cols-3 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Phase 1 · 2026–27</span>
+<span class="deck-snake-product">Digital employees</span>
+<span class="deck-snake-ver">Retail Q2 · Enterprise Q3 2027</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Phase 2 · Q3 2027+</span>
+<span class="deck-snake-product">Wearables · apps</span>
+<span class="deck-snake-ver">Passive + real-time data mesh</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Phase 3 · Q1 2028+</span>
+<span class="deck-snake-product">Platform licensing</span>
+<span class="deck-snake-ver">Parallel · API · rev-share</span>
+</div></div></div><div class="deck-snake deck-snake--compact mb-2"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Career API</span>
+<span class="deck-snake-ver"><b>Catalyst</b> pilots · Phase 3 start</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2028</span>
+<span class="deck-snake-product">Dating integrations</span>
+<span class="deck-snake-ver"><b>Kat</b> white-label · parallel w/ Phase 2</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2028</span>
+<span class="deck-snake-product">Agency graph API</span>
+<span class="deck-snake-ver"><b>Sira</b> licensing · targeting</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q4 2028</span>
+<span class="deck-snake-product">Full B2B2C scale</span>
+<span class="deck-snake-ver">Rev-share · all verticals</span>
+</div></div></div><div class="grid grid-cols-3 gap-3"><div class="deck-card deck-card--active">
+<b>Career matching</b> · Catalyst
+<ul class="deck-list">
+<li>Trajectory inference for roles & positions</li>
+<li>Job boards, recruiters, talent platforms</li>
+<li>Work psychology — not résumé keywords</li>
+</ul>
+</div><div class="deck-card deck-card--active">
+<b>Dating & relationships</b> · Kat
+<ul class="deck-list">
+<li>Compatibility depth apps cannot build alone</li>
+<li>Values, temperament, life trajectory</li>
+<li>Consent-gated patterns → better matches</li>
+</ul>
+</div><div class="deck-card deck-card--active">
+<b>Marketing agencies</b> · Sira
+<ul class="deck-list">
+<li>Audience from unified people psychology</li>
+<li>Agency platforms tap our graph</li>
+<li>Campaign fit by trajectory — not demographics</li>
+</ul>
+</div></div><div class="deck-footnote">
+Wearable-fed graph depth · Phase 3 unlocks B2B2C reach wherever human psychology drives matching, hiring, and persuasion
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>12 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="12" data-slide="gtm">
+    <div class="slide-inner"><h1>Go-to-market strategy</h1><div class="slide-content"><div class="deck-lead">
+Product roadmap — retail <b>Q2 2027</b> · enterprise <b>Q3 2027</b> · Phase 2 & 3 run in parallel from Q3 2027 / Q1 2028
+</div><div class="deck-snake"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Jul 2026</span>
+<span class="deck-snake-product">Sophon Platform</span>
+<span class="deck-snake-ver"><b>v1.0</b> · waitlist · design partners</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Sira · Rina</span>
+<span class="deck-snake-ver"><b>β</b> · YC & finance communities</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q1 2027</span>
+<span class="deck-snake-product">Fleet <b>β</b></span>
+<span class="deck-snake-ver">Elyra · Catalyst · Kat <b>α</b> · Ent. CoS <b>α</b></span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Retail sales</span>
+<span class="deck-snake-ver">Sira · Rina <b>GA</b> · paying customers</span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q2 2028</span>
+<span class="deck-snake-product">Phase 2 GA · Phase 3</span>
+<span class="deck-snake-ver">Wearable <b>v1.0</b> · Dating layer</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Phase 3 pilots</span>
+<span class="deck-snake-ver"><b>Career API</b> · parallel to Phase 2</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q4 2027</span>
+<span class="deck-snake-product">Phase 2 <b>β</b></span>
+<span class="deck-snake-ver">Wearable · Apps · passive sensors</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--future">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise · Phase 2</span>
+<span class="deck-snake-ver">Ent. sales · Wearable · Apps <b>α</b></span>
+</div></div></div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>13 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="13" data-slide="funding-viz">
+    <div class="slide-inner"><h1>Funding roadmap</h1><div class="slide-content"><div class="deck-lead">
+Use of funds by round · ARR ramp · <b>fund · product · phase</b> milestones on one timeline
+</div><div class="deck-funding"><div class="grid grid-cols-3 gap-2 deck-funding-rounds"><div class="deck-funding-round">
+<div class="deck-funding-round-head">
+<b>Angel</b>
+<span>Q3 2026</span>
+</div>
+<div class="deck-funding-round-amt">$500K</div>
+<div class="deck-fund-stack" title="Use of funds">
+<div class="deck-fund-seg deck-fund-seg--eng" style="width:40%"></div>
+<div class="deck-fund-seg deck-fund-seg--team" style="width:30%"></div>
+<div class="deck-fund-seg deck-fund-seg--ml" style="width:15%"></div>
+<div class="deck-fund-seg deck-fund-seg--legal" style="width:15%"></div>
+</div>
+<div class="deck-fund-legend">
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--eng"></span><span>Platform & Sophon</span><b>40%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--team"></span><span>Founder salaries</span><b>30%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--ml"></span><span>ML compute</span><b>15%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--legal"></span><span>Legal · partners</span><b>15%</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--fund">Fund close</span>
+<span class="deck-funding-tag deck-funding-tag--product">Sophon v1.0</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase 1 build</span>
+</div>
+</div><div class="deck-funding-round deck-funding-round--active">
+<div class="deck-funding-round-head">
+<b>Pre-seed</b>
+<span>Q4 2026</span>
+</div>
+<div class="deck-funding-round-amt">$2.0M</div>
+<div class="deck-fund-stack">
+<div class="deck-fund-seg deck-fund-seg--team" style="width:45%"></div>
+<div class="deck-fund-seg deck-fund-seg--ml" style="width:23%"></div>
+<div class="deck-fund-seg deck-fund-seg--gtm" style="width:15%"></div>
+<div class="deck-fund-seg deck-fund-seg--legal" style="width:10%"></div>
+<div class="deck-fund-seg deck-fund-seg--reserve" style="width:7%"></div>
+</div>
+<div class="deck-fund-legend">
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--team"></span><span>Core team · 8 FTE</span><b>45%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--ml"></span><span>Research & compute</span><b>23%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--gtm"></span><span>GTM · partners</span><b>15%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--legal"></span><span>Legal</span><b>10%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--reserve"></span><span>Reserve</span><b>7%</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--fund">Fund close</span>
+<span class="deck-funding-tag deck-funding-tag--product">Sira · Rina β</span>
+<span class="deck-funding-tag deck-funding-tag--product">Fleet α</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase 1</span>
+</div>
+</div><div class="deck-funding-round">
+<div class="deck-funding-round-head">
+<b>Seed</b>
+<span>Q2 2027</span>
+</div>
+<div class="deck-funding-round-amt">$12.0M</div>
+<div class="deck-fund-stack">
+<div class="deck-fund-seg deck-fund-seg--eng" style="width:40%"></div>
+<div class="deck-fund-seg deck-fund-seg--gtm" style="width:25%"></div>
+<div class="deck-fund-seg deck-fund-seg--ml" style="width:15%"></div>
+<div class="deck-fund-seg deck-fund-seg--legal" style="width:10%"></div>
+<div class="deck-fund-seg deck-fund-seg--reserve" style="width:10%"></div>
+</div>
+<div class="deck-fund-legend">
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--eng"></span><span>Eng · product · 16 FTE</span><b>40%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--gtm"></span><span>GTM · enterprise</span><b>25%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--ml"></span><span>ML · Sophon infra</span><b>15%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--legal"></span><span>Legal · compliance</span><b>10%</b></div>
+<div class="deck-fund-legend-row"><span class="deck-fund-dot deck-fund-seg--reserve"></span><span>Reserve</span><b>10%</b></div>
+</div>
+<div class="deck-funding-tags">
+<span class="deck-funding-tag deck-funding-tag--fund">Fund close</span>
+<span class="deck-funding-tag deck-funding-tag--product">Retail GA</span>
+<span class="deck-funding-tag deck-funding-tag--product">Enterprise</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase 2 α</span>
+</div>
+</div></div><div class="deck-funding-lower"><div class="deck-arr-chart">
+<div class="deck-arr-label">ARR ramp · pre-raise & targets</div>
+<div class="deck-arr-row"><span>Q3'26</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:0%"></div></div><b>$0</b></div>
+<div class="deck-arr-row"><span>Q4'26</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:0%"></div></div><b>$0</b></div>
+<div class="deck-arr-row"><span>Q1'27</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:1%"></div></div><b>~$0</b></div>
+<div class="deck-arr-row"><span>Q2'27</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:4%"></div></div><b>~$400K</b></div>
+<div class="deck-arr-row"><span>Q3'27</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:25%"></div></div><b>~$3M</b></div>
+<div class="deck-arr-row"><span>Q4'27</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:50%"></div></div><b>~$6M</b></div>
+<div class="deck-arr-row"><span>EOY</span><div class="deck-arr-bar"><div class="deck-arr-bar-fill" style="width:100%"></div></div><b>$12M</b></div>
+</div><div class="deck-funding-timeline-wrap"><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--fund deck-snake-milestone--active">
+<span class="deck-snake-q">Q3 2026</span>
+<span class="deck-snake-product">Angel · $500K</span>
+<span class="deck-snake-ver">Sophon v1.0 · ~$0 ARR</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--fund">
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Pre-seed · $2M</span>
+<span class="deck-snake-ver">Sira · Rina <b>β</b> · Phase 1</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q1 2027</span>
+<span class="deck-snake-product">Fleet <b>β</b></span>
+<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Retail GA</span>
+<span class="deck-snake-ver">Seed · $12M · ~$400K ARR</span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-4"></div><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Phase 3 pilots</span>
+<span class="deck-snake-ver">Career API · ~$18M ARR</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Phase 2 <b>α</b></span>
+<span class="deck-snake-ver">Wearable · Apps · ~$3M ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise sales</span>
+<span class="deck-snake-ver">Ent. CoS · ghost orgs</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">EOY 2027</span>
+<span class="deck-snake-product"><b>$12M ARR</b></span>
+<span class="deck-snake-ver">70% retail · 30% ent.</span>
+</div></div></div></div></div></div><div class="deck-footnote">
+<span class="deck-funding-tag deck-funding-tag--fund">Fund</span> round close ·
+<span class="deck-funding-tag deck-funding-tag--product">Product</span> ship ·
+<span class="deck-funding-tag deck-funding-tag--phase">Phase</span> expansion · ARR at pre-raise / run-rate
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>14 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense ask" data-index="14" data-slide="ask-angel">
+    <div class="slide-inner"><h1>The ask · Angel investors</h1><div class="slide-content"><div class="deck-lead">
+<b>$50K – $500K</b> per angel · Post-money SAFE · <b>$10–12M</b> valuation cap · Rolling close through Q3 2026
+</div><div class="deck-ask-context"><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Round timing</span>
+<b>Q3 2026</b>
+<span>Now · Jul–Sep 2026</span>
+</div><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Pre-raise ARR</span>
+<b>~$0</b>
+<span>Pre-revenue · Sophon v0.9 · design partners</span>
+</div></div><div class="deck-ask"><div class="deck-ask-main"><div class="deck-ask-col"><div class="deck-ask-section-label">Cap table · pro forma</div><div class="deck-table-wrap deck-cap-table"><div class="deck-table-wrap"><table class="deck-table"><thead><tr><th>Stakeholder</th><th style="text-align:right">Own.</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Founders</strong></td><td style="text-align:right">87%</td><td>Ajay · Aman</td></tr><tr><td><strong>ESOP pool</strong></td><td style="text-align:right">10%</td><td>Reserved</td></tr><tr><td><strong>Angel syndicate</strong></td><td style="text-align:right">3%</td><td>$500K @ $12M cap</td></tr><tr><td><strong>Prior investors</strong></td><td style="text-align:right">—</td><td>None</td></tr></tbody></table></div></div><div class="grid grid-cols-2 gap-2 deck-metrics">
+<div class="deck-metric"><b>Instrument</b><span>Post-money SAFE</span></div>
+<div class="deck-metric"><b>Dilution</b><span>~3% full round</span></div>
+<div class="deck-metric"><b>Pro-rata</b><span>Seed rights</span></div>
+<div class="deck-metric deck-metric--active"><b>Min check</b><span>$50K</span></div>
+</div></div><div class="deck-ask-col"><div class="deck-ask-section-label">Use of funds</div><div class="deck-stack deck-stack--tight">
+<div class="deck-row"><span>Platform & Sophon harness</span><b>40%</b></div>
+<div class="deck-row"><span>Founder salaries (lean)</span><b>30%</b></div>
+<div class="deck-row"><span>ML compute & research</span><b>15%</b></div>
+<div class="deck-row"><span>Legal · design partners</span><b>15%</b></div>
+</div></div></div><div class="deck-ask-timeline"><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-3 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q3 2026</span>
+<span class="deck-snake-product">Angel close</span>
+<span class="deck-snake-ver">SAFE · ~$0 ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Jul 2026</span>
+<span class="deck-snake-product">Sophon <b>v1.0</b></span>
+<span class="deck-snake-ver">Platform launch</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Sira · Rina <b>β</b></span>
+<span class="deck-snake-ver">Bridge to pre-seed</span>
+</div></div></div></div></div><div class="deck-footnote">
+Angels bridge to pre-seed · Pro-rata and MFN standard · Ideal for operators who know enterprise AI
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>15 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense ask" data-index="15" data-slide="ask-preseed">
+    <div class="slide-inner"><h1>The ask · Pre-seed</h1><div class="slide-content"><div class="deck-lead">
+Raising <b>$500K – $3M</b> · Post-money SAFE or priced note · <b>$15–20M</b> cap · 18-month runway to GA
+</div><div class="deck-ask-context"><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Round timing</span>
+<b>Q4 2026</b>
+<span>~1Q from today · Oct–Dec 2026</span>
+</div><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Pre-raise ARR</span>
+<b>~$0</b>
+<span>Sira · Rina <b>β</b> · free pilots · no GA yet</span>
+</div></div><div class="deck-ask"><div class="deck-ask-main"><div class="deck-ask-col"><div class="deck-ask-section-label">Cap table · pro forma</div><div class="deck-table-wrap deck-cap-table"><div class="deck-table-wrap"><table class="deck-table"><thead><tr><th>Stakeholder</th><th style="text-align:right">Own.</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Founders</strong></td><td style="text-align:right">74%</td><td>Post-angel dilution</td></tr><tr><td><strong>ESOP pool</strong></td><td style="text-align:right">12%</td><td>Expanded at close</td></tr><tr><td><strong>Pre-seed</strong></td><td style="text-align:right">12%</td><td>$2M @ $18M cap</td></tr><tr><td><strong>Angel / prior</strong></td><td style="text-align:right">2%</td><td>SAFE conversion</td></tr></tbody></table></div></div><div class="grid grid-cols-2 gap-2 deck-metrics">
+<div class="deck-metric deck-metric--active"><b>Target</b><span>$1.5M – $2M</span></div>
+<div class="deck-metric"><b>Dilution</b><span>12–18%</span></div>
+<div class="deck-metric"><b>ESOP</b><span>10% → 12%</span></div>
+<div class="deck-metric"><b>Valuation</b><span>$15–20M post</span></div>
+</div></div><div class="deck-ask-col"><div class="deck-ask-section-label">Use of funds · $2M target</div><div class="deck-stack deck-stack--tight">
+<div class="deck-row"><span>Core team · 8 FTE</span><b>$900K · 45%</b></div>
+<div class="deck-row"><span>Research & ML compute</span><b>$450K · 23%</b></div>
+<div class="deck-row"><span>GTM · design partners</span><b>$300K · 15%</b></div>
+<div class="deck-row"><span>Legal & compliance</span><b>$200K · 10%</b></div>
+<div class="deck-row"><span>Reserve</span><b>$150K · 7%</b></div>
+</div></div></div><div class="deck-ask-timeline"><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Pre-seed close</span>
+<span class="deck-snake-ver">Sira · Rina <b>β</b> · ~$0 ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q1 2027</span>
+<span class="deck-snake-product">Fleet <b>β</b></span>
+<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Retail sales</span>
+<span class="deck-snake-ver">First revenue · seed raise</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise · Phase 2</span>
+<span class="deck-snake-ver">~$3M ARR run-rate</span>
+</div></div></div></div></div><div class="deck-footnote">
+Within market: Carta 2025 median pre-seed cap <b>$10–15M</b> for $1–2.5M raises · IIT + YC + multi-pack platform justify upper range
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>16 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense ask" data-index="16" data-slide="ask-seed">
+    <div class="slide-inner"><h1>The ask · Seed</h1><div class="slide-content"><div class="deck-lead">
+Raising <b>$10M – $15M</b> priced equity · <b>$48–55M</b> pre-money · ~18% dilution · Scale retail fleet + enterprise
+</div><div class="deck-ask-context"><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Round timing</span>
+<b>Q2 2027</b>
+<span>~3Q from today · Apr–Jun 2027</span>
+</div><div class="deck-ask-context-item deck-ask-context-item--active">
+<span class="deck-ask-context-label">Pre-raise ARR</span>
+<b>~$300K – $500K</b>
+<span>Early retail GA · Sira · Rina paying customers</span>
+</div></div><div class="deck-ask"><div class="deck-ask-main"><div class="deck-ask-col"><div class="deck-ask-section-label">Cap table · pro forma</div><div class="deck-table-wrap deck-cap-table"><div class="deck-table-wrap"><table class="deck-table"><thead><tr><th>Stakeholder</th><th style="text-align:right">Own.</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Founders</strong></td><td style="text-align:right">58%</td><td>Post pre-seed</td></tr><tr><td><strong>ESOP pool</strong></td><td style="text-align:right">10%</td><td>16 FTE plan</td></tr><tr><td><strong>Seed investors</strong></td><td style="text-align:right">18%</td><td>$12M @ $55M pre</td></tr><tr><td><strong>Pre-seed + angels</strong></td><td style="text-align:right">10%</td><td>Prior rounds</td></tr><tr><td><strong>Strategic advisors</strong></td><td style="text-align:right">4%</td><td>Angels · advisors</td></tr></tbody></table></div></div><div class="grid grid-cols-2 gap-2 deck-metrics">
+<div class="deck-metric deck-metric--active"><b>Target</b><span>$12M</span></div>
+<div class="deck-metric"><b>Pre-money</b><span>$48–55M</span></div>
+<div class="deck-metric"><b>Dilution</b><span>17–20%</span></div>
+<div class="deck-metric"><b>ESOP</b><span>→ 10% post-close</span></div>
+</div></div><div class="deck-ask-col"><div class="deck-ask-section-label">Use of funds · $12M target</div><div class="deck-stack deck-stack--tight">
+<div class="deck-row"><span>Engineering · product · 16 FTE</span><b>$4.8M · 40%</b></div>
+<div class="deck-row"><span>GTM · enterprise pilots</span><b>$3.0M · 25%</b></div>
+<div class="deck-row"><span>ML compute · Sophon infra</span><b>$1.8M · 15%</b></div>
+<div class="deck-row"><span>Legal · compliance</span><b>$1.2M · 10%</b></div>
+<div class="deck-row"><span>Reserve</span><b>$1.2M · 10%</b></div>
+</div></div></div><div class="deck-ask-timeline"><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-4 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--active">
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Seed close</span>
+<span class="deck-snake-ver">Retail GA · ~$300–500K ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise · Phase 2</span>
+<span class="deck-snake-ver">~$3M ARR run-rate</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">Q4 2027</span>
+<span class="deck-snake-product">Fleet scale</span>
+<span class="deck-snake-ver">~$6M ARR run-rate</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-q">EOY 2027</span>
+<span class="deck-snake-product">ARR target</span>
+<span class="deck-snake-ver"><b>$12M</b> · 70/30 mix</span>
+</div></div></div></div></div><div class="deck-footnote">
+Ambitious vs. median AI seed (<b>~$4.5M / $20M post</b>, Carta 2025) — justified by 7-pack platform, enterprise pipeline, and wearable Phase 2 optionality
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>17 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame dense" data-index="17" data-slide="unified-timeline">
+    <div class="slide-inner"><h1>Unified timeline</h1><div class="slide-content"><div class="deck-lead">
+Every labeled milestone from <b>today</b> through <b>pre-Series A</b> — funding · products · phases · ARR
+</div><div class="deck-unified"><div class="deck-unified-legend">
+<span class="deck-funding-tag deck-funding-tag--fund">Fund</span>
+<span class="deck-funding-tag deck-funding-tag--product">Product</span>
+<span class="deck-funding-tag deck-funding-tag--phase">Phase</span>
+<span class="deck-funding-tag deck-funding-tag--arr">ARR</span>
+</div><div class="deck-snake deck-snake--compact"><div class="deck-snake-row deck-snake-row--cols-5 deck-snake-row--ltr"><div class="deck-snake-milestone deck-snake-milestone--fund deck-snake-milestone--active">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q3 2026 · Now</span>
+<span class="deck-snake-product">Angel · $500K</span>
+<span class="deck-snake-ver">SAFE · ~$0 ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-type">Product</span>
+<span class="deck-snake-q">Jul 2026</span>
+<span class="deck-snake-product">Sophon <b>v1.0</b></span>
+<span class="deck-snake-ver">Platform launch</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--fund">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Pre-seed · $2M</span>
+<span class="deck-snake-ver">8 FTE · ~$0 ARR</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-type">Product</span>
+<span class="deck-snake-q">Q4 2026</span>
+<span class="deck-snake-product">Sira · Rina <b>β</b></span>
+<span class="deck-snake-ver">Phase 1 · free pilots</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-type">Product</span>
+<span class="deck-snake-q">Q1 2027</span>
+<span class="deck-snake-product">Fleet <b>β</b></span>
+<span class="deck-snake-ver">Elyra · Catalyst · Kat</span>
+</div></div><div class="deck-snake-turn deck-snake-turn--right deck-snake-turn--cols-5"></div><div class="deck-snake-row deck-snake-row--cols-5 deck-snake-row--rtl"><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-type">Phase</span>
+<span class="deck-snake-q">Q1 2028</span>
+<span class="deck-snake-product">Phase 3 pilots</span>
+<span class="deck-snake-ver">Career API · Kat · Sira API</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--arr">
+<span class="deck-snake-type">ARR</span>
+<span class="deck-snake-q">EOY 2027</span>
+<span class="deck-snake-product"><b>$12M ARR</b></span>
+<span class="deck-snake-ver">70% retail · 30% ent.</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-type">Phase</span>
+<span class="deck-snake-q">Q4 2027</span>
+<span class="deck-snake-product">Phase 2 <b>β</b></span>
+<span class="deck-snake-ver">Wearable · Apps · ~$6M ARR</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-type">Phase</span>
+<span class="deck-snake-q">Q3 2027</span>
+<span class="deck-snake-product">Enterprise · Phase 2 <b>α</b></span>
+<span class="deck-snake-ver">Ent. CoS · wearable · ~$3M ARR</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--fund">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q2 2027</span>
+<span class="deck-snake-product">Seed · $12M</span>
+<span class="deck-snake-ver">Retail GA · ~$400K ARR</span>
+</div></div><div class="deck-snake-turn deck-snake-turn--left deck-snake-turn--cols-5"></div><div class="deck-snake-row deck-snake-row--cols-5 deck-snake-row--ltr"><div class="deck-snake-milestone">
+<span class="deck-snake-type">Product</span>
+<span class="deck-snake-q">Q2 2028</span>
+<span class="deck-snake-product">Wearable <b>GA</b></span>
+<span class="deck-snake-ver">Deeplife · companion apps</span>
+</div><div class="deck-snake-milestone">
+<span class="deck-snake-type">Product</span>
+<span class="deck-snake-q">Q3 2028</span>
+<span class="deck-snake-product">Agency graph API</span>
+<span class="deck-snake-ver">Sira · targeted ads</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--phase">
+<span class="deck-snake-type">Phase</span>
+<span class="deck-snake-q">Q4 2028</span>
+<span class="deck-snake-product">B2B2C scale</span>
+<span class="deck-snake-ver">Phase 2 + 3 parallel</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--arr">
+<span class="deck-snake-type">ARR</span>
+<span class="deck-snake-q">EOY 2028</span>
+<span class="deck-snake-product"><b>$28M ARR</b></span>
+<span class="deck-snake-ver">50% retail · 50% ent.</span>
+</div><div class="deck-snake-milestone deck-snake-milestone--fund deck-snake-milestone--active">
+<span class="deck-snake-type">Fund</span>
+<span class="deck-snake-q">Q2 2029</span>
+<span class="deck-snake-product">Pre-Series A</span>
+<span class="deck-snake-ver">~$35M ARR · 3-phase platform</span>
+</div></div></div><div class="deck-unified-end">
+<b>Pre-Series A · Q2 2029</b> — ~$35M ARR run-rate · wearable-fed graph · Phase 3 licensing at scale · positions for Series A
+</div></div><div class="deck-footnote">
+Today = Q3 2026 · ~$12.5M total raised through seed · pre-Series A opens the path to Series A and $85M ARR by 2030
+</div></div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>18 / 19</span>
+    </footer>
+  </section>
+  <section class="slide-frame center center" data-index="18" data-slide="closing">
+    <div class="slide-inner"><h1>Governed machine labor — built to last.</h1>
+<h3>The engineering discipline that makes autonomous work safe to run in production.</h3>
+<p><strong><a href="mailto:contact@deepemergence.com">contact@deepemergence.com</a></strong> · deepemergence.com</p>
+<div class="deck-meta">
+July 2026
+</div></div>
+    <footer class="slide-footer">
+      <span>DeepEmergence</span>
+      <span>Confidential · 2026</span>
+      <span>19 / 19</span>
+    </footer>
+  </section>
+  </main>
+  <nav class="nav" aria-label="Slide navigation">
+    <button type="button" id="prev" aria-label="Previous">←</button>
+    <span id="counter">1 / 19</span>
+    <button type="button" id="next" aria-label="Next">→</button>
+    <button type="button" onclick="window.print()" aria-label="Print / PDF" title="Print or save as PDF (P)">⎙</button>
+  </nav>
+  <script>
+let index = 0;
+const slides = document.querySelectorAll('.slide-frame');
+const counter = document.getElementById('counter');
+const progress = document.getElementById('progress');
+
+async function renderMermaid(slide) {
+  if (!window.mermaid) return;
+  const nodes = slide.querySelectorAll('.mermaid:not([data-processed])');
+  if (!nodes.length) return;
+  nodes.forEach(n => { n.style.minHeight = minChartHeight(n) + 'px'; });
+  try {
+    await mermaid.run({ nodes });
+    nodes.forEach(n => {
+      n.setAttribute('data-processed', '1');
+      scaleMermaid(n);
+    });
+  } catch (e) { console.warn('Mermaid:', e); }
+}
+
+function scaleMermaid(node) {
+  const svg = node.querySelector('svg');
+  if (!svg) return;
+  svg.removeAttribute('width');
+  svg.removeAttribute('height');
+  svg.style.transform = '';
+  svg.style.display = 'block';
+  const pw = node.clientWidth || node.parentElement?.clientWidth || 400;
+  const ph = node.clientHeight || minChartHeight(node);
+  requestAnimationFrame(() => {
+    const rect = svg.getBoundingClientRect();
+    const sw = rect.width || svg.viewBox?.baseVal?.width || 400;
+    const sh = rect.height || svg.viewBox?.baseVal?.height || 300;
+    if (!sw || !sh) return;
+    const scale = Math.min(pw / sw, ph / sh) * 0.92;
+    if (Math.abs(scale - 1) > 0.03) {
+      svg.style.transform = 'scale(' + scale + ')';
+      svg.style.transformOrigin = 'center center';
+    }
+  });
+}
+
+function minChartHeight(node) {
+  const slide = node.closest('.slide-frame');
+  const dense = slide?.classList.contains('dense');
+  const inner = node.closest('.slide-inner');
+  const base = inner ? inner.clientHeight * (dense ? 0.34 : 0.4) : window.innerHeight * 0.32;
+  if (node.closest('.deck-chart') || node.closest('.col-span-2')) return Math.max(base, dense ? 150 : 180);
+  if (node.closest('.grid')) return Math.max(base * 0.9, dense ? 140 : 165);
+  return Math.max(base * 0.85, dense ? 130 : 155);
+}
+
+function fitSlide(slide) {
+  const inner = slide.querySelector('.slide-inner');
+  const content = slide.querySelector('.slide-content');
+  if (!inner || slide.classList.contains('center')) return;
+  if (content) {
+    content.style.transform = 'none';
+    content.style.width = '100%';
+  }
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const target = content || inner;
+      const h1 = inner.querySelector('h1');
+      const titleH = h1 ? h1.offsetHeight + 8 : 0;
+      const avail = inner.clientHeight - titleH;
+      const needed = target.scrollHeight;
+      const minScale = slide.classList.contains('dense') ? 0.76 : 0.84;
+      if (needed > avail * 1.04 && avail > 0) {
+        const scale = Math.max(avail / needed, minScale);
+        target.style.transform = 'scale(' + scale + ')';
+        target.style.transformOrigin = 'top center';
+        target.style.width = (100 / scale) + '%';
+      }
+      inner.querySelectorAll('.mermaid[data-processed]').forEach(scaleMermaid);
+    });
+  });
+}
+
+async function show(i) {
+  index = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, n) => s.classList.toggle('active', n === index));
+  counter.textContent = (index + 1) + ' / ' + slides.length;
+  progress.style.width = ((index + 1) / slides.length * 100) + '%';
+  history.replaceState(null, '', '#' + (index + 1));
+  await renderMermaid(slides[index]);
+  fitSlide(slides[index]);
+}
+
+function next() { show(index + 1); }
+function prev() { show(index - 1); }
+
+document.getElementById('next').addEventListener('click', next);
+document.getElementById('prev').addEventListener('click', prev);
+
+document.addEventListener('keydown', (e) => {
+  if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); next(); }
+  if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); prev(); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  if (e.key === 'p' || e.key === 'P') { window.print(); }
+});
+
+const hash = parseInt(location.hash.replace('#', ''), 10);
+
+function isDark() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function initMermaid() {
+  if (!window.mermaid) return;
+  const dark = isDark();
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: dark ? 'dark' : 'base',
+    securityLevel: 'loose',
+    themeVariables: dark ? {
+      fontSize: '11px',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      primaryColor: '#1c1c1f',
+      primaryTextColor: '#eceae6',
+      lineColor: '#3a3a3e',
+      secondaryColor: '#222',
+      tertiaryColor: '#141416'
+    } : {
+      fontSize: '11px',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      primaryColor: '#ece9e3',
+      primaryTextColor: '#1c1a17',
+      lineColor: '#c8c4bc',
+      secondaryColor: '#f6f4f0',
+      tertiaryColor: '#e8e4dc',
+      primaryBorderColor: '#d8d3ca',
+      secondaryBorderColor: '#d8d3ca'
+    }
+  });
+}
+
+initMermaid();
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  document.querySelectorAll('.mermaid[data-processed]').forEach(n => {
+    const src = n.getAttribute('data-src');
+    if (src) n.textContent = src;
+    n.removeAttribute('data-processed');
+  });
+  initMermaid();
+  renderMermaid(slides[index]);
+});
+
+if (!Number.isNaN(hash) && hash >= 1) show(hash - 1);
+else show(0);
+
+window.addEventListener('hashchange', () => {
+  const h = parseInt(location.hash.replace('#', ''), 10);
+  if (!Number.isNaN(h) && h >= 1) show(h - 1);
+});
+
+window.addEventListener('resize', () => {
+  if (slides[index]) {
+    fitSlide(slides[index]);
+    slides[index].querySelectorAll('.mermaid[data-processed]').forEach(scaleMermaid);
+  }
+});
+</script>
+</body>
+</html>

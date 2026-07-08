@@ -6,12 +6,14 @@
   "scripts": {
     "dev": "slidev slides.md --open",
     "build": "slidev build slides.md",
+    "build:html": "node scripts/build-html.js",
     "export": "slidev export slides.md --format pptx --output DeepEmergence-Pitch-Deck.pptx",
     "export:pdf": "slidev export slides.md --format pdf --output DeepEmergence-Pitch-Deck.pdf"
   },
   "devDependencies": {
     "@slidev/cli": "^52.16.0",
     "@slidev/theme-default": "^0.25.0",
+    "marked": "^18.0.5",
     "playwright-chromium": "^1.47.0"
   }
 }
