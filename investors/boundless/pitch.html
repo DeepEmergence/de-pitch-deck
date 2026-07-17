@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>DeepEmergence — Boundless Ventures</title>
+  <style>
+    :root {
+      --ink: #141210;
+      --muted: #5a554c;
+      --line: #ddd7cc;
+      --paper: #faf9f6;
+      --card: #ffffff;
+      --accent: #1a4d3e;
+      --accent-soft: #e8f0ec;
+      --warn: #9a5b12;
+      --warn-soft: #f7f0e6;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+      /* Readable floor ~14px; grows with viewport; caps on huge displays */
+      --u: clamp(0.9rem, 0.85vw + 0.65vh, 1.35rem);
+      --slide-pad-y: clamp(1.1rem, 3.2vh, 2.4rem);
+      --slide-pad-x: clamp(1.25rem, 3.5vw, 3.25rem);
+      --foot-space: clamp(2.75rem, 5.5vh, 3.75rem);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: var(--u);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.screen {
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .stage {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--paper);
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .deck { width: 100%; height: 100%; position: relative; }
+    .slide {
+      display: none;
+      position: absolute;
+      inset: 0;
+      padding: var(--slide-pad-y) var(--slide-pad-x) calc(var(--slide-pad-y) + var(--foot-space));
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(0.55rem, 1.2vh, 0.9rem);
+      background: var(--paper);
+      overflow: hidden;
+      container-type: size;
+      container-name: slide;
+    }
+    .slide.on { display: flex; }
+    .slide.slide-hidden,
+    .slide.slide-hidden.on { display: none !important; }
+    .slide > *:not(.slide-foot) {
+      width: min(72rem, 100%);
+    }
+    .slide.cover {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-bottom: calc(var(--slide-pad-y) + var(--foot-space));
+      gap: clamp(0.75rem, 1.6vh, 1.15rem);
+    }
+    .slide.cover > *:not(.slide-foot) {
+      width: min(46rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .slide-foot {
+      position: absolute;
+      left: var(--slide-pad-x);
+      right: var(--slide-pad-x);
+      bottom: clamp(2.6rem, 4.8vh, 3.4rem);
+      display: flex;
+      justify-content: space-between;
+      font-size: clamp(0.7rem, 1.1vh + 0.15vw, 0.82rem);
+      color: var(--muted);
+      opacity: 0.85;
+    }
+    h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2.1rem, 5.2vh + 0.6vw, 3.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+      margin-inline: auto;
+    }
+    h2 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(1.65rem, 3.8vh + 0.5vw, 2.65rem);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin-bottom: 0;
+      max-width: 36ch;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: clamp(0.72rem, 1.2vh + 0.1vw, 0.85rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0;
+      text-align: center;
+    }
+    .lede {
+      font-size: clamp(1rem, 1.8vh + 0.2vw, 1.2rem);
+      line-height: 1.4;
+      color: var(--muted);
+      max-width: min(52rem, 96%);
+      margin-bottom: 0;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .lede strong { color: var(--ink); font-weight: 600; }
+    .stack { display: flex; flex-direction: column; gap: 0.65rem; max-width: min(52rem, 100%); margin-inline: auto; text-align: left; }
+    .row { display: grid; gap: 0.75rem; max-width: min(68rem, 100%); margin-inline: auto; text-align: left; width: 100%; }
+    .row-2 { grid-template-columns: 1fr 1fr; }
+    .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .box {
+      border: 1px solid var(--line);
+      background: var(--card);
+      padding: 0.95rem 1.1rem;
+      border-radius: 0.5rem;
+    }
+    .box b {
+      display: block;
+      font-size: clamp(0.98rem, 1.55vh + 0.15vw, 1.15rem);
+      margin-bottom: 0.28rem;
+      font-weight: 650;
+    }
+    .box p {
+      font-size: clamp(0.92rem, 1.4vh + 0.15vw, 1.08rem);
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .box.accent {
+      border-color: #9bb5a8;
+      background: var(--accent-soft);
+    }
+    .quote {
+      font-family: var(--display);
+      font-size: clamp(1.45rem, 3.2vh + 0.4vw, 2.15rem);
+      line-height: 1.28;
+      max-width: 30ch;
+      margin: 0.4rem auto 0.95rem;
+      text-align: center;
+    }
+    .meta {
+      font-size: clamp(0.88rem, 1.35vh + 0.15vw, 1.02rem);
+      color: var(--muted);
+      margin-top: 0.75rem;
+      max-width: min(52rem, 100%);
+      line-height: 1.4;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .meta a { color: var(--accent); text-decoration: none; }
+    .slide.close-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding-top: clamp(0.6rem, 1.5vh, 1.1rem);
+      padding-bottom: calc(var(--slide-pad-y) + var(--foot-space));
+    }
+    .slide.close-slide > *:not(.slide-foot) {
+      width: min(56rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .close-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.55rem, 1.35vh, 0.95rem);
+      width: min(56rem, 100%);
+    }
+    .slide.close-slide .eyebrow {
+      margin: 0;
+    }
+    .slide.close-slide .quote {
+      max-width: 34ch;
+      margin: 0;
+      font-size: clamp(1.35rem, 2.8vh + 0.35vw, 2rem);
+    }
+    .slide.close-slide .lede {
+      max-width: min(52rem, 100%);
+      margin: 0;
+      font-size: clamp(0.92rem, 1.5vh, 1.08rem);
+      line-height: 1.38;
+    }
+    .close-roadmap {
+      list-style: none;
+      margin: 0.15rem auto 0;
+      padding: clamp(0.65rem, 1.4vh, 0.95rem) clamp(0.85rem, 1.4vw, 1.15rem);
+      width: 100%;
+      max-width: min(52rem, 100%);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.4rem, 0.95vh, 0.55rem);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.55rem;
+    }
+    .close-roadmap li {
+      font-size: clamp(0.86rem, 1.4vh, 1rem);
+      line-height: 1.35;
+      color: #3a3630;
+      padding-left: 0.85rem;
+      position: relative;
+    }
+    .close-roadmap li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 0.28rem;
+      height: 0.28rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .close-roadmap li strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .slide.close-slide .meta {
+      margin-top: 0.15rem;
+    }
+    .slide.phase1-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding-top: clamp(0.55rem, 1.3vh, 1rem);
+      padding-bottom: calc(var(--slide-pad-y) + var(--foot-space));
+    }
+    .slide.phase1-slide > *:not(.slide-foot) {
+      width: min(62rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .phase1-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.4rem, 1vh, 0.72rem);
+      width: min(62rem, 100%);
+    }
+    .slide.phase1-slide .eyebrow,
+    .slide.phase1-slide h2,
+    .slide.phase1-slide .lede {
+      margin: 0;
+      text-align: center;
+    }
+    .slide.phase1-slide h2 {
+      max-width: 22ch;
+      font-size: clamp(1.55rem, 3.2vh, 2.35rem);
+    }
+    .slide.phase1-slide .lede {
+      max-width: min(46rem, 100%);
+      font-size: clamp(0.95rem, 1.55vh, 1.1rem);
+    }
+    .phase1-core {
+      width: 100%;
+      max-width: min(58rem, 100%);
+      text-align: center;
+      padding: clamp(0.55rem, 1.2vh, 0.85rem) clamp(0.85rem, 1.4vw, 1.15rem);
+    }
+    .phase1-core b {
+      text-align: center;
+      font-size: clamp(0.98rem, 1.65vh, 1.15rem);
+      margin-bottom: 0.2rem;
+    }
+    .phase1-core p {
+      margin: 0 auto;
+      max-width: 44rem;
+      font-size: clamp(0.84rem, 1.35vh, 0.98rem);
+      line-height: 1.32;
+    }
+    .phase1-ecos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(0.55rem, 1.2vw, 0.85rem);
+      width: 100%;
+      max-width: min(52rem, 100%);
+      text-align: left;
+    }
+    .phase1-ecos.cols-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+      max-width: min(62rem, 100%);
+    }
+    .phase1-ecos .box {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: clamp(0.8rem, 1.5vh, 1.05rem) clamp(0.9rem, 1.3vw, 1.15rem);
+    }
+    .phase1-ecos .box b {
+      font-size: clamp(0.95rem, 1.55vh, 1.12rem);
+      margin-bottom: 0.15rem;
+    }
+    .phase1-roles {
+      list-style: none;
+      margin: 0.45rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.4rem, 0.95vh, 0.55rem);
+      flex: 1;
+    }
+    .phase1-roles li {
+      font-size: clamp(0.9rem, 1.45vh, 1.05rem);
+      line-height: 1.32;
+      color: #3a3630;
+    }
+    .phase1-roles li strong { color: var(--ink); font-weight: 700; }
+    .phase1-roles li.more {
+      margin-top: auto;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: clamp(0.84rem, 1.3vh, 0.96rem);
+    }
+    .phase1-roles li.more strong { color: var(--accent); }
+    .phase1-tier {
+      display: block;
+      font-size: clamp(0.68rem, 1.05vh, 0.78rem);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0.4rem 0 0.12rem;
+    }
+    .phase1-roles.dense li {
+      font-size: clamp(0.82rem, 1.32vh, 0.96rem);
+      line-height: 1.28;
+    }
+    .phase1-ecos.dense .box {
+      padding: clamp(0.65rem, 1.35vh, 0.9rem) clamp(0.8rem, 1.2vw, 1rem);
+    }
+    .phase1-ecos.dense .box > b:first-of-type {
+      font-size: clamp(0.92rem, 1.48vh, 1.08rem);
+    }
+    .slide.phase1-slide .meta {
+      margin: 0;
+      max-width: min(44rem, 100%);
+    }
+    @media (max-width: 800px) {
+      .phase1-ecos { grid-template-columns: 1fr; }
+      .phase1-ecos.cols-3 { grid-template-columns: 1fr; }
+    }
+    /* Sophon (slide 4) — engineered stack + investor answers */
+    .slide.sophon-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding-top: clamp(0.5rem, 1.3vh, 1rem);
+      padding-bottom: calc(var(--slide-pad-y) + var(--foot-space));
+    }
+    .slide.sophon-slide > *:not(.slide-foot) {
+      width: min(66rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .sophon-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.4rem, 1.1vh, 0.72rem);
+      width: min(66rem, 100%);
+    }
+    .slide.sophon-slide .eyebrow,
+    .slide.sophon-slide h2,
+    .slide.sophon-slide .lede { margin: 0; text-align: center; }
+    .slide.sophon-slide h2 {
+      max-width: 26ch;
+      font-size: clamp(1.45rem, 3vh, 2.2rem);
+    }
+    .slide.sophon-slide .lede {
+      max-width: min(54rem, 100%);
+      font-size: clamp(0.9rem, 1.5vh, 1.08rem);
+    }
+    .sophon-layout {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: clamp(0.5rem, 1vw, 0.85rem);
+      width: 100%;
+      text-align: left;
+      align-items: stretch;
+    }
+    .sophon-stack,
+    .sophon-why {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.3rem, 0.7vh, 0.5rem);
+    }
+    .slayer {
+      position: relative;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 0.5rem;
+      padding: clamp(0.42rem, 0.95vh, 0.68rem) clamp(0.6rem, 1vw, 0.85rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .slayer .ltag {
+      font-size: clamp(0.58rem, 0.98vh, 0.7rem);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .slayer .ltag em { font-style: normal; color: var(--warn); }
+    .slayer b {
+      font-size: clamp(0.8rem, 1.32vh, 0.96rem);
+      font-weight: 650;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .slayer p {
+      font-size: clamp(0.71rem, 1.18vh, 0.85rem);
+      line-height: 1.3;
+      color: var(--muted);
+    }
+    .slayer.moat {
+      border-color: #9bb5a8;
+      background: var(--accent-soft);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent);
+    }
+    .slayer.models { background: var(--paper); border-style: dashed; }
+    .whycard {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 0.5rem;
+      padding: clamp(0.42rem, 0.95vh, 0.68rem) clamp(0.6rem, 1vw, 0.85rem);
+      flex: 1 1 0;
+    }
+    .whycard b {
+      display: block;
+      font-size: clamp(0.8rem, 1.32vh, 0.96rem);
+      font-weight: 650;
+      color: var(--ink);
+      margin-bottom: 0.12rem;
+    }
+    .whycard b .q { color: var(--accent); }
+    .whycard p {
+      font-size: clamp(0.71rem, 1.18vh, 0.85rem);
+      line-height: 1.3;
+      color: var(--muted);
+    }
+    .whycard.accent { border-color: #9bb5a8; background: var(--accent-soft); }
+    .slide.sophon-slide .meta { margin: 0; max-width: min(54rem, 100%); }
+    @media (max-width: 800px) {
+      .sophon-layout { grid-template-columns: 1fr; }
+    }
+    .slide.capital-slide {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+      padding-top: clamp(0.45rem, 1.1vh, 0.85rem);
+      padding-bottom: calc(var(--slide-pad-y) + var(--foot-space));
+    }
+    .slide.capital-slide > *:not(.slide-foot):not(.fund-detail) {
+      width: min(56rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .capital-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.45rem, 1.15vh, 0.75rem);
+      width: min(56rem, 100%);
+    }
+    .slide.capital-slide h2 {
+      margin: 0;
+      max-width: 28ch;
+      font-size: clamp(1.35rem, 2.9vh, 2.1rem);
+      text-align: center;
+    }
+    .slide.capital-slide .lede {
+      margin: 0;
+      max-width: min(48rem, 100%);
+      font-size: clamp(0.88rem, 1.4vh, 1.02rem);
+      text-align: center;
+    }
+    .fund-toolbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: min(56rem, 100%);
+      margin: 0;
+      width: 100%;
+    }
+    .slide.capital-slide .fund-summary {
+      width: 100%;
+      max-width: min(52rem, 100%);
+      margin: 0;
+      text-align: left;
+    }
+    .slide.capital-slide .fund-summary th,
+    .slide.capital-slide .fund-summary td {
+      padding: 0.38rem 0.55rem 0.38rem 0;
+    }
+    .slide.capital-slide .fund-milestones {
+      width: 100%;
+      max-width: min(52rem, 100%);
+      margin: 0;
+      gap: clamp(0.45rem, 1vw, 0.65rem);
+      text-align: left;
+    }
+    .slide.capital-slide .fund-milestones .box {
+      padding: 0.7rem 0.85rem;
+    }
+    .slide.capital-slide .fund-milestones .box b {
+      font-size: clamp(0.9rem, 1.4vh, 1.05rem);
+    }
+    .slide.capital-slide .fund-milestones .box p {
+      font-size: clamp(0.82rem, 1.25vh, 0.95rem);
+      line-height: 1.32;
+    }
+    .slide.capital-slide .meta {
+      margin: 0;
+      max-width: min(44rem, 100%);
+    }
+    .fund-expand {
+      appearance: none;
+      font: inherit;
+      font-size: clamp(0.78rem, 1.2vh, 0.9rem);
+      font-weight: 650;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #9bb5a8;
+      border-radius: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .fund-expand:hover { background: #dce8e2; }
+    .fund-expand:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .fund-expand .chev {
+      display: inline-block;
+      transition: transform 0.15s ease;
+      font-size: 0.75em;
+    }
+    .fund-expand[aria-expanded="true"] .chev { transform: rotate(180deg); }
+    /* Full-viewport overlay when expanded */
+    .fund-detail {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      width: 100vw !important;
+      max-width: none !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none;
+      border-radius: 0;
+      background: var(--paper);
+      text-align: left;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .slide.funds-open .fund-detail,
+    body.funds-overlay-open .fund-detail {
+      display: flex !important;
+      flex-direction: column;
+    }
+    body.funds-overlay-open { overflow: hidden; }
+    .fund-detail-bar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: clamp(0.85rem, 2vh, 1.25rem) clamp(1.25rem, 3.5vw, 2.5rem);
+      border-bottom: 1px solid var(--line);
+      background: var(--card);
+    }
+    .fund-detail-bar .bar-copy { min-width: 0; }
+    .fund-detail-bar .bar-kicker {
+      font-size: clamp(0.7rem, 1.1vh, 0.8rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.2rem;
+    }
+    .fund-detail-bar .bar-title {
+      font-family: var(--display);
+      font-size: clamp(1.25rem, 2.6vh, 1.75rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.15;
+    }
+    .fund-detail-body {
+      flex: 1 1 auto;
+      overflow: auto;
+      padding: clamp(1rem, 2.2vh, 1.5rem) clamp(1.25rem, 3.5vw, 2.5rem) clamp(1.5rem, 3vh, 2.25rem);
+      width: 100%;
+      max-width: min(96rem, 100%);
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .fund-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(0.75rem, 1.5vh, 1.15rem) clamp(1rem, 2vw, 1.75rem);
+      align-content: start;
+    }
+    @media (max-width: 960px) {
+      .fund-detail-grid { grid-template-columns: 1fr; }
+    }
+    .fund-detail-item {
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+      background: var(--card);
+    }
+    .fund-detail-item.span-2 { grid-column: 1 / -1; }
+    .fund-detail-item.largest {
+      border-color: #9bb5a8;
+      background: var(--accent-soft);
+    }
+    .fund-detail-item .hd {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+      margin-bottom: 0.45rem;
+    }
+    .fund-detail-item .hd b {
+      font-size: clamp(1rem, 1.7vh, 1.2rem);
+      color: var(--ink);
+    }
+    .fund-detail-item .hd span {
+      font-size: clamp(0.95rem, 1.5vh, 1.1rem);
+      font-weight: 650;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .fund-salary-toggle {
+      appearance: none;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: inherit;
+    }
+    .fund-salary-toggle .chev {
+      flex: 0 0 auto;
+      transition: transform 0.15s ease;
+      color: var(--accent);
+      font-size: 0.85em;
+    }
+    .fund-salary.open .fund-salary-toggle .chev { transform: rotate(180deg); }
+    .fund-salary-body { display: none; margin-top: 0.65rem; }
+    .fund-salary.open .fund-salary-body { display: block; }
+    .fund-salary-hint {
+      font-size: clamp(0.8rem, 1.2vh, 0.92rem);
+      color: var(--muted);
+      margin: 0.15rem 0 0;
+    }
+    .fund-salary-group {
+      font-size: clamp(0.72rem, 1.1vh, 0.82rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0.75rem 0 0.3rem;
+    }
+    .fund-salary-group:first-child { margin-top: 0; }
+    .fund-lines {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.88rem, 1.35vh, 1.05rem);
+    }
+    .fund-lines th {
+      text-align: left;
+      font-size: 0.72em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.25rem 0.5rem 0.35rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .fund-lines th.num, .fund-lines td.num { text-align: right; white-space: nowrap; }
+    .fund-lines td {
+      padding: 0.35rem 0.5rem 0.35rem 0;
+      color: var(--muted);
+      line-height: 1.35;
+      vertical-align: top;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    }
+    .fund-lines tr:last-child td { border-bottom: none; }
+    .fund-lines td:first-child { color: var(--ink); font-weight: 550; width: 42%; }
+    .fund-lines td.total { color: var(--ink); font-weight: 650; }
+    .fund-note {
+      font-size: clamp(0.78rem, 1.15vh, 0.9rem);
+      color: var(--muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .steps { counter-reset: s; list-style: none; max-width: min(52rem, 100%); margin-inline: auto; text-align: left; width: 100%; }
+    .steps li {
+      position: relative;
+      padding: 0.6rem 0 0.6rem 2.3rem;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(0.98rem, 1.55vh + 0.15vw, 1.15rem);
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .steps li:last-child { border-bottom: none; }
+    .steps li::before {
+      counter-increment: s;
+      content: counter(s);
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .steps li strong { color: var(--ink); }
+    table.simple {
+      width: 100%;
+      max-width: min(68rem, 100%);
+      margin-inline: auto;
+      text-align: left;
+      border-collapse: collapse;
+      font-size: clamp(0.92rem, 1.45vh + 0.15vw, 1.08rem);
+    }
+    table.simple th, table.simple td {
+      text-align: left;
+      padding: 0.55rem 0.6rem 0.55rem 0;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    table.simple th {
+      font-weight: 650;
+      font-size: clamp(0.72rem, 1.15vh + 0.1vw, 0.82rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    table.simple td:first-child, table.simple td b { color: var(--ink); }
+    table.simple.dense { font-size: clamp(0.82rem, 1.25vh + 0.12vw, 0.98rem); }
+    table.simple.dense th, table.simple.dense td { padding: 0.28rem 0.5rem 0.28rem 0; line-height: 1.28; }
+    .chip {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 650;
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-top: 0.35rem;
+    }
+    .vs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      max-width: min(68rem, 100%);
+      margin-inline: auto;
+      text-align: left;
+      width: 100%;
+    }
+    .points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 1.75rem;
+      max-width: min(72rem, 100%);
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      text-align: left;
+      width: 100%;
+    }
+    .points li {
+      position: relative;
+      padding: 0.3rem 0 0.3rem 1rem;
+      font-size: clamp(0.92rem, 1.45vh + 0.15vw, 1.08rem);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .points li strong { color: var(--ink); font-weight: 650; }
+    .budget-panel {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.85rem, 2vw, 1.4rem);
+      text-align: left;
+    }
+    .budget-pie {
+      flex: 0 0 auto;
+      width: clamp(7.5rem, 18vh, 10.5rem);
+      height: clamp(7.5rem, 18vh, 10.5rem);
+      border-radius: 50%;
+      /* ~55% headcount · ~10% software · ~35% other */
+      background: conic-gradient(
+        var(--accent) 0 55%,
+        #c4b8a8 55% 65%,
+        #e6e0d6 65% 100%
+      );
+      box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.08);
+    }
+    .budget-legend { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; }
+    .budget-legend .item { display: flex; align-items: flex-start; gap: 0.5rem; }
+    .budget-legend .swatch {
+      flex: 0 0 auto;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 2px;
+      margin-top: 0.28em;
+    }
+    .budget-legend .swatch.headcount { background: var(--accent); }
+    .budget-legend .swatch.software { background: #c4b8a8; }
+    .budget-legend .swatch.other { background: #e6e0d6; box-shadow: inset 0 0 0 1px rgba(20,18,16,0.12); }
+    .budget-legend .label { font-size: clamp(0.8rem, 1.2vh + 0.1vw, 0.95rem); line-height: 1.28; color: var(--muted); }
+    .budget-legend .label strong { color: var(--ink); font-weight: 650; display: block; font-size: 1.05em; }
+    .budget-legend .pct {
+      font-family: var(--display);
+      font-size: clamp(1.15rem, 2.1vh, 1.45rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.1rem;
+    }
+    .market-layout {
+      display: grid;
+      grid-template-columns: minmax(12rem, 0.95fr) 1.35fr;
+      gap: clamp(0.85rem, 2vw, 1.5rem);
+      align-items: center;
+      max-width: min(72rem, 100%);
+      margin-inline: auto;
+      width: 100%;
+      text-align: left;
+    }
+    .tam-rings {
+      position: relative;
+      width: min(100%, 20.5rem);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+    /* Disks: TAM full · SAM inset 20% · SOM inset 38% — labels match those bands */
+    .tam-disk {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      box-sizing: border-box;
+    }
+    .tam-disk--tam {
+      inset: 0;
+      z-index: 1;
+      background: #c5d9cf;
+      border: 1px solid rgba(26, 77, 62, 0.2);
+    }
+    .tam-disk--sam {
+      inset: 20%;
+      z-index: 2;
+      background: #8fad9c;
+      border: 1px solid rgba(26, 77, 62, 0.22);
+    }
+    .tam-disk--som {
+      inset: 38%;
+      z-index: 3;
+      background: radial-gradient(circle at 50% 42%, #2a705a 0%, var(--accent) 78%);
+      border: 1px solid rgba(26, 77, 62, 0.4);
+    }
+    .tam-label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+      line-height: 1.1;
+      gap: 0.02rem;
+      box-sizing: border-box;
+      padding: 0 0.35rem;
+    }
+    /* Band 0–20%: TAM text only in the exposed outer ring */
+    .tam-label--tam {
+      top: 0;
+      height: 20%;
+      padding-top: 0.15rem;
+    }
+    /* Band 20–38%: SAM text only in the mid ring */
+    .tam-label--sam {
+      top: 20%;
+      height: 18%;
+    }
+    /* Disk 38–62%: SOM text centered inside the inner circle */
+    .tam-label--som {
+      top: 38%;
+      height: 24%;
+      color: #f4faf7;
+    }
+    .tam-label .k {
+      font-size: clamp(0.55rem, 0.95vh, 0.68rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.78;
+    }
+    .tam-label .v {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2.35vh, 1.45rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .tam-label .sub {
+      font-size: clamp(0.52rem, 0.85vh, 0.68rem);
+      color: var(--muted);
+      line-height: 1.15;
+      max-width: 92%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tam-label--som .k { color: rgba(244, 250, 247, 0.9); opacity: 1; }
+    .tam-label--som .v {
+      color: #f4faf7;
+      font-size: clamp(0.95rem, 2.1vh, 1.25rem);
+    }
+    .tam-label--som .sub { color: rgba(244, 250, 247, 0.82); white-space: normal; }
+    .geo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.65rem;
+    }
+    .geo-card {
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 0.5rem;
+      padding: 0.85rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-height: 100%;
+    }
+    .geo-card.accent {
+      border-color: #9bb5a8;
+      background: var(--accent-soft);
+    }
+    .geo-card .geo-icon {
+      width: 1.85rem;
+      height: 1.85rem;
+      color: var(--accent);
+    }
+    .geo-card .geo-name {
+      font-size: clamp(0.78rem, 1.2vh, 0.9rem);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .geo-card .geo-title {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 1.9vh, 1.3rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .geo-card .geo-num {
+      font-family: var(--display);
+      font-size: clamp(1.45rem, 2.8vh, 1.85rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      margin-top: 0.2rem;
+    }
+    .geo-card p {
+      font-size: clamp(0.8rem, 1.2vh + 0.1vw, 0.92rem);
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .geo-card .geo-split {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 0.25rem;
+      flex-wrap: wrap;
+    }
+    .geo-card .geo-split span {
+      font-size: clamp(0.72rem, 1.1vh, 0.82rem);
+      color: var(--muted);
+      line-height: 1.3;
+    }
+    .geo-card .geo-split strong { color: var(--ink); font-weight: 650; }
+    .market-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      width: min(72rem, 100%);
+    }
+    .market-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+    .market-controls label {
+      font-size: clamp(0.72rem, 1.1vh, 0.82rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .region-select {
+      appearance: none;
+      -webkit-appearance: none;
+      font: inherit;
+      font-size: clamp(0.88rem, 1.35vh, 1rem);
+      font-weight: 650;
+      color: var(--ink);
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231a4d3e' d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+      border: 1px solid var(--line);
+      border-radius: 0.4rem;
+      padding: 0.4rem 2.1rem 0.4rem 0.85rem;
+      min-width: 9.5rem;
+      cursor: pointer;
+    }
+    .region-select:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .market-slide .meta { max-width: min(68rem, 100%); }
+
+    /* Slide 2 — fit-to-box, height-fill, no overflow */
+    .slide.dense {
+      justify-content: flex-start;
+      align-items: center;
+      gap: clamp(0.28rem, 0.7vh, 0.5rem);
+      padding-top: clamp(0.55rem, 1.4vh, 1rem);
+      padding-left: clamp(0.9rem, 2.2vw, 1.75rem);
+      padding-right: clamp(0.9rem, 2.2vw, 1.75rem);
+      padding-bottom: clamp(2.8rem, 5vh, 3.4rem);
+    }
+    .slide.dense > *:not(.slide-foot) {
+      width: min(92rem, 100%);
+    }
+    .slide.dense h2 {
+      max-width: none;
+      font-size: clamp(1.35rem, 2.8vh, 2.1rem);
+      line-height: 1.1;
+      text-align: center;
+    }
+    .slide.dense .eyebrow {
+      font-size: clamp(0.68rem, 1.1vh, 0.8rem);
+      text-align: center;
+    }
+    .slide.dense .lede {
+      font-size: clamp(0.82rem, 1.35vh, 0.98rem);
+      max-width: 64rem;
+      line-height: 1.3;
+      margin-bottom: 0;
+      text-align: center;
+    }
+    .thesis {
+      font-size: clamp(0.78rem, 1.25vh, 0.92rem);
+      line-height: 1.3;
+      color: var(--ink);
+      text-align: center;
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: clamp(0.35rem, 0.8vh, 0.55rem) clamp(0.6rem, 1vw, 0.9rem);
+      background: color-mix(in srgb, var(--accent) 8%, var(--card));
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+      border-radius: 0.45rem;
+      font-weight: 550;
+    }
+    .thesis strong { color: var(--accent); font-weight: 750; }
+    .mind-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      gap: clamp(0.4rem, 0.8vw, 0.7rem);
+      width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-items: stretch;
+      text-align: left;
+      /* consumes leftover viewport height so boxes don't leave dead air */
+      height: 100%;
+    }
+    .gap-cell {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.45rem;
+      padding: clamp(0.4rem, 0.9vh, 0.65rem) clamp(0.5rem, 0.9vw, 0.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.18rem, 0.45vh, 0.3rem);
+      min-height: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    .gap-cell.mid {
+      border-color: color-mix(in srgb, var(--warn) 45%, var(--line));
+      background: var(--warn-soft);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--warn) 12%, transparent);
+    }
+    .gap-cell.future {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+      background: var(--accent-soft);
+    }
+    .gap-cell .who {
+      font-size: clamp(0.88rem, 1.55vh, 1.1rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      flex: 0 0 auto;
+    }
+    .gap-cell.mid .who { color: var(--warn); }
+    .gap-cell.future .who { color: var(--accent); }
+    .gap-cell .role {
+      font-size: clamp(0.7rem, 1.15vh, 0.82rem);
+      color: var(--muted);
+      line-height: 1.25;
+      padding-bottom: clamp(0.18rem, 0.4vh, 0.28rem);
+      border-bottom: 1px solid var(--line);
+      font-weight: 500;
+      flex: 0 0 auto;
+    }
+    .gap-cell ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .gap-cell li {
+      font-size: clamp(0.72rem, 1.25vh, 0.9rem);
+      line-height: 1.28;
+      color: #3a3630;
+      padding-left: 0.75rem;
+      position: relative;
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      min-height: 0;
+    }
+    .gap-cell li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.28rem;
+      height: 0.28rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .gap-cell.mid li::before { background: var(--warn); }
+    .gap-cell li strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .mind-note {
+      font-size: clamp(0.7rem, 1.15vh, 0.84rem);
+      line-height: 1.3;
+      color: var(--muted);
+      text-align: center;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+    .mind-note strong { color: var(--ink); font-weight: 650; }
+
+    /* Min viewport ≈ MacBook Air usable height; below → block */
+    .size-gate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(20, 18, 16, 0.94);
+      color: #f5f2ea;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .size-gate.on { display: flex; }
+    .size-gate .gate-card {
+      max-width: 28rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .size-gate .gate-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9bb5a8;
+      font-weight: 700;
+    }
+    .size-gate h2 {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 4vh, 2rem);
+      color: #fff;
+      max-width: none;
+      margin: 0;
+      text-align: center;
+    }
+    .size-gate p {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #cfc8bb;
+    }
+    .size-gate .gate-meta {
+      font-size: 0.85rem;
+      color: #8a8478;
+    }
+    @media print {
+      .size-gate { display: none !important; }
+    }
+
+
+    /* Phase 2→3→4 progress flow */
+    .phase-flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      width: 100%;
+      max-width: min(88rem, 100%);
+      margin-inline: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .phase-step {
+      flex: 1 1 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.55rem;
+      padding: clamp(0.65rem, 1.3vh, 0.95rem) clamp(0.7rem, 1.1vw, 1rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+      text-align: left;
+    }
+    .phase-step.p2 {
+      border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+      background: color-mix(in srgb, var(--accent) 6%, var(--card));
+    }
+    .phase-step.p3 {
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      background: var(--accent-soft);
+    }
+    .phase-step.p4 {
+      border-color: color-mix(in srgb, var(--warn) 40%, var(--line));
+      background: var(--warn-soft);
+    }
+    .phase-step .ph-num {
+      font-size: clamp(0.68rem, 1.1vh, 0.78rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .phase-step .ph-num .ph-when {
+      letter-spacing: 0.04em;
+      text-transform: none;
+      font-weight: 650;
+      font-size: clamp(0.72rem, 1.15vh, 0.85rem);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .phase-step.p4 .ph-num { color: var(--warn); }
+    .phase-step.p4 .ph-num .ph-when { color: color-mix(in srgb, var(--warn) 75%, var(--muted)); }
+    .phase-step .ph-title {
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2vh, 1.35rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+    .phase-step .ph-tag {
+      font-size: clamp(0.75rem, 1.2vh, 0.88rem);
+      color: var(--muted);
+      line-height: 1.3;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .phase-step ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.28rem, 0.7vh, 0.4rem);
+      flex: 1;
+    }
+    .phase-step li {
+      font-size: clamp(0.78rem, 1.3vh, 0.92rem);
+      line-height: 1.3;
+      color: #3a3630;
+      padding-left: 0.75rem;
+      position: relative;
+    }
+    .phase-step li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.48em;
+      width: 0.28rem;
+      height: 0.28rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .phase-step.p4 li::before { background: var(--warn); }
+    .phase-step li strong { color: var(--ink); font-weight: 700; }
+    .phase-arrow {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+      padding: 0 clamp(0.35rem, 0.8vw, 0.65rem);
+      color: var(--accent);
+      min-width: 2.8rem;
+      align-self: center;
+    }
+    .phase-arrow .arr {
+      font-size: clamp(1.6rem, 3.2vh, 2.25rem);
+      line-height: 1;
+      font-weight: 400;
+    }
+    .phase-arrow .arr-label {
+      font-size: clamp(0.6rem, 1vh, 0.7rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .phase-rail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.4rem, 1vw, 0.75rem);
+      width: 100%;
+      max-width: min(88rem, 100%);
+      margin: 0 auto;
+      padding: 0.15rem 0;
+    }
+    .phase-rail .dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: 0 0 auto;
+    }
+    .phase-rail .dot.soft { background: var(--warn); }
+    .phase-rail .line {
+      flex: 1 1 auto;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--warn)));
+      border-radius: 2px;
+      opacity: 0.55;
+    }
+    .phase-rail .lbl {
+      font-size: clamp(0.65rem, 1.05vh, 0.75rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+      .phase-flow { flex-direction: column; }
+      .phase-arrow { flex-direction: row; gap: 0.4rem; min-width: 0; padding: 0.4rem 0; }
+      .phase-arrow .arr { transform: rotate(90deg); }
+    }
+    @media print {
+      .phase-flow { max-width: none !important; }
+      .phase-step li { font-size: 9.5pt !important; }
+      .phase-step .ph-title { font-size: 13pt !important; }
+      .phase-step .ph-tag { font-size: 9pt !important; }
+    }
+
+    @media (max-width: 900px) {
+      .mind-grid { grid-template-columns: 1fr; }
+      .gap-cell ul { justify-content: flex-start; gap: 0.3rem; }
+      .slide.dense { overflow-y: auto; justify-content: flex-start; }
+      .row-2, .row-3, .vs { grid-template-columns: 1fr; }
+      .slide { overflow-y: auto; }
+      h1, h2 { max-width: none; }
+    }
+
+    @page { size: 13.333in 7.5in; margin: 0; }
+    @media print {
+      html, body {
+        width: 13.333in;
+        background: #fff !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        display: block !important;
+        font-size: 14pt !important;
+      }
+      :root {
+        --u: 14pt;
+        --slide-pad-y: 0.45in;
+        --slide-pad-x: 0.6in;
+        --foot-space: 0.38in;
+      }
+      .stage {
+        width: 13.333in !important;
+        height: auto !important;
+        aspect-ratio: auto !important;
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+      }
+      .deck { height: auto !important; position: static !important; }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        width: 13.333in !important;
+        height: 7.5in !important;
+        min-height: 7.5in !important;
+        max-height: 7.5in !important;
+        padding: 0.45in 0.6in 0.62in !important;
+        page-break-after: always;
+        break-after: page;
+        overflow: hidden !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        gap: 0.38rem !important;
+        container-type: normal !important;
+      }
+      .slide.slide-hidden {
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        padding: 0 !important;
+        page-break-after: auto !important;
+        break-after: auto !important;
+        overflow: hidden !important;
+      }
+      .slide:not(.slide-hidden):last-of-type,
+      .slide:not(.slide-hidden).last-print { page-break-after: auto; break-after: auto; }
+      .slide.cover,
+      .slide.close-slide,
+      .slide.phase1-slide,
+      .slide.capital-slide,
+      .slide.sophon-slide {
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding-bottom: 0.62in !important;
+      }
+      .slide.sophon-slide .sophon-body {
+        gap: 0.4rem !important;
+        width: min(10.4in, 100%) !important;
+      }
+      .slide.sophon-slide h2 { font-size: 23pt !important; }
+      .slide.sophon-slide .lede { font-size: 12pt !important; max-width: 9.4in !important; }
+      .sophon-layout { gap: 0.4rem !important; }
+      .slayer .ltag { font-size: 8.5pt !important; }
+      .slayer b, .whycard b { font-size: 12pt !important; }
+      .slayer p, .whycard p { font-size: 10.5pt !important; line-height: 1.28 !important; }
+      .slide.sophon-slide .meta { font-size: 10.5pt !important; }
+      .slide.capital-slide .capital-body {
+        gap: 0.38rem !important;
+        width: min(10.2in, 100%) !important;
+      }
+      .slide.capital-slide h2 { font-size: 22pt !important; }
+      .slide.capital-slide .lede { font-size: 11.5pt !important; }
+      .slide.capital-slide .fund-summary { font-size: 11pt !important; }
+      .slide.capital-slide .fund-milestones .box b { font-size: 11pt !important; }
+      .slide.capital-slide .fund-milestones .box p { font-size: 10pt !important; }
+      .slide.capital-slide .fund-expand { display: none !important; }
+      .slide.close-slide .close-body {
+        gap: 0.45rem !important;
+        width: min(10.2in, 100%) !important;
+      }
+      .slide.phase1-slide .phase1-body {
+        gap: 0.4rem !important;
+        width: min(10.4in, 100%) !important;
+      }
+      .slide.phase1-slide h2 { font-size: 24pt !important; }
+      .slide.phase1-slide .lede { font-size: 12.5pt !important; }
+      .phase1-core { padding: 0.5rem 0.75rem !important; }
+      .phase1-core b { font-size: 13.5pt !important; }
+      .phase1-core p { font-size: 11.5pt !important; }
+      .phase1-ecos { gap: 0.5rem !important; max-width: 10in !important; }
+      .phase1-ecos.cols-3 { grid-template-columns: 1fr 1fr 1fr !important; max-width: 10.2in !important; }
+      .phase1-roles li { font-size: 11.5pt !important; }
+      .phase1-roles.dense li { font-size: 10.5pt !important; line-height: 1.26 !important; }
+      .phase1-tier { font-size: 8.5pt !important; }
+      .phase1-roles li.more { font-size: 10.5pt !important; }
+      .slide.close-slide .quote { font-size: 22pt !important; max-width: 34ch !important; }
+      .slide.close-slide .lede { font-size: 12pt !important; max-width: 9.6in !important; }
+      .close-roadmap {
+        gap: 0.32rem !important;
+        padding: 0.45rem 0.65rem !important;
+        max-width: 9.6in !important;
+      }
+      .close-roadmap li { font-size: 11pt !important; line-height: 1.32 !important; }
+      .slide-foot { bottom: 0.3in; left: 0.6in; right: 0.6in; font-size: 9pt; }
+      h1 { font-size: 32pt !important; }
+      h2 { font-size: 24pt !important; }
+      .eyebrow { font-size: 9.5pt !important; }
+      .lede { font-size: 13.5pt !important; }
+      .quote { font-size: 20pt !important; }
+      .box b { font-size: 12.5pt !important; }
+      .box p { font-size: 11.5pt !important; }
+      .meta { font-size: 11pt !important; }
+      .steps li { font-size: 12.5pt !important; }
+      table.simple { font-size: 12pt !important; }
+      .row-2, .vs { grid-template-columns: 1fr 1fr !important; }
+      .row-3 { grid-template-columns: 1fr 1fr 1fr !important; }
+      .sophon-layout { grid-template-columns: 1.08fr 0.92fr !important; }
+      .points { grid-template-columns: 1fr 1fr !important; max-width: none !important; }
+      .points li { font-size: 11.5pt !important; }
+      .mind-grid { grid-template-columns: 1.15fr 1fr 1fr !important; max-width: none !important; gap: 0.35rem !important; }
+      .gap-cell { padding: 0.35rem 0.45rem !important; }
+      .gap-cell .who { font-size: 11pt !important; }
+      .gap-cell .role { font-size: 8.5pt !important; }
+      .gap-cell li { font-size: 9pt !important; line-height: 1.25 !important; }
+      .slide.dense h2 { font-size: 20pt !important; }
+      .slide.dense .lede { font-size: 11pt !important; }
+      .thesis { font-size: 10pt !important; padding: 0.3rem 0.45rem !important; }
+      .mind-note { font-size: 9pt !important; }
+      .row, .stack, .steps, table.simple, .vs, .points, .mind-grid { max-width: none !important; }
+      .budget-pie { width: 2.4in; height: 2.4in; }
+      .budget-legend .pct { font-size: 16pt !important; }
+      .budget-legend .label { font-size: 11pt !important; }
+      .market-layout { grid-template-columns: 0.95fr 1.35fr !important; max-width: none !important; }
+      .tam-label .v { font-size: 16pt !important; }
+      .tam-label--som .v { font-size: 14pt !important; }
+      .tam-label .sub { font-size: 8pt !important; }
+      .tam-rings { width: 3.6in !important; }
+      .geo-card .geo-num { font-size: 18pt !important; }
+      .geo-card p, .geo-card .geo-split span { font-size: 10pt !important; }
+      .market-controls { display: none !important; }
+      .fund-expand { display: none !important; }
+      .fund-detail { display: none !important; }
+      .fund-summary { display: table !important; }
+    }
+  </style>
+</head>
+<body class="screen">
+  <div class="stage">
+    <div class="deck" id="deck">
+
+      <!-- 1 Cover -->
+      <section class="slide cover on" data-title="Cover">
+        <p class="eyebrow">DeepEmergence · Confidential</p>
+        <h1>Building Silicon Mind for Silicon Employees.</h1>
+        <!-- <p class="lede">Engineering digital mind piece by piece to make a remote employee</p> -->
+        <!-- <p class="lede"> — always awake, on computer &amp; phone.</p> -->
+        <p class="meta">Ajay Pratap Singh · Founder, CEO &amp; CTO · ajay@deepemergence.com · deepemergence.com</p>
+        <div class="slide-foot"><span>DeepEmergence × Boundless Ventures</span><span>1</span></div>
+      </section>
+
+      <!-- 2 Problem -->
+      <section class="slide dense" data-title="Problem">
+        <p class="eyebrow">Market gap · cognition vs wrappers</p>
+        <h2>LLM alone ≠ mind.</h2>
+        <p class="lede">Domain AI apps sell copilots, agents, and “workers” by wrapping an LLM with tools and skills. Demos look employed. Companies still hire humans.</p>
+        <p class="thesis">LLMs + tools != an autonomous worker. The winner of the AI race will be whoever successfully engineers miniaturized human cognitive functions into a single, scalable digital employee.</p>
+        <div class="mind-grid">
+          <div class="gap-cell">
+            <div class="who">Mind parts LLM alone misses</div>
+            <div class="role">Language is one slice of cognition</div>
+            <ul>
+              <li><strong>Language → LLM</strong> — fluent; not sufficient for labour</li>
+              <li><strong>Vision / depth / fusion</strong> — seeing + sensing still open</li>
+              <li><strong>Imagination → world models</strong> — simulate before acting</li>
+              <li><strong>Memory ≠ chat history</strong> — must change the base of self</li>
+              <li><strong>LLMs are stateless</strong> — context is attached, not lived</li>
+              <li><strong>No self / world awareness</strong> — weak internal + external state</li>
+              <li><strong>Causal reasoning</strong> — cause / effect &amp; interventions missing from next-token prediction</li>
+              <li><strong>Goals &amp; beliefs</strong> — don’t evolve or self-correct</li>
+              <li><strong>Skill learning / RL</strong> — little real-world action learning</li>
+              <li><strong>Broader brain stack</strong> — ML/NN parts AGI needs are absent</li>
+            </ul>
+          </div>
+          <div class="gap-cell mid">
+            <div class="who">What’s sold today</div>
+            <div class="role">OpenClaw · Hermes · Paperclip · domain agents</div>
+            <ul>
+              <li><strong>Wrapper pattern</strong> — LLM + tools + skills for a domain</li>
+              <li><strong>Prompt / cron bound</strong> — reactive or scheduled</li>
+              <li><strong>Loop ≠ mind</strong> — act cycles, no durable self</li>
+              <li><strong>Loop engineering</strong> — scaffolds “long work” that never leaves toy projects</li>
+              <li><strong>No causal reasoning</strong> — correlates &amp; continues; doesn’t intervene on cause</li>
+              <li><strong>Happy-path demos</strong> — works when the world is framed</li>
+              <li><strong>Human babysitter</strong> — judgment, stop, repair</li>
+              <li><strong>No mandate / liability</strong> — not a hireable employee</li>
+              <li><strong>Siloed domain bots</strong> — finance ≠ ops ≠ support</li>
+              <li><strong>Pilot cliff</strong> — demos die in messy orgs</li>
+            </ul>
+          </div>
+          <div class="gap-cell future">
+            <div class="who">Engineered silicon mind</div>
+            <div class="role">Compose the missing parts → hireable labour</div>
+            <ul>
+              <li><strong>Composed cognition</strong> — not chat seats with APIs</li>
+              <li><strong>Causal reasoning</strong> — intervene on cause, not just continue the pattern</li>
+              <li><strong>Linear memory since first boot</strong> — unbroken lived history</li>
+              <li><strong>Always available</strong> — working toward goals, not waiting on a prompt</li>
+              <li><strong>Continuous mind</strong> — owns the day across signals</li>
+              <li><strong>Durable identity</strong> — memory that updates the self</li>
+              <li><strong>Goals &amp; beliefs</strong> — evolve; anti-drift under mandate</li>
+              <li><strong>World-model foresight</strong> — imagine, then act</li>
+              <li><strong>Remote-employee surface</strong> — laptop + phone native</li>
+              <li><strong>Governed long-horizon work</strong> — accountable like a hire</li>
+              <li><strong>Miniaturised mind functions</strong> — engineer first, then generalise</li>
+              <li><strong>Digital worker bar</strong> — where world expectation is heading</li>
+            </ul>
+          </div>
+        </div>
+        <p class="mind-note"><strong>Thesis:</strong> AGI is an engineering problem.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>2</span></div>
+      </section>
+
+      <!-- Standard / bar (hidden from deck; keep for later — remove slide-hidden to show) -->
+      <section class="slide slide-hidden" data-title="Standard" aria-hidden="true">
+        <p class="eyebrow">The bar · what wrappers fail</p>
+        <h2>A hire owns the day. A loop waits for a prompt.</h2>
+        <p class="lede">World expectation is heading to <strong>digital workers</strong> — not chat seats. That bar needs continuous cognition, evolving memory, goals &amp; beliefs, and mandate — not LLM + tools + skills alone.</p>
+        <div class="row row-3">
+          <div class="box"><b>Continuous mind</b><p>Always on: external signals + internal priority. Not prompt-bound or cron-bound.</p></div>
+          <div class="box"><b>Self that persists</b><p>Memory that updates identity and beliefs — not attached context that dies with the session.</p></div>
+          <div class="box accent"><b>Remote employee surface</b><p>Laptop + phone like a human hire — governed writes, handoffs, accountability.</p></div>
+        </div>
+        <p class="meta">If it needs a human babysitter for judgment, stop, and repair — it is still a demo, not an employee.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>Standard · hidden</span></div>
+      </section>
+
+      <!-- 3 Conviction · why now · why we win -->
+      <section class="slide" data-title="Conviction">
+        <p class="eyebrow">Conviction · signals by mind function · application layer</p>
+        <h2>Labs ship mind ingredients. We ship the digital employee.</h2>
+        <p class="lede">Frontier work is capturing <strong>parts of an AGI-like mind</strong> — beyond LLM agents. <strong>Causal reasoning is the most important ingredient</strong> — and it already exists as serious research (not vapour). Directional signals only (not partnerships). We are the <strong>application layer</strong>: compose those ingredients into a hireable digital employee.</p>
+        <table class="simple dense">
+          <thead><tr><th style="width:22%">Mind function</th><th style="width:48%">Early signals (class of player)</th><th>Ingredient role</th></tr></thead>
+          <tbody>
+            <tr><td><b>Causal reasoning</b></td><td>Microsoft DoWhy / PyWhy-class — causal discovery, identification, estimation; Pearl-style intervention stacks at big-tech + academia</td><td>Cause → effect; intervene, not only correlate</td></tr>
+            <tr><td><b>Language</b></td><td>Frontier LLMs — OpenAI / Anthropic / Google-class</td><td>Fluent reasoning &amp; dialogue</td></tr>
+            <tr><td><b>Imagination / dynamics</b></td><td>World models — DeepMind Genie-class; JEPA-style latent prediction</td><td>Simulate before acting</td></tr>
+            <tr><td><b>Vision–spatial</b></td><td>World Labs–class spatial intelligence; multimodal perception stacks</td><td>See &amp; situate in space</td></tr>
+            <tr><td><b>Memory / prediction</b></td><td>Persistent-memory &amp; representation research across labs &amp; papers</td><td>State beyond the prompt</td></tr>
+            <tr><td><b>Planning / control</b></td><td>Long-horizon agents in sim; robotics &amp; autonomy programs</td><td>Goals → actions over time</td></tr>
+            <tr><td><b>Computer control</b></td><td>CUA / computer-use agents — Anthropic-class, Operator-class</td><td>Click, type, navigate UIs</td></tr>
+            <tr><td><b>Embodiment</b></td><td>Robotics + sim platforms (e.g. NVIDIA Cosmos–class tooling)</td><td>Act in the physical world</td></tr>
+          </tbody>
+        </table>
+        <div class="row row-2" style="margin-top:0.5rem">
+          <div class="box accent">
+            <b>Our layer</b>
+            <p><strong>Digital employee</strong> — compose ingredients into identity, mandate, lived memory, org graph, and configurable roles. Customizable for enterprise &amp; retail. Engineered path toward AGI as a <em>system</em>, not a single model.</p>
+          </div>
+          <div class="box">
+            <b>Why we still win</b>
+            <p>Labs race <strong>foundations</strong>. We productise the <strong>hire</strong> into services/headcount budgets. Fuel improves us; they do not own employment. First-wave application layer — not out-training Genie or GPT.</p>
+          </div>
+        </div>
+        <p class="meta"><strong>Conviction:</strong> Surf the wave of digital-mind foundations. Capture them as product — silicon employees — while the industry is still stuck on copilots.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>3</span></div>
+      </section>
+
+      <!-- 4 Sophon -->
+      <section class="slide sophon-slide" data-title="Sophon">
+        <div class="sophon-body">
+          <p class="eyebrow">What we engineer · not another domain wrapper</p>
+          <h2>Sophon — the composed mind under every role.</h2>
+          <p class="lede">Sophon is <strong>one engineered runtime</strong> that turns a swappable model into a <strong>governed digital employee</strong>. The model is a component; the system is the product. Build the mind once — then configure roles on top.</p>
+          <div class="sophon-layout">
+            <div class="sophon-stack" aria-label="Sophon architecture, top to bottom">
+              <div class="slayer roles">
+                <span class="ltag">Roles — configured, not rebuilt</span>
+                <b>Digital employees: retail + enterprise</b>
+                <p>Chronos, Sira, Elyra… and finance / legal / ops. A new role is config on one runtime — not a 12th wrapper to maintain.</p>
+              </div>
+              <div class="slayer harness moat">
+                <span class="ltag">Sophon harness <em>· the moat</em></span>
+                <b>Identity · guardrails · hooks · evals · replayable traces</b>
+                <p>Every action is scoped, policy-bound, and audited. Deny-by-default; humans approve high-risk writes. This layer is the liability surface.</p>
+              </div>
+              <div class="slayer cognition">
+                <span class="ltag">Beyond-LLM cognition</span>
+                <b>World model · causal engine · typed memory · planner</b>
+                <p>Simulate consequences before acting, reason cause→effect (not correlation), remember with lineage — what an LLM alone can't do.</p>
+              </div>
+              <div class="slayer models">
+                <span class="ltag">Foundation models — the fuel</span>
+                <b>Swappable &amp; commoditized</b>
+                <p>Any frontier LLM + retrieval, hot-swapped behind evals. We route intelligence; we don't retrain it.</p>
+              </div>
+            </div>
+            <div class="sophon-why">
+              <div class="whycard">
+                <b><span class="q">Not a wrapper.</span></b>
+                <p>A wrapper is model + prompt + tools + session memory. Sophon <strong>simulates and verifies before any irreversible write</strong>, and reasons about cause — a system, not a chat loop.</p>
+              </div>
+              <div class="whycard">
+                <b><span class="q">Hard to copy.</span></b>
+                <p>Value compounds where models don't deprecate: <strong>causal schemas, eval history, trace archive, and the org coordination graph</strong> — plus owned identity and the customer data plane.</p>
+              </div>
+              <div class="whycard accent">
+                <b><span class="q">Labs won't eat it.</span></b>
+                <p>Frontier labs race the bottom layer (fuel). We own the top three — the <strong>employment surface, governance, and customer data</strong>. Every better model only makes Sophon stronger.</p>
+              </div>
+            </div>
+          </div>
+          <p class="meta">LLM is fuel for language. <strong>Sophon is the engine that makes labour possible</strong> — and the part that survives every model release.</p>
+        </div>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>4</span></div>
+      </section>
+
+      <!-- 5 Competitors -->
+      <section class="slide" data-title="Competitors">
+        <p class="eyebrow">Competition · who sells the hire today</p>
+        <h2>We compete with employers of people — not AI copilots.</h2>
+        <p class="lede">Copilots fight over the <strong>software</strong> slice. We compete for the <strong>headcount &amp; services</strong> slice — the same budget as IT, consultancy, and staffing that supply employees for hire.</p>
+        <div class="row row-2">
+          <div class="box">
+            <b>Typical enterprise opex mix</b>
+            <div class="budget-panel" style="margin-top:0.55rem">
+              <div class="budget-pie" role="img" aria-label="Pie chart: about 55 percent headcount and services, about 10 percent software, about 35 percent other opex"></div>
+              <div class="budget-legend">
+                <div class="item">
+                  <span class="swatch headcount" aria-hidden="true"></span>
+                  <div>
+                    <div class="pct">~55%</div>
+                    <div class="label"><strong>Headcount &amp; services</strong>People, contractors, BPO, consulting</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <span class="swatch software" aria-hidden="true"></span>
+                  <div>
+                    <div class="pct">~10%</div>
+                    <div class="label"><strong>Software &amp; tools</strong>SaaS, copilots, agents, platforms</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <span class="swatch other" aria-hidden="true"></span>
+                  <div>
+                    <div class="pct">~35%</div>
+                    <div class="label"><strong>Other opex</strong>Facilities, infra, marketing, travel, legal, G&amp;A, COGS-adjacent…</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="margin-top:0.55rem;font-size:clamp(0.78rem,1.2vh,0.9rem);color:var(--muted);line-height:1.35">Illustrative — mix varies by industry. We aim at the people slice; copilots fight software; other opex is real but not our category.</p>
+          </div>
+          <div class="stack">
+            <div class="box">
+              <b>IT &amp; BPO / GCC labour</b>
+              <p>Services &amp; captives that staff knowledge roles at scale — default remote work capacity.</p>
+            </div>
+            <div class="box">
+              <b>Consultancy &amp; managed services</b>
+              <p>Humans embedded in workflows — billed as delivery teams, not software seats.</p>
+            </div>
+            <div class="box accent">
+              <b>Staffing &amp; talent platforms</b>
+              <p>Staff aug, PEOs, remote marketplaces — the employment surface we digitise.</p>
+            </div>
+          </div>
+        </div>
+        <p class="meta"><strong>Why not AI agent vendors:</strong> they compete for the ~10% software aisle. Labour outcomes still buy from the ~55% headcount &amp; services slice — that is our category.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>5</span></div>
+      </section>
+
+      <!-- 6 Market · TAM SAM SOM (region switcher) -->
+      <section class="slide market-slide" data-title="Market" id="marketSlide">
+        <div class="market-head">
+          <p class="eyebrow" id="mEyebrow">Market · Global · remote-capable digital employees</p>
+          <div class="market-controls">
+            <label for="regionSelect">Region</label>
+            <select id="regionSelect" class="region-select" aria-label="Market region">
+              <option value="global" selected>Global</option>
+              <option value="usa">USA</option>
+              <option value="india">India</option>
+            </select>
+          </div>
+          <h2 id="mTitle">One mind. Configurable roles. A global labour market.</h2>
+          <p class="lede" id="mLede">We aim at <strong>remote-capable human jobs</strong> — almost every knowledge role a laptop &amp; phone can do — sold as customizable digital employees. Figures below are wage-pool TAM, citeable SAM, and company SOM targets.</p>
+        </div>
+        <div class="market-layout">
+          <div class="tam-rings" id="mRings" role="img" aria-label="Market size rings">
+            <div class="tam-disk tam-disk--tam" aria-hidden="true"></div>
+            <div class="tam-disk tam-disk--sam" aria-hidden="true"></div>
+            <div class="tam-disk tam-disk--som" aria-hidden="true"></div>
+            <div class="tam-label tam-label--tam">
+              <span class="k">TAM</span>
+              <span class="v" data-m="tam">$8.4T</span>
+              <span class="sub" data-m="tamSub">Remote-capable wages</span>
+            </div>
+            <div class="tam-label tam-label--sam">
+              <span class="k">SAM</span>
+              <span class="v" data-m="sam">$172B</span>
+              <span class="sub" data-m="samSub">AI app software ’25</span>
+            </div>
+            <div class="tam-label tam-label--som">
+              <span class="k">SOM</span>
+              <span class="v" data-m="som">$85M</span>
+              <span class="sub" data-m="somSub">Yr-5 target</span>
+            </div>
+          </div>
+          <div class="stack" style="max-width:none;gap:0.65rem">
+            <div class="geo-grid" id="mCards">
+              <!-- filled by JS; Global default in noscript-friendly static below -->
+              <div class="geo-card" data-card="0">
+                <svg class="geo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.6"/><ellipse cx="16" cy="16" rx="5" ry="12" stroke="currentColor" stroke-width="1.4"/><path d="M4 16h24M16 4c3.5 3.2 5.5 7.2 5.5 12S19.5 24.8 16 28C12.5 24.8 10.5 20.8 10.5 16S12.5 7.2 16 4z" stroke="currentColor" stroke-width="1.2"/></svg>
+                <div class="geo-name" data-f="name">TAM · Global</div>
+                <div class="geo-title" data-f="title">Remote-capable wage pool</div>
+                <div class="geo-num" data-f="num">$8.4T</div>
+                <p data-f="body">Worldwide employer cost of knowledge roles that can run on laptop + phone — the ceiling as configurable roles cover nearly all such jobs.</p>
+                <div class="geo-split" data-f="split"><span>Wage pool · not software</span></div>
+              </div>
+              <div class="geo-card accent" data-card="1">
+                <svg class="geo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="5" y="8" width="22" height="14" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M5 12h22M9 8v14M13 12v10" stroke="currentColor" stroke-width="1.2"/></svg>
+                <div class="geo-name" data-f="name">SAM · Global</div>
+                <div class="geo-title" data-f="title">AI application software</div>
+                <div class="geo-num" data-f="num">$172B</div>
+                <p data-f="body">Gartner worldwide AI application software spend (2025) — the citeable near-term budget aisle we re-price as hireable digital employees.</p>
+                <div class="geo-split" data-f="split"><span>Longer ceiling · IT services <strong>$1.69T</strong></span></div>
+              </div>
+              <div class="geo-card accent" data-card="2">
+                <svg class="geo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="11" stroke="currentColor" stroke-width="1.6"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <div class="geo-name" data-f="name">SOM · Global</div>
+                <div class="geo-title" data-f="title">Yr-5 revenue target</div>
+                <div class="geo-num" data-f="num">$85M</div>
+                <p data-f="body">DeepEmergence Year-5 global revenue target across retail roles and enterprise deployments — company plan, not a third-party forecast.</p>
+                <div class="geo-split" data-f="split"><span>Plan · not market research</span></div>
+              </div>
+            </div>
+            <div class="box">
+              <b id="mFunnelTitle">How the funnel works</b>
+              <p id="mFunnelBody"><strong>TAM</strong> = remote-capable knowledge wage pool. <strong>SAM</strong> = Gartner AI application software 2025 ($172B) as citeable near-term budget; longer ceiling is IT services ($1.69T). <strong>SOM</strong> = DE Year-5 revenue target — not a third-party forecast.</p>
+            </div>
+          </div>
+        </div>
+        <p class="meta" id="mMeta"><strong>Sources:</strong> BEA/FRED private wages · Gartner IT &amp; AI spend 2025 · NASSCOM FY25 · see <em>market-methodology.md</em>. SOM = company target.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>6</span></div>
+      </section>
+
+      <!-- 7 Phase 1 · products -->
+      <section class="slide phase1-slide" data-title="Phase 1">
+        <div class="phase1-body">
+          <p class="eyebrow">Phase 1 · products · ~18 - 24 months</p>
+          <h2>What we will have built.</h2>
+          <p class="lede">One engineered mind — then an ecosystem of digital employees on top. Same Sophon core for retail and enterprise.</p>
+          <div class="box accent phase1-core">
+            <b>Sophon — core of the digital mind</b>
+            <p>Identity · continuous cognition · lived memory · causal foresight · org channels. Model-agnostic runtime on laptop + phone — the substrate under every hire.</p>
+          </div>
+          <div class="phase1-ecos cols-3 dense">
+            <div class="box">
+              <b>Silver · Phase 1</b>
+              <ul class="phase1-roles dense">
+                <li><strong>Chronos</strong> — AI Chief of Staff</li>
+                <li><strong>Sira</strong> — equity advisor</li>
+                <li><strong>Elyra</strong> — healthspan COO</li>
+                <li><strong>Saarthi</strong> — career operator</li>
+                <li><strong>Lux</strong> — personal finance</li>
+                <li><strong>Butler</strong> — home &amp; lifestyle</li>
+              </ul>
+            </div>
+            <div class="box">
+              <b>Gold · preview</b>
+              <ul class="phase1-roles dense">
+                <li><strong>Auvi</strong> — family office</li>
+                <li><strong>Kat</strong> — relationships</li>
+                <li><strong>Guru</strong> — AI teacher</li>
+                <li><strong>Vael</strong> — leadership coach</li>
+                <li><strong>Jolly</strong> — legal literacy</li>
+                <li><strong>Butler Gold</strong> — human + workforce</li>
+              </ul>
+            </div>
+            <div class="box">
+              <b>Enterprise</b>
+              <ul class="phase1-roles dense">
+                <li><strong>Digital FTE</strong> — scoped hire</li>
+                <li><strong>Team module</strong> — 3–12 FTEs / dept</li>
+                <li><strong>Ghost Org</strong> — 8 depts · one graph</li>
+                <li><strong>Hybrid org</strong> — human + silicon</li>
+                <li><strong>Ledger</strong> — finance FTE pack</li>
+                <li><strong>Chronos Team</strong> — exec CoS module</li>
+                <li><strong>Studio</strong> — custom roles &amp; evals</li>
+                <li><strong>Rampart</strong> — auth · MCP · fail-closed</li>
+              </ul>
+            </div>
+          </div>
+          <p class="meta">Phase 1 ships Sophon + first retail seats + first enterprise ladder — not twelve separate bots.</p>
+        </div>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>7</span></div>
+      </section>
+
+      <!-- 8 Phase 1 · capital -->
+      <section class="slide capital-slide" data-title="Phase 1 Capital" id="phase1Capital">
+        <div class="capital-body">
+          <h2>Phase 1 · $1.5M pre-seed · 18–24 months</h2>
+          <p class="lede"><strong>Compute &gt; salaries</strong> — India-weighted USD. GPU, APIs, experiments, and eng/AI software lead; top talent cash; lean GTM + reserve.</p>
+          <div class="fund-toolbar">
+            <button type="button" class="fund-expand" id="fundExpandBtn" aria-expanded="false" aria-controls="fundDetail">
+              <span class="fund-expand-label">Expand detailed breakdown</span>
+              <span class="chev" aria-hidden="true">▾</span>
+            </button>
+          </div>
+          <table class="simple dense fund-summary" id="fundSummary">
+            <thead><tr><th style="width:30%">Use of funds</th><th style="width:13%">Share</th><th>Why this line exists</th></tr></thead>
+            <tbody>
+              <tr><td><b>Compute, cloud &amp; software</b></td><td>46% · $695K</td><td>GPU · frontier APIs · experiments · eng/AI tools — largest</td></tr>
+              <tr><td><b>Team salaries</b></td><td>37% · $550K</td><td>Top India AI rates · 5 eng + 5 researchers · founder $6K</td></tr>
+              <tr><td><b>Workplace &amp; ops</b></td><td>8% · $115K</td><td>Laptops · office · coffee · insurance · entity</td></tr>
+              <tr><td><b>Marketing &amp; sales (GTM)</b></td><td>4% · $55K</td><td>Lean proof GTM — paid Chronos + LOI</td></tr>
+              <tr><td><b>Pilots &amp; delivery</b></td><td>3% · $40K</td><td>One hybrid design partner path</td></tr>
+              <tr><td><b>Reserve &amp; misc</b></td><td>3% · $45K</td><td>Hiring lag · compute spikes · random events</td></tr>
+            </tbody>
+          </table>
+          <div class="row row-3 fund-milestones">
+            <div class="box accent"><b>Milestone 1</b><p>Continuous-mind Sophon beta — identity, memory, governed action in daily use.</p></div>
+            <div class="box accent"><b>Milestone 2</b><p>Paid Chronos users + Sira beta — demand for hireable roles.</p></div>
+            <div class="box accent"><b>Milestone 3</b><p>1 enterprise pilot / LOI — hybrid design partner.</p></div>
+          </div>
+          <p class="meta"><strong>Ask:</strong> $1.5M pre-seed → Phase 1 proof. Next capital after hireability is real.</p>
+        </div>
+        <div class="fund-detail" id="fundDetail" hidden role="dialog" aria-modal="true" aria-labelledby="fundDetailTitle">
+          <div class="fund-detail-bar">
+            <div class="bar-copy">
+              <p class="bar-kicker">Phase 1 · $1.5M pre-seed · 18 months · India-weighted USD</p>
+              <p class="bar-title" id="fundDetailTitle">Use of funds — detailed breakdown</p>
+            </div>
+            <button type="button" class="fund-expand" id="fundCollapseBtn" aria-label="Collapse detailed breakdown">
+              <span>Collapse</span>
+              <span class="chev" aria-hidden="true" style="transform:rotate(180deg)">▾</span>
+            </button>
+          </div>
+          <div class="fund-detail-body">
+            <div class="fund-detail-grid">
+              <div class="fund-detail-item span-2 largest">
+                <div class="hd"><b>Compute, cloud &amp; software</b><span>46% · $695K · largest · &gt; salaries</span></div>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit (avg)</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Cloud GPU / hosts (continuous cognition · eval farms · overnight loops)</td><td class="num">1</td><td class="num">$15K/mo</td><td class="num">× 18 mo</td><td class="num total">$270K</td></tr>
+                    <tr><td>AI API (frontier models + judge/eval models · multi-model ablations)</td><td class="num">1</td><td class="num">$14K/mo</td><td class="num">× 18 mo</td><td class="num total">$252K</td></tr>
+                    <tr><td>Proprietary experiment bursts (fine-tunes · long-context · private eval clusters)</td><td class="num">1</td><td class="num">$5.0K/mo</td><td class="num">× 18 mo</td><td class="num total">$90K</td></tr>
+                    <tr><td>Human eval · labeling · red-team (mind quality gates)</td><td class="num">1</td><td class="num">$1.8K/mo</td><td class="num">× 10 mo · from M6</td><td class="num total">$18K</td></tr>
+                    <tr><td>Datasets · experiment infra · R&amp;D tooling</td><td class="num">1</td><td class="num">$10K</td><td class="num">lump</td><td class="num total">$10K</td></tr>
+                    <tr><td>Eng / AI software &amp; tools (GitHub · IDE seats · eval/tracking · observability · design · seats)</td><td class="num">1</td><td class="num">$3.2K/mo</td><td class="num">× 18 mo avg</td><td class="num total">$55K</td></tr>
+                  </tbody>
+                </table>
+                <p class="fund-note" style="margin-top:0.45rem;text-align:left">Largest bucket by design: Sophon burns GPU + APIs for mind experiments, plus the software stack eng/AI teams need to run them. Averages ramp (early months lower, M12–M18 higher). Spot/preemptible where safe · reserved capacity when runs cannot fail mid-flight.</p>
+              </div>
+
+              <div class="fund-detail-item span-2 fund-salary" id="fundSalary">
+                <button type="button" class="fund-salary-toggle" id="fundSalaryBtn" aria-expanded="false" aria-controls="fundSalaryBody">
+                  <div>
+                    <div class="hd" style="margin:0">
+                      <b>Team salaries</b>
+                      <span>37% · $550K</span>
+                    </div>
+                    <p class="fund-salary-hint">Collapsed by default · top India AI cash for IIT / research-grade talent · support lean · CRO advisor/PT · hire as depth grows</p>
+                  </div>
+                  <span class="chev" aria-hidden="true">▾</span>
+                </button>
+                <div class="fund-salary-body" id="fundSalaryBody" hidden>
+                  <p class="fund-salary-group">Builders — pay for minds that can invent the stack (not commodity CRUD)</p>
+                  <table class="fund-lines">
+                    <thead><tr><th>Role</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">On payroll</th><th class="num">Total</th></tr></thead>
+                    <tbody>
+                      <tr><td>AI Engineer</td><td class="num">5</td><td class="num">$4.0K/mo</td><td class="num">15 / 11 / 7 / 4 / 3 mo</td><td class="num total">$160K</td></tr>
+                      <tr><td>AI Researcher</td><td class="num">5</td><td class="num">$5.5K/mo</td><td class="num">15 / 11 / 7 / 4 / 3 mo</td><td class="num total">$220K</td></tr>
+                      <tr><td>Platform Engineer</td><td class="num">1</td><td class="num">$1.6K/mo</td><td class="num">× 8 mo · from M8</td><td class="num total">$13K</td></tr>
+                      <tr><td>Frontend Engineer</td><td class="num">1</td><td class="num">$1.3K/mo</td><td class="num">× 6 mo · from M10</td><td class="num total">$8K</td></tr>
+                      <tr><td>DevOps</td><td class="num">1</td><td class="num">$1.1K/mo</td><td class="num">× 5 mo · from M11</td><td class="num total">$6K</td></tr>
+                      <tr><td>Tester</td><td class="num">1</td><td class="num">$0.9K/mo</td><td class="num">× 4 mo · from M12</td><td class="num total">$4K</td></tr>
+                      <tr><td>AI PM</td><td class="num">1</td><td class="num">$1.3K/mo</td><td class="num">× 5 mo · from M10</td><td class="num total">$7K</td></tr>
+                      <tr><td>CRO (advisor · part-time contract)</td><td class="num">1</td><td class="num">$1.0K/mo</td><td class="num">× 4 mo · from M10</td><td class="num total">$4K</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="fund-salary-group">Founder / ops</p>
+                  <table class="fund-lines">
+                    <thead><tr><th>Role</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">On payroll</th><th class="num">Total</th></tr></thead>
+                    <tbody>
+                      <tr><td>Founder · CEO</td><td class="num">1</td><td class="num">$6.0K/mo</td><td class="num">× 18 mo</td><td class="num total">$108K</td></tr>
+                      <tr><td>Admin · ops · bookkeeping</td><td class="num">1</td><td class="num">$0.7K/mo</td><td class="num">× 12 mo · from M4</td><td class="num total">$8K</td></tr>
+                      <tr><td>Legal &amp; compliance (part-time)</td><td class="num">1</td><td class="num">$0.5K/mo</td><td class="num">× 6 mo · from M6</td><td class="num total">$3K</td></tr>
+                      <tr><td>Employer costs (PF · benefits · payroll taxes)</td><td class="num">1</td><td class="num">$9K</td><td class="num">lump</td><td class="num total">$9K</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="fund-note" style="margin-top:0.65rem;text-align:left">~$4.0K / $5.5K cash for AI eng / researchers is top-of-market India for deep-tech (IIT + research track) — still far below US SF. Equity-heavy. Person-months: 40 eng · 40 research — later seats open as Sophon depth needs more inventors. Support stays lean so capital funds builders + experiments. Laptops under Workplace; eng/AI software under Compute.</p>
+                </div>
+              </div>
+
+              <div class="fund-detail-item span-2">
+                <div class="hd"><b>Workplace &amp; ops</b><span>8% · $115K</span></div>
+                <p class="fund-salary-group">Hardware — one-time (tiered by role)</p>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Builder laptops (AI eng · AI researchers · founder)</td><td class="num">11</td><td class="num">$3.0K</td><td class="num">each · one-time</td><td class="num total">$33K</td></tr>
+                    <tr><td>Support laptops (platform · FE · DevOps · tester · AI PM · CRO · admin)</td><td class="num">7</td><td class="num">$1.5K</td><td class="num">each · one-time</td><td class="num total">$10.5K</td></tr>
+                    <tr><td>Peripherals (monitors · docks · headsets · bags)</td><td class="num">1</td><td class="num">$3.5K</td><td class="num">lump</td><td class="num total">$3.5K</td></tr>
+                  </tbody>
+                </table>
+                <p class="fund-salary-group">Office — recurring + one-offs (India)</p>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Coworking / small office rent</td><td class="num">1</td><td class="num">$0.8K/mo</td><td class="num">× 14 mo · from M5</td><td class="num total">$11K</td></tr>
+                    <tr><td>Internet · power · UPS · coffee · snacks · cleaning · phone</td><td class="num">1</td><td class="num">$0.7K/mo</td><td class="num">× 14 mo</td><td class="num total">$10K</td></tr>
+                    <tr><td>Furniture · pantry · small offsite</td><td class="num">1</td><td class="num">$5K</td><td class="num">lump</td><td class="num total">$5K</td></tr>
+                  </tbody>
+                </table>
+                <p class="fund-salary-group">Trust · legal · company ops</p>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Entity · contracts · customer paper</td><td class="num">1</td><td class="num">$12K</td><td class="num">lump</td><td class="num total">$12K</td></tr>
+                    <tr><td>Privacy · security baseline</td><td class="num">1</td><td class="num">$8K</td><td class="num">lump</td><td class="num total">$8K</td></tr>
+                    <tr><td>Outside counsel · IP filings support</td><td class="num">1</td><td class="num">$8K</td><td class="num">lump</td><td class="num total">$8K</td></tr>
+                    <tr><td>Insurance (liability · cyber · health contrib)</td><td class="num">1</td><td class="num">$10K</td><td class="num">lump</td><td class="num total">$10K</td></tr>
+                    <tr><td>Recruiting (researcher / eng search)</td><td class="num">1</td><td class="num">$4K</td><td class="num">lump</td><td class="num total">$4K</td></tr>
+                  </tbody>
+                </table>
+                <p class="fund-note" style="margin-top:0.45rem;text-align:left">Hardware $47K · office $26K · trust $42K = $115K. Eng/AI software seats live in Compute, cloud &amp; software — not duplicated here.</p>
+              </div>
+
+              <div class="fund-detail-item">
+                <div class="hd"><b>Marketing &amp; sales (GTM)</b><span>4% · $55K</span></div>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Brand · website · role pages</td><td class="num">1</td><td class="num">$15K</td><td class="num">lump</td><td class="num total">$15K</td></tr>
+                    <tr><td>Demo / sales assets</td><td class="num">1</td><td class="num">$8K</td><td class="num">lump</td><td class="num total">$8K</td></tr>
+                    <tr><td>Content · founder distribution</td><td class="num">1</td><td class="num">$1.0K/mo</td><td class="num">× 10 mo</td><td class="num total">$10K</td></tr>
+                    <tr><td>Sales stack + light outbound</td><td class="num">1</td><td class="num">$10K</td><td class="num">lump</td><td class="num total">$10K</td></tr>
+                    <tr><td>Events · selective travel</td><td class="num">1</td><td class="num">$12K</td><td class="num">lump</td><td class="num total">$12K</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fund-detail-item">
+                <div class="hd"><b>Pilots &amp; delivery</b><span>3% · $40K</span></div>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Design-partner support + connectors</td><td class="num">1</td><td class="num">$1.8K/mo</td><td class="num">× 10 mo</td><td class="num total">$18K</td></tr>
+                    <tr><td>Pilot infra · workshops</td><td class="num">1</td><td class="num">$10K</td><td class="num">lump</td><td class="num total">$10K</td></tr>
+                    <tr><td>Pilot buffer</td><td class="num">1</td><td class="num">$12K</td><td class="num">lump</td><td class="num total">$12K</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="fund-detail-item span-2">
+                <div class="hd"><b>Reserve &amp; misc</b><span>3% · $45K</span></div>
+                <table class="fund-lines">
+                  <thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Unit</th><th class="num">Duration</th><th class="num">Total</th></tr></thead>
+                  <tbody>
+                    <tr><td>Contingency (compute spikes · hiring lag · FX)</td><td class="num">1</td><td class="num">$30K</td><td class="num">lump</td><td class="num total">$30K</td></tr>
+                    <tr><td>Misc startup costs</td><td class="num">1</td><td class="num">$15K</td><td class="num">lump</td><td class="num total">$15K</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="fund-note">$695K + $550K + $115K + $55K + $40K + $45K = $1.5M · compute &gt; salaries · Esc or Collapse to return</p>
+          </div>
+        </div>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>8</span></div>
+      </section>
+
+      <!-- 9 Phases 2→3→4 -->
+      <section class="slide" data-title="Phases 2–4">
+        <p class="eyebrow">Progression · engineering the rest of the mind</p>
+        <h2>Depth → twin → body.</h2>
+        <p class="lede">After Phase 1 proof (Now → Q4 ’26): fuse more signals, then permissioned judgment, then a physical body. Same engineering thesis — miniaturised mind functions, then generalise. Phase 4 has no date.</p>
+        <div class="phase-rail" aria-hidden="true">
+          <span class="lbl">Phase 2 · 2027</span>
+          <span class="dot"></span>
+          <span class="line"></span>
+          <span class="lbl">Phase 3 · 2027–28</span>
+          <span class="dot"></span>
+          <span class="line"></span>
+          <span class="lbl">Phase 4 · horizon</span>
+          <span class="dot soft"></span>
+        </div>
+        <div class="phase-flow">
+          <div class="phase-step p2">
+            <div class="ph-num"><span>Phase 2</span><span class="ph-when">2027</span></div>
+            <div class="ph-title">Continuous depth</div>
+            <div class="ph-tag">What it continuously understands — not only what you tell it</div>
+            <ul>
+              <li><strong>Personal context mesh</strong> — calendar, inbox, docs, finance, health, relationships</li>
+              <li><strong>Enterprise context mesh</strong> — CRM, ERP, tickets, policy, team state</li>
+              <li><strong>Continuous work loop</strong> — observe → believe → prioritise → act / escalate</li>
+              <li><strong>Expect</strong> — works before the prompt; software-first on devices you already own</li>
+            </ul>
+          </div>
+          <div class="phase-arrow" aria-hidden="true">
+            <span class="arr">→</span>
+            <span class="arr-label">then</span>
+          </div>
+          <div class="phase-step p3">
+            <div class="ph-num"><span>Phase 3</span><span class="ph-when">2027–28</span></div>
+            <div class="ph-title">Digital twin &amp; platform</div>
+            <div class="ph-tag">Delegate low-ROI decisions · keep human moments</div>
+            <ul>
+              <li><strong>Personal delegation</strong> — career, shopping, travel, household admin shortlists</li>
+              <li><strong>Enterprise autonomy</strong> — planning, vendors, obligations — policy-bounded</li>
+              <li><strong>Platform APIs</strong> — career, compatibility, workforce primitives for partners</li>
+              <li><strong>Expect</strong> — permissioned judgment layer; twin screens the long tail</li>
+            </ul>
+          </div>
+          <div class="phase-arrow" aria-hidden="true">
+            <span class="arr">→</span>
+            <span class="arr-label">then</span>
+          </div>
+          <div class="phase-step p4">
+            <div class="ph-num"><span>Phase 4</span><span class="ph-when">Horizon</span></div>
+            <div class="ph-title">Physical body</div>
+            <div class="ph-tag">Real silicon employee — no date</div>
+            <ul>
+              <li><strong>Same mind, new surface</strong> — sensors, mobility, actuation on Sophon</li>
+              <li><strong>Beyond screens</strong> — spaces, logistics, care, field ops in the world</li>
+              <li><strong>Earn embodiment</strong> — mind + trust first; hardware does not lead</li>
+              <li><strong>Vision</strong> — digital employee → embodied silicon employee</li>
+            </ul>
+          </div>
+        </div>
+        <p class="meta">Not a product roadmap of wrappers. A progress curve for the silicon mind: richer state → delegated judgment → embodiment.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>9</span></div>
+      </section>
+
+      <!-- 12 Team -->
+      <section class="slide" data-title="Team">
+        <!-- <p class="eyebrow">Team · who engineers the mind</p> -->
+        <h2>Team · who engineers the digital mind</h2>
+        <div class="row row-2">
+          <div class="box accent">
+            <b>Ajay Pratap Singh · Founder, CEO &amp; CTO</b>
+            <p>IIT Madras · YC · Goldman. Premji Invest · Owns product, platform, GTM, raise. Ships the employment surface; knows wrappers are not enough — Sophon still needs dedicated research ownership.</p>
+          </div>
+          <div class="box">
+            <b>Co-founder · Chief Research Officer (CRO)</b>
+            <p><strong>IIT Madras PhD</strong> candidates in discussion; <strong>IIT / MIT / Stanford</strong> preferred.</p>
+          </div>
+        </div>
+        <p class="meta"></p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>10</span></div>
+      </section>
+
+      <!-- 13 Advisors -->
+      <section class="slide" data-title="Advisors">
+        <p class="eyebrow">Advisors · four seats · all open</p>
+        <h2>Open seats. Forming the bench.</h2>
+        <p class="lede">Four advisor seats — none filled. Seat 1 is in consideration with two research professors; seats 2–4 are open.</p>
+        <table class="simple">
+          <thead><tr><th style="width:8%">#</th><th style="width:28%">Seat</th><th style="width:22%">Status</th><th>Focus</th></tr></thead>
+          <tbody>
+            <tr><td><b>1</b></td><td><b>AI Research Professor</b></td><td>Open · considering 2</td><td>Prof. Balaraman Ravindran · Prof. Mitesh Khapra — mind stack, RL, memory, planning</td></tr>
+            <tr><td><b>2</b></td><td><b>Applied AI Technical Leader</b></td><td>Open</td><td>Production systems — what breaks when loops leave the sandbox</td></tr>
+            <tr><td><b>3</b></td><td><b>Product &amp; Sales</b></td><td>Open</td><td>Hireable digital labour GTM — packaging, pilots, close</td></tr>
+            <tr><td><b>4</b></td><td><b>Software Companies Growth</b></td><td>Open</td><td>Scaling software businesses — distribution, expansion, ops leverage</td></tr>
+          </tbody>
+        </table>
+        <p class="meta"></p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>11</span></div>
+      </section>
+
+      <!-- 14 Why Boundless -->
+      <section class="slide" data-title="Why Boundless">
+        <p class="eyebrow">Why Boundless</p>
+        <h2>You bet on the stack. We engineer the mind.</h2>
+        <p class="lede">Alter and Shram sit beside us — trust and proactivity. Sophon is the missing layer: a composed mind that turns agents into <strong>hireable employees</strong>, not another domain wrapper in the portfolio.</p>
+        <div class="row row-2">
+          <div class="box"><b>Alter</b><p>Trust, compliance, observability for agents. We consume that — and own <strong>who the employee is</strong>, mandate, and what they may write.</p></div>
+          <div class="box"><b>Shram</b><p>Proactive knowledge agents. We make proactivity <strong>durable</strong> — continuous mind, multi-thread, anti-drift, org context.</p></div>
+        </div>
+        <div class="box accent" style="margin-top:0.5rem;max-width:min(68rem,100%)">
+          <b>Fit to your lanes</b>
+          <p>Memory / autonomy (Lane 1) · consumer habit (Lane 3) · science × story on governed employment (Lane 4). India creating the digital-worker category — not copying LLM + tools + skills wrappers.</p>
+        </div>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>12</span></div>
+      </section>
+
+      <!-- Ask + use of funds (hidden from deck; keep for later — remove slide-hidden to show) -->
+      <section class="slide slide-hidden" data-title="Ask" aria-hidden="true">
+        <p class="eyebrow">The ask</p>
+        <h2>$1.5M pre-seed · 18 - 24 months to proof.</h2>
+        <!-- <p class="lede">Compute &gt; salaries · ~80% build · GPU/API/experiments + eng/AI software in one bucket · top India AI cash.</p> -->
+        <table class="simple">
+          <thead><tr><th style="width:30%">Use of funds</th><th style="width:15%">Share</th><th>What it buys</th></tr></thead>
+          <tbody>
+            <tr><td><b>Compute, cloud &amp; software</b></td><td>46% · $695K</td><td>GPU · APIs · experiments · eng/AI tools</td></tr>
+            <tr><td><b>Team salaries</b></td><td>37% · $550K</td><td>AI eng $4K · researchers $5.5K · founder $6K</td></tr>
+            <tr><td><b>Workplace &amp; ops</b></td><td>8% · $115K</td><td>Laptops · office · insurance · entity</td></tr>
+            <tr><td><b>Marketing &amp; sales (GTM)</b></td><td>4% · $55K</td><td>Lean proof GTM</td></tr>
+            <tr><td><b>Pilots &amp; delivery</b></td><td>3% · $40K</td><td>One design-partner path</td></tr>
+            <tr><td><b>Reserve &amp; misc</b></td><td>3% · $45K</td><td>Spikes · lag · misc</td></tr>
+          </tbody>
+        </table>
+        <p class="meta"><strong>Milestones:</strong> continuous-mind Sophon beta · paid Chronos users · Sira beta · 1 enterprise pilot/LOI · CRO path clear. Allocation is planning-level and finalised with the lead.</p>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>Ask · hidden</span></div>
+      </section>
+
+      <!-- 15 Close -->
+      <section class="slide close-slide" data-title="Close">
+        <div class="close-body">
+          <p class="eyebrow">DeepEmergence</p>
+          <p class="quote">We are creating digital employees for hire.</p>
+          <p class="lede">LLM alone ≠ mind. Without a mind, you are not hiring an employee — you are building a wrapper.</p>
+          <p class="lede"><strong>AGI is an engineering problem.</strong> Sophon composes the missing architectural pieces into a unified silicon mind. We scale this mind through a compounding 5-stage roadmap:</p>
+          <ul class="close-roadmap">
+            <li><strong>Phase 0 (Core Engine)</strong> — Building Sophon — a vanilla cognitive core engineered to natively control computers and process raw signal I/O.</li>
+            <li><strong>Phase 1 (The Software Org)</strong> — Orchestrating autonomous roles, agent teams, and hybrid human–AI workflows.</li>
+            <li><strong>Phase 2 (Hardware Integration)</strong> — Embedding this mind into edge hardware to integrate natively into lives and enterprises.</li>
+            <li><strong>Phase 3 (The Behavioral Twin)</strong> — Leveraging hyper-dense data collections to build a digital twin that deeply understands and mimics user behavior.</li>
+            <li><strong>Phase 4 (Physical Embodiment)</strong> — Porting this exact same, hyper-contextualized mind into a physical robotic body.</li>
+          </ul>
+          <p class="lede">Global market expectation is heading here inevitably. <strong>Sophon is building the architecture.</strong></p>
+          <p class="meta"><a href="https://deepemergence.com">deepemergence.com</a> · ajay@deepemergence.com · Ajay Pratap Singh · CEO &amp; CTO</p>
+        </div>
+        <div class="slide-foot"><span>DeepEmergence · Confidential</span><span>13</span></div>
+      </section>
+
+    </div>
+  </div>
+
+
+  <div class="size-gate" id="sizeGate" role="alertdialog" aria-modal="true" aria-labelledby="sizeGateTitle" hidden>
+    <div class="gate-card">
+      <p class="gate-kicker">Viewport too small</p>
+      <h2 id="sizeGateTitle">Open this on a larger screen.</h2>
+      <p>This deck needs at least a MacBook Air–class display height to stay readable. Resize the window or open on a larger screen.</p>
+      <p class="gate-meta">Minimum MacBook Air–class height (~680px+) · open full screen if needed</p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide:not(.slide-hidden)'));
+    let i = 0;
+    function show(n) {
+      i = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, k) => s.classList.toggle('on', k === i));
+      if (!window.matchMedia('print').matches) location.hash = String(i + 1);
+    }
+    document.addEventListener('keydown', (e) => {
+      if (document.body.classList.contains('funds-overlay-open')) return;
+      if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); show(i + 1); }
+      if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+      if (e.key === 'Home') { e.preventDefault(); show(0); }
+      if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    });
+    let touchX = null;
+    document.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      if (touchX == null) return;
+      const dx = e.changedTouches[0].screenX - touchX;
+      if (dx < -50) show(i + 1);
+      if (dx > 50) show(i - 1);
+      touchX = null;
+    }, { passive: true });
+    const h = parseInt(location.hash.replace('#', ''), 10);
+    show(!Number.isNaN(h) && h >= 1 ? h - 1 : 0);
+
+    // MacBook Air–class minimum (usable height after browser chrome)
+    const MIN_H = 680;
+    const gate = document.getElementById('sizeGate');
+    function checkSize() {
+      const ok = window.matchMedia('print').matches || window.innerHeight >= MIN_H;
+      if (!gate) return;
+      gate.classList.toggle('on', !ok);
+      gate.hidden = ok;
+      document.body.style.overflow = ok ? '' : 'hidden';
+    }
+    window.addEventListener('resize', checkSize);
+    checkSize();
+  })();
+
+  /* Market slide · Global / USA / India */
+  (function () {
+    const MARKET = {
+      global: {
+        eyebrow: 'Market · Global · remote-capable digital employees',
+        title: 'One mind. Configurable roles. A global labour market.',
+        lede: 'We aim at <strong>remote-capable human jobs</strong> — almost every knowledge role a laptop &amp; phone can do — sold as customizable digital employees. <strong>TAM</strong> is the wage pool; <strong>SAM</strong> is citeable near-term budget; <strong>SOM</strong> is our Yr-5 target.',
+        tam: '$8.4T', tamSub: 'Remote-capable wages',
+        sam: '$172B', samSub: 'AI app software ’25',
+        som: '$85M', somSub: 'Yr-5 target',
+        funnelTitle: 'How the funnel works',
+        funnelBody: '<strong>TAM $8.4T</strong> = worldwide employer cost of remote-capable knowledge roles. <strong>SAM $172B</strong> = Gartner worldwide AI application software (2025) — citeable near-term budget we re-price as hires; longer ceiling IT services <strong>$1.69T</strong>. <strong>SOM $85M</strong> = DE Year-5 global revenue target. Use the region control for USA-only or India-only pages.',
+        meta: '<strong>Sources:</strong> BEA/FRED · Gartner IT $5.43T / IT services $1.69T / AI apps $172B (2025) · methodology in market-methodology.md. SOM = company target. USA and India figures appear only when those regions are selected.',
+        cards: [
+          {
+            name: 'TAM · Global', title: 'Remote-capable wage pool', num: '$8.4T', accent: false,
+            body: 'Worldwide employer cost of knowledge roles that can run on laptop + phone — the ceiling as configurable roles cover nearly all such jobs.',
+            split: '<span>Wage pool · not software</span>'
+          },
+          {
+            name: 'SAM · Global', title: 'AI application software', num: '$172B', accent: true,
+            body: 'Gartner worldwide AI application software spend (2025) — the citeable near-term budget aisle we re-price as hireable digital employees.',
+            split: '<span>Longer ceiling · IT services <strong>$1.69T</strong></span>'
+          },
+          {
+            name: 'SOM · Global', title: 'Yr-5 revenue target', num: '$85M', accent: true,
+            body: 'DeepEmergence Year-5 global revenue target across retail roles and enterprise deployments — company plan, not a third-party forecast.',
+            split: '<span>Plan · not market research</span>'
+          }
+        ]
+      },
+      usa: {
+        eyebrow: 'Market · USA · remote-capable digital employees',
+        title: 'USA first: the wage pool that already buys knowledge work.',
+        lede: 'US private wages are <strong>$11.0T</strong> (BEA 2025). We size <strong>remote-capable knowledge roles</strong> inside that — then the AI software budget we can convert into hireable digital employees.',
+        tam: '$3.1T', tamSub: 'US remote-capable wages',
+        sam: '$62B', samSub: 'US AI software budget',
+        som: '$40M', somSub: 'US Yr-5 target',
+        funnelTitle: 'USA funnel (sourced)',
+        funnelBody: '<strong>TAM $3.1T</strong> ≈ BEA private wages <strong>$11.0T</strong> × knowledge wage share × remote-capable share among knowledge roles. <strong>SAM $62B</strong> ≈ US share (~36%) of Gartner AI application software <strong>$172B</strong> (2025). <strong>SOM $40M</strong> = DE Year-5 US target — enterprise + retail roles.',
+        meta: '<strong>Sources:</strong> BEA/FRED A132RC1A027NBEA ($11.03T private wages, 2025) · Gartner AI application software $172B (2025) · WFH-capable occupation literature for remote-capable share. SOM = company target.',
+        cards: [
+          {
+            name: 'TAM · USA', title: 'Remote-capable knowledge', num: '$3.1T', accent: false,
+            body: 'Employer cost of US knowledge roles that can run on laptop + phone. Anchored to BEA private wages ($11.0T), not a software TAM.',
+            split: '<span>Private wages <strong>$11.0T</strong></span><span>BEA 2025</span>'
+          },
+          {
+            name: 'SAM · USA', title: 'Digital workforce budget', num: '$62B', accent: true,
+            body: 'Near-term spend we can sell into as silicon employees — US slice of enterprise AI application software, re-priced toward headcount outcomes.',
+            split: '<span>Global AI apps <strong>$172B</strong></span><span>US ~36%</span>'
+          },
+          {
+            name: 'SOM · USA', title: 'Yr-5 beachhead', num: '$40M', accent: true,
+            body: 'Company revenue target: Chronos/Sira retail + enterprise FTE → team → hybrid design partners. Not a third-party forecast.',
+            split: '<span>Plan · not research</span>'
+          }
+        ]
+      },
+      india: {
+        eyebrow: 'Market · India · GCC · IT · BPM digital employees',
+        title: 'India: where remote capacity is already a product.',
+        lede: 'NASSCOM: India tech industry <strong>$283B</strong> FY25, <strong>5.8M</strong> people, <strong>1,760 GCCs</strong>. We aim at remote-capable knowledge wage pool and a near-term slice of services/GCC budgets — not the full industry as SAM.',
+        tam: '$0.5T', tamSub: 'India remote-capable wages',
+        sam: '$14B', samSub: 'Services / GCC slice',
+        som: '$8M', somSub: 'India Yr-5 target',
+        funnelTitle: 'India funnel (sourced)',
+        funnelBody: '<strong>TAM ~$0.5T</strong> = conservative remote-capable knowledge wage pool (tech employment 5.8M plus BFSI/ops knowledge roles — <em>not</em> NASSCOM $283B revenue). <strong>SAM $14B</strong> = near-term AI-led delivery + GCC/enterprise digital-employee spend inside IT services ($137B) + BPM ($55B). <strong>SOM $8M</strong> = DE Year-5 India target.',
+        meta: '<strong>Sources:</strong> NASSCOM Strategic Review FY25 ($282.6–283B industry · $224.4B exports · IT $137.1B · BPM $54.6B · 5.8M headcount · ~1,760 GCCs). SOM = company target. See market-methodology.md.',
+        cards: [
+          {
+            name: 'TAM · India', title: 'Remote-capable knowledge', num: '$0.5T', accent: false,
+            body: 'Conservative wage-pool TAM for laptop/phone knowledge roles. Deliberately below prior $0.7T broad knowledge figure — industry revenue ≠ wages.',
+            split: '<span>Tech headcount <strong>5.8M</strong></span><span>NASSCOM FY25</span>'
+          },
+          {
+            name: 'SAM · India', title: 'Services + GCC slice', num: '$14B', accent: true,
+            body: 'Addressable near-term: AI-led IT/BPM transformation and GCC digital capacity — buyers already purchase remote work as labour outcomes.',
+            split: '<span>IT+BPM <strong>$192B</strong></span><span>Industry <strong>$283B</strong></span>'
+          },
+          {
+            name: 'SOM · India', title: 'Yr-5 beachhead', num: '$8M', accent: true,
+            body: 'Company revenue target via configured roles + enterprise/GCC design partners. Scale path uses India’s delivery economics — not fantasy ARR.',
+            split: '<span>Plan · not research</span>'
+          }
+        ]
+      }
+    };
+
+    const sel = document.getElementById('regionSelect');
+    if (!sel) return;
+
+    function applyRegion(key) {
+      const d = MARKET[key] || MARKET.global;
+      const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+      set('mEyebrow', d.eyebrow);
+      set('mTitle', d.title);
+      set('mLede', d.lede);
+      set('mFunnelTitle', d.funnelTitle);
+      set('mFunnelBody', d.funnelBody);
+      set('mMeta', d.meta);
+      const map = { tam: d.tam, tamSub: d.tamSub, sam: d.sam, samSub: d.samSub, som: d.som, somSub: d.somSub };
+      Object.keys(map).forEach((k) => {
+        document.querySelectorAll('[data-m="' + k + '"]').forEach((el) => { el.textContent = map[k]; });
+      });
+      const rings = document.getElementById('mRings');
+      if (rings) rings.setAttribute('aria-label', 'TAM ' + d.tam + ', SAM ' + d.sam + ', SOM ' + d.som);
+      d.cards.forEach((c, i) => {
+        const card = document.querySelector('[data-card="' + i + '"]');
+        if (!card) return;
+        card.classList.toggle('accent', !!c.accent);
+        const name = card.querySelector('[data-f="name"]');
+        const title = card.querySelector('[data-f="title"]');
+        const num = card.querySelector('[data-f="num"]');
+        const body = card.querySelector('[data-f="body"]');
+        const split = card.querySelector('[data-f="split"]');
+        if (name) name.textContent = c.name;
+        if (title) title.textContent = c.title;
+        if (num) num.textContent = c.num;
+        if (body) body.innerHTML = c.body;
+        if (split) {
+          if (c.split) { split.innerHTML = c.split; split.hidden = false; }
+          else { split.innerHTML = ''; split.hidden = true; }
+        }
+      });
+    }
+
+    sel.addEventListener('change', () => applyRegion(sel.value));
+    // Print / PDF always Global
+    window.addEventListener('beforeprint', () => {
+      sel.value = 'global';
+      applyRegion('global');
+    });
+    applyRegion(sel.value || 'global');
+  })();
+
+  /* Phase 1 Capital · fullscreen use-of-funds breakdown */
+  (function () {
+    const slide = document.getElementById('phase1Capital');
+    const btn = document.getElementById('fundExpandBtn');
+    const closeBtn = document.getElementById('fundCollapseBtn');
+    const detail = document.getElementById('fundDetail');
+    const salary = document.getElementById('fundSalary');
+    const salaryBtn = document.getElementById('fundSalaryBtn');
+    const salaryBody = document.getElementById('fundSalaryBody');
+    if (!slide || !btn || !detail) return;
+    const label = btn.querySelector('.fund-expand-label');
+    const placeholder = document.createComment('fundDetail-home');
+    slide.insertBefore(placeholder, detail);
+
+    function setSalaryOpen(open) {
+      if (!salary || !salaryBtn || !salaryBody) return;
+      salary.classList.toggle('open', open);
+      salaryBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      salaryBody.hidden = !open;
+    }
+
+    function setOpen(open) {
+      slide.classList.toggle('funds-open', open);
+      document.body.classList.toggle('funds-overlay-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      detail.hidden = !open;
+      if (label) label.textContent = open ? 'Collapse detailed breakdown' : 'Expand detailed breakdown';
+      if (open) {
+        document.body.appendChild(detail);
+        setSalaryOpen(false);
+        (closeBtn || btn).focus({ preventScroll: true });
+      } else if (placeholder.parentNode) {
+        setSalaryOpen(false);
+        placeholder.parentNode.insertBefore(detail, placeholder.nextSibling);
+      }
+    }
+
+    btn.addEventListener('click', () => setOpen(!document.body.classList.contains('funds-overlay-open')));
+    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    if (salaryBtn) {
+      salaryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setSalaryOpen(!salary.classList.contains('open'));
+      });
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('funds-overlay-open')) {
+        e.preventDefault();
+        if (salary && salary.classList.contains('open')) setSalaryOpen(false);
+        else setOpen(false);
+      }
+    });
+    window.addEventListener('beforeprint', () => setOpen(false));
+  })();
+  </script>
+</body>
+</html>

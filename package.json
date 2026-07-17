@@ -12,12 +12,15 @@
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
     "export": "slidev export slides.md --format pptx --output DeepEmergence-Pitch-Deck.pptx",
-    "export:pdf": "slidev export slides.md --format pdf --output DeepEmergence-Pitch-Deck.pdf"
+    "export:pdf": "slidev export slides.md --format pdf --output DeepEmergence-Pitch-Deck.pdf",
+    "deploy:boundless": "bash scripts/deploy-boundless.sh"
   },
   "devDependencies": {
     "@slidev/cli": "^52.16.0",
     "@slidev/theme-default": "^0.25.0",
     "marked": "^18.0.5",
-    "playwright-chromium": "^1.47.0"
+    "playwright-chromium": "^1.47.0",
+    "wrangler": "^4.111.0",
+    "wrangler": "^4.111.0"
   }
 }
