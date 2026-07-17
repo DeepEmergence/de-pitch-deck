@@ -13,7 +13,8 @@
     "docker:logs": "docker compose logs -f",
     "export": "slidev export slides.md --format pptx --output DeepEmergence-Pitch-Deck.pptx",
     "export:pdf": "slidev export slides.md --format pdf --output DeepEmergence-Pitch-Deck.pdf",
-    "deploy:boundless": "bash scripts/deploy-boundless.sh"
+    "deploy:boundless": "bash scripts/deploy-boundless.sh",
+    "deploy:boldcap": "bash scripts/deploy-boldcap.sh"
   },
   "devDependencies": {
     "@slidev/cli": "^52.16.0",
